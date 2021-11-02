@@ -1,0 +1,89 @@
+/* ceci est un fichier avec toute les lignes des tests a executer sur chaque version de minishell */
+
+
+/////*****/////
+if
+argv[0] == (null) || argv[0] == \0
+argv[1] = "boujour les amiche\n"
+
+probleme ici :(
+/////*****/////
+
+
+expend :  
+
+-- unquote
+	-env
+		echo $LESS
+		echo $LESS$
+		echo $LESS@
+		echo b$LESS@ /////////////////////////////////////// ici ca ne marche pas, ca n'affiche pas le @
+		echo b$LESS@bjr ///////ici aussi
+		echo $LESS@bjr$LESS
+		echo f$LESS$LESS
+		echo f$LESS$LESS@bjr ///////////ici aussi
+		
+	-env qui existe pas
+		echo $LESSS
+		echo $LES
+		echo $LESS9
+		echo $LESS_
+		echo $TRUC@
+		echo $TRUC$
+		echo bjr$TRUC
+		echo bjr$TRUC@
+
+	-env true env false
+		echo $LESS$TRUC
+		echo $TRUC$LESS
+		echo $TRUC@$LESS
+		echo $TRUC@$LESS@ ////////////// ici ca marche pas
+		echo coucou$TRUC$LESS
+
+	-env_multi word : export L="ls -l -a" | export B="s -l -a" |export A="ls $B" && export B="-la"
+		$L (valgrind)
+		$Le
+		l$B
+		l$Be
+		$A
+		"$A"
+
+		"$L"
+		
+		jr$B
+
+	- "env -i ./minishell"
+		$LESS
+		$LESS@$LESS
+		$LESS$LESS
+		bjrs$LESS
+
+	
+	- < sans file
+		: <     ls
+
+		: mot <|
+		: test bonjour < 
+
+	- < file
+
+	- > sans file
+
+	- > avec file
+
+	- > sans file
+
+	- << sans here_doc
+
+	- << avec Here_doc
+		: cat << ""
+
+-- single quote
+	-env
+
+	-double quote
+
+	- < << > >>
+
+	- vide
+

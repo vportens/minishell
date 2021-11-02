@@ -1,0 +1,154 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARG	minishell.h	/^	ARG,$/;"	e	enum:token
+BACKSLASH	minishell.h	/^	BACKSLASH,$/;"	e	enum:quote
+BUILTIN	minishell.h	/^	BUILTIN,$/;"	e	enum:token
+CC	Makefile	/^CC 		= gcc$/;"	m
+CREAT_FILE	minishell.h	/^	CREAT_FILE,$/;"	e	enum:token
+DOUBLE	minishell.h	/^	DOUBLE,$/;"	e	enum:quote
+END	minishell.h	/^	END$/;"	e	enum:quote
+ENDS	minishell.h	/^	ENDS$/;"	e	enum:token
+FILE_IN	minishell.h	/^	FILE_IN,$/;"	e	enum:token
+FILE_OUT	minishell.h	/^	FILE_OUT,$/;"	e	enum:token
+FILE_OUT_OVER	minishell.h	/^	FILE_OUT_OVER,$/;"	e	enum:token
+FLAGS	Makefile	/^FLAGS 	= -Wall -Wextra$/;"	m
+HEAD	libft/Makefile	/^HEAD = .\/includes$/;"	m
+HERE_DOC	minishell.h	/^	HERE_DOC,$/;"	e	enum:token
+LIB	Makefile	/^LIB =  -L\/usr\/include -lreadline$/;"	m
+LIBFT	Makefile	/^LIBFT = libft$/;"	m
+LIBFT_H	libft/includes/libft.h	/^# define LIBFT_H$/;"	d
+LIMITOR	minishell.h	/^	LIMITOR,$/;"	e	enum:token
+MAC	Makefile	/^MAC =$/;"	m
+MAC_B	Makefile	/^MAC_B =$/;"	m
+MINISHELL_H	minishell.h	/^# define MINISHELL_H$/;"	d
+NAME	Makefile	/^NAME = minishell$/;"	m
+NAME	libft/Makefile	/^NAME = libft.a$/;"	m
+NAME_B	Makefile	/^NAME_B = minishell_bonus$/;"	m
+NON	minishell.h	/^	NON,$/;"	e	enum:token
+NONE	minishell.h	/^	NONE,$/;"	e	enum:quote
+OBJ	Makefile	/^OBJ 	= ${SRCS:.c=.o}$/;"	m
+OBJ	libft/Makefile	/^OBJ = *.o$/;"	m
+OBJS	Makefile	/^OBJS 	= *.o$/;"	m
+OBJS_B	Makefile	/^OBJS_B = *.o$/;"	m
+OBJ_B	Makefile	/^OBJ_B = ${SRCS_BONUS:.c=.o}$/;"	m
+OPEN_FILE	minishell.h	/^	OPEN_FILE,$/;"	e	enum:token
+SINGLE	minishell.h	/^	SINGLE,$/;"	e	enum:quote
+SRC	libft/Makefile	/^SRC = *.c $/;"	m
+SRCS	Makefile	/^SRCS =  	main_test_2.c						\\$/;"	m
+SRCS_BONUS	Makefile	/^SRCS_BONUS =$/;"	m
+WRITE_FILE	minishell.h	/^	WRITE_FILE,$/;"	e	enum:token
+alloc_dollar	parsing/get_env.c	/^char	*alloc_dollar(void)$/;"	f
+argv	minishell.h	/^	char			**argv;$/;"	m	struct:s_commande_line
+argv	minishell.h	/^	char	**argv;$/;"	m	struct:s_exec
+check_open_fil	parsing/expend_word/expend_word.c	/^int	check_open_fil(t_commande_line **block)$/;"	f
+cmdl_add_back	parsing/lst_fonction/cmdl_add_back.c	/^void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back)$/;"	f
+copy_fake_env	parsing/expend_word/fake_env.c	/^char	*copy_fake_env(char *str)$/;"	f
+create_add_back_token	parsing/split_arg.c	/^int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)$/;"	f
+create_and_fill_cmd	parsing/get_cmd_line.c	/^int	create_and_fill_cmd(char *str, int cur, int start, t_commande_line **first)$/;"	f
+devellope_limitor	parsing/expend_word/devellope_limitor.c	/^char	*devellope_limitor(t_token *stc, char *str, int i)$/;"	f
+e_quote	minishell.h	/^}	e_quote;$/;"	t	typeref:enum:quote
+e_token	minishell.h	/^}				e_token;$/;"	t	typeref:enum:token
+edit_type	parsing/expend_word/expend_word.c	/^int	edit_type(t_commande_line **block)$/;"	f
+end_word_unquote	parsing/expend_word/word_unquote_inter.c	/^char	*end_word_unquote(char *str, char *s1, int *i, int j)$/;"	f
+env_doublequote	parsing/expend_word/word_will_double.c	/^char	*env_doublequote(char *str, char *s1, int *i, int j)$/;"	f
+envp	minishell.h	/^	char			**envp;$/;"	m	struct:s_commande_line
+expand_full_quote_str	parsing/expend_word/devellope_limitor.c	/^char	*expand_full_quote_str(void)$/;"	f
+expanded	minishell.h	/^	bool	expanded;$/;"	m	struct:s_token
+expend_words	parsing/expend_word/expend_word.c	/^int	expend_words(t_commande_line **block)$/;"	f
+fake_env	parsing/expend_word/fake_env.c	/^char	*fake_env(int *j, int len_str)$/;"	f
+fd_in	minishell.h	/^	int		fd_in;$/;"	m	struct:s_exec
+fd_out	minishell.h	/^	int		fd_out;$/;"	m	struct:s_exec
+file_in	minishell.h	/^	char	*file_in;$/;"	m	struct:s_exec
+file_out	minishell.h	/^	char	*file_out;$/;"	m	struct:s_exec
+fill_new	libft/itoa.c	/^void	fill_new(char *new, int sign, int nbr, int j)$/;"	f
+first_token	minishell.h	/^	t_token			*first_token;$/;"	m	struct:s_commande_line
+free_all	main_test_2.c	/^void	free_all(t_commande_line **cmd_line)$/;"	f
+free_both	parsing/free_utils.c	/^void	free_both(char *s1, char *s2)$/;"	f
+free_cmdl_ret_malloc_error	parsing/free_utils.c	/^int	free_cmdl_ret_malloc_error(t_commande_line *stc)$/;"	f
+free_split	parsing/free_utils.c	/^void	free_split(char **split)$/;"	f
+free_split_ret_str	parsing/expend_word/word_will_unquote.c	/^char	*free_split_ret_str(char **split, char *str)$/;"	f
+free_split_token	parsing/expend_word/word_will_unquote.c	/^char	*free_split_token(char **split, t_token *tok)$/;"	f
+free_str_ret_null	parsing/free_utils.c	/^char	*free_str_ret_null(char *s1)$/;"	f
+free_token_ret_malloc_error	parsing/free_utils.c	/^int	free_token_ret_malloc_error(t_token *tok)$/;"	f
+ft_atoi	libft/atoi.c	/^int	ft_atoi(char *str)$/;"	f
+ft_count_words	libft/strsplit.c	/^static int	ft_count_words(const char *s, char c)$/;"	f	file:
+ft_is_alpha_num	libft/is_alpha_num.c	/^int	ft_is_alpha_num(char c)$/;"	f
+ft_itoa	libft/itoa.c	/^char	*ft_itoa(int nbr)$/;"	f
+ft_memalloc	libft/memalloc.c	/^void	*ft_memalloc(size_t size)$/;"	f
+ft_memset	libft/memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
+ft_strcat	libft/strcat.c	/^char	*ft_strcat(char *s1, const char *s2)$/;"	f
+ft_strcmp	libft/strcmp.c	/^int	ft_strcmp(char *str, char *in)$/;"	f
+ft_strcpy	libft/strcpy.c	/^char	*ft_strcpy(char *dst, const char *src)$/;"	f
+ft_strdup	libft/strdup.c	/^char	*ft_strdup(const char *s1)$/;"	f
+ft_strjoin	libft/strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f
+ft_strlen	libft/strlen.c	/^size_t	ft_strlen(const char *s)$/;"	f
+ft_strncmp	libft/strncmp.c	/^int	ft_strncmp(char *str, char *to, int n)$/;"	f
+ft_strncpy	libft/strncpy.c	/^char	*ft_strncpy(char *dst, char *src, int n)$/;"	f
+ft_strnew	libft/str_new.c	/^char	*ft_strnew(size_t size)$/;"	f
+ft_strsplit	libft/strsplit.c	/^char	**ft_strsplit(char const *s, char c)$/;"	f
+ft_strsub	libft/strsub.c	/^char	*ft_strsub(char const *s, unsigned int start, size_t len)$/;"	f
+ft_truestrncmp	libft/strncmp.c	/^int	ft_truestrncmp(char *str, char *to, int n)$/;"	f
+g_envp	minishell.h	/^char							**g_envp;$/;"	v
+get_cmd_line	parsing/get_cmd_line.c	/^int	get_cmd_line(char *string, t_commande_line **first_stc)$/;"	f
+get_env	parsing/get_env.c	/^char	*get_env(int *cur, char *str)$/;"	f
+get_envp	parsing/get_env.c	/^char	*get_envp(char *str, int *j)$/;"	f
+get_len_env_var	parsing/get_env.c	/^int	get_len_env_var(char *str)$/;"	f
+go_to_the_pipe	parsing/get_cmd_line.c	/^void	go_to_the_pipe(int *i, char *str)$/;"	f
+if_env	parsing/expend_word/word_will_unquote.c	/^char	*if_env(t_token **stc, char *str, char *s1, int *i)$/;"	f
+if_no_env	parsing/expend_word/word_will_unquote.c	/^char	*if_no_env(char *str, int *i, char *s1)$/;"	f
+init_arg	parsing/organise_arg.c	/^void	init_arg(t_commande_line *cmd)$/;"	f
+init_cmdl	parsing/get_cmd_line.c	/^void	init_cmdl(t_commande_line *new)$/;"	f
+init_token	parsing/lst_fonction/init_token.c	/^void	init_token(t_token *new)$/;"	f
+init_type	parsing/lst_fonction/init_token.c	/^void	init_type(t_token *new)$/;"	f
+is_builtin	builtin.c	/^int	is_builtin(char *str)$/;"	f
+is_env	parsing/get_env.c	/^int	is_env(char *str, char *env, int len)$/;"	f
+is_redirection	parsing/parsing_utils.c	/^int	is_redirection(char c)$/;"	f
+is_separator	parsing/parsing_utils.c	/^int	is_separator(char c)$/;"	f
+iter_to_end_arg	parsing/split_arg.c	/^int	iter_to_end_arg(int *cur, char *str)$/;"	f
+iter_to_end_or_redirection	parsing/split_arg.c	/^void	iter_to_end_or_redirection(char	*str, int *cur)$/;"	f
+len_fake_env	parsing/expend_word/fake_env.c	/^int	len_fake_env(char *str)$/;"	f
+len_int	libft/itoa.c	/^int	len_int(int nbr, int *sign)$/;"	f
+limitor	parsing/expend_word/devellope_limitor.c	/^int	limitor(t_token *stc, char *str)$/;"	f
+limitor_unquote	parsing/expend_word/devellope_limitor.c	/^char	*limitor_unquote(char *str, int *i, char *s1, e_quote quote)$/;"	f
+main	main_test_2.c	/^int	main(int ac, char **av, char **envp)$/;"	f
+move_to	parsing/expend_word/devellope_limitor.c	/^int	move_to(char *str, int *i, e_quote quote)$/;"	f
+nbr_arg_cmd	parsing/organise_arg.c	/^int	nbr_arg_cmd(t_commande_line *cmd)$/;"	f
+new_token_env	parsing/expend_word/word_will_unquote.c	/^char	*new_token_env(t_token **stc, char **split, int i)$/;"	f
+next	minishell.h	/^	t_commande_line	*next;$/;"	m	struct:s_commande_line
+next	minishell.h	/^	t_env	*next;$/;"	m	struct:s_env
+next	minishell.h	/^	t_exec	*next;	$/;"	m	struct:s_exec
+next	minishell.h	/^	t_token	*next;$/;"	m	struct:s_token
+organise_arg	parsing/organise_arg.c	/^int	organise_arg(t_commande_line **cmd)$/;"	f
+path	minishell.h	/^	char	*path;$/;"	m	struct:s_exec
+quote	minishell.h	/^typedef enum quote$/;"	g
+s_commande_line	minishell.h	/^struct				s_commande_line$/;"	s
+s_env	minishell.h	/^struct		s_env$/;"	s
+s_exec	minishell.h	/^struct		s_exec$/;"	s
+s_token	minishell.h	/^struct		s_token$/;"	s
+split_all_cmdl_string_to_token	parsing/split_arg.c	/^int	split_all_cmdl_string_to_token(t_commande_line **first)$/;"	f
+split_string_cur_cmdl	parsing/split_arg.c	/^int	split_string_cur_cmdl(t_commande_line **stc)$/;"	f
+spliting	libft/strsplit.c	/^void	spliting(int words, char const *s, char c, char **tab)$/;"	f
+str	minishell.h	/^	char	*str;$/;"	m	struct:s_env
+str	minishell.h	/^	char	*str;$/;"	m	struct:s_token
+string	minishell.h	/^	char			*string;$/;"	m	struct:s_commande_line
+string_before_env	parsing/expend_word/word_unquote_inter.c	/^char	*string_before_env(char *str, char *s1, int *cur, int start)$/;"	f
+string_env	parsing/expend_word/word_unquote_inter.c	/^char	*string_env(char *str, char *tmp, int *cur)$/;"	f
+t_commande_line	minishell.h	/^typedef struct s_commande_line	t_commande_line;$/;"	t	typeref:struct:s_commande_line
+t_env	minishell.h	/^typedef struct s_env			t_env;$/;"	t	typeref:struct:s_env
+t_exec	minishell.h	/^typedef struct s_exec			t_exec;$/;"	t	typeref:struct:s_exec
+t_token	minishell.h	/^typedef struct s_token			t_token;$/;"	t	typeref:struct:s_token
+token	minishell.h	/^typedef enum token$/;"	g
+token_add_back	parsing/lst_fonction/token_add_back.c	/^void	token_add_back(t_token **first, t_token *add_back)$/;"	f
+type	minishell.h	/^	e_token	type;$/;"	m	struct:s_token
+unclose_quote	parsing/parsing_utils.c	/^int	unclose_quote(char	*str)$/;"	f
+update_quote_status	parsing/parsing_utils.c	/^e_quote	update_quote_status(char c, e_quote quote)$/;"	f
+update_quote_succes	parsing/parsing_utils.c	/^e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote)$/;"	f
+word_modif	parsing/expend_word/expend_word.c	/^int	word_modif(t_token **stc, char *str, e_token token)$/;"	f
+word_modif_two	parsing/expend_word/expend_word.c	/^int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)$/;"	f
+word_will_double	parsing/expend_word/word_will_double.c	/^char	*word_will_double(char *str, int *i, char *s1)$/;"	f
+word_will_single	parsing/expend_word/word_will_single.c	/^char	*word_will_single(char *str, int *i, char *s1)$/;"	f
+word_will_unquote	parsing/expend_word/word_will_unquote.c	/^char	*word_will_unquote(t_token **stc, char *str, int *cur, char *s1)$/;"	f
