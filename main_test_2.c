@@ -6,12 +6,11 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 20:26:04 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 00:53:57 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "minishell.h"
+#include "include/minishell.h"
 
 void	free_all(t_commande_line **cmd_line)
 {
