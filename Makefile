@@ -12,24 +12,37 @@ FLAGS 	= -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 
-SRCS =  	main_test_2.c						\
-			parsing/creat_fill_lst/get_cmd_line.c				\
-			parsing/lst_fonction/cmdl_add_back.c				\
-			parsing/parsing_utils.c				\
-			parsing/free_utils.c				\
-			parsing/creat_fill_lst/split_arg.c					\
+SRCS =  	main_test_2.c									\
+			parsing/creat_fill_lst/get_cmd_line.c			\
+			parsing/lst_fonction/cmdl_add_back.c			\
+			parsing/parsing_utils.c							\
+			parsing/free_utils.c							\
+			parsing/creat_fill_lst/split_arg.c				\
 			parsing/lst_fonction/init_token.c				\
-			builtin.c							\
 			parsing/expend_word/expend_word.c				\
 			parsing/expend_word/devellope_limitor.c			\
 			parsing/expend_word/word_will_single.c			\
 			parsing/expend_word/word_will_double.c			\
 			parsing/expend_word/word_will_unquote.c			\
-			parsing/get_env.c					\
+			parsing/get_env.c								\
 			parsing/expend_word/fake_env.c					\
 			parsing/expend_word/word_unquote_inter.c		\
-			parsing/creat_fill_lst/organise_arg.c				\
-			parsing/lst_fonction/token_add_back.c			
+			parsing/creat_fill_lst/organise_arg.c			\
+			parsing/lst_fonction/token_add_back.c			\
+			built_in/ft_built_in_pwd.c						\
+			built_in/ft_built_in_echo.c						\
+			built_in/ft_built_in_env.c						\
+			built_in/ft_delete_key.c						\
+			built_in/ft_env_singletone.c					\
+			built_in/ft_add_value.c							\
+			built_in/ft_built_in_cd.c						\
+			built_in/ft_push_front.c						\
+			built_in/ft_built_in_export.c					\
+			built_in/ft_init_env.c							\
+			built_in/ft_free_env.c							\
+			built_in/ft_get_value.c							\
+			built_in/ft_built_in.c							\
+			built_in/ft_built_in_unset.c				
 
 SRCS_BONUS =
 
@@ -40,12 +53,19 @@ OBJS 	= *.o
 OBJ_B = ${SRCS_BONUS:.c=.o}
 OBJS_B = *.o
 
+
+all : header
+	@make -C $(LIBFT)
+	@make $(NAME)
+
 .c.o:
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I include/.
 
-all :
-	@make -C $(LIBFT)
-	@make $(NAME)
+get_src:
+	@find built_in -type f -name "*.c" | tr "\n" "|" | sed -r 's/["|"]+/\\ \n/g'
+
+header:
+	  @Headermaker built_in include/exec.h -inc struct 
 
 $(NAME)	: $(OBJ)
 	$(CC) $(FLAGS) -I libft/includes/ -I include/. $(OBJ) libft/libft.a -o $(NAME) $(LIB)
@@ -59,6 +79,7 @@ clean :
 		@rm -rf $(OBJ_B)
 
 fclean : clean
+		@rm -rf libft.a
 		@make fclean -C $(LIBFT)
 		@rm -rf $(OBJS)
 		@rm -rf $(OBJS_B)
@@ -68,8 +89,6 @@ fclean : clean
 relinux : fclean LINUX
 
 re : fclean all
-
-
 
 bonus :
 		@make -C $(LIBFT)

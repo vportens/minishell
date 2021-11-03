@@ -6,13 +6,13 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 01:03:50 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:45:27 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_cmdl(t_commande_line *new)
+static void	init_cmdl(t_commande_line *new)
 {
 	new->string = NULL;
 	new->first_token = NULL;
@@ -20,7 +20,7 @@ void	init_cmdl(t_commande_line *new)
 	new->next = NULL;
 }
 
-void	go_to_the_pipe(int *i, char *str)
+static void	go_to_the_pipe(int *i, char *str)
 {
 	e_quote	quote;
 
@@ -35,7 +35,7 @@ void	go_to_the_pipe(int *i, char *str)
 	return ;
 }
 
-int	create_and_fill_cmd(char *str, int cur, int start, t_commande_line **first)
+static int	create_and_fill_cmd(char *str, int cur, int start, t_commande_line **first)
 {
 	t_commande_line	*tmp;
 	t_commande_line	*new;

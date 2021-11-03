@@ -6,13 +6,13 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:15:07 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 01:04:42 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:46:14 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_arg(t_commande_line *cmd)
+static void	init_arg(t_commande_line *cmd)
 {
 	t_token	*cur_t;
 	int		i;
@@ -31,7 +31,7 @@ void	init_arg(t_commande_line *cmd)
 	cmd->argv[i] = NULL;
 }
 
-int	nbr_arg_cmd(t_commande_line *cmd)
+static int	nbr_arg_cmd(t_commande_line *cmd)
 {
 	t_token	*cur_t;
 	int		len;

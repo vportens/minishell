@@ -6,13 +6,13 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 01:07:48 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:47:13 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)
+static int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)
 {
 	t_token	*new;
 
@@ -29,7 +29,7 @@ int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)
 	return (0);
 }
 
-void	iter_to_end_or_redirection(char	*str, int *cur)
+static void	iter_to_end_or_redirection(char	*str, int *cur)
 {
 	while (str[*cur] && is_redirection(str[*cur]))
 		(*cur)++;
@@ -52,7 +52,7 @@ int	iter_to_end_arg(int *cur, char *str)
 
 /*ici on decoupe la string en arg*/
 /*tester create_add_back_token == NULL*/
-int	split_string_cur_cmdl(t_commande_line **stc)
+static int	split_string_cur_cmdl(t_commande_line **stc)
 {
 	int		cur;
 	int		start;

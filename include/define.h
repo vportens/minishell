@@ -1,27 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/03 15:16:20 by lchristo         ###   ########.fr       */
+/*   Created: 2021/11/03 15:07:15 by lchristo          #+#    #+#             */
+/*   Updated: 2021/11/03 15:30:46 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef DEFINE_H
+# define DEFINE_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/includes/libft.h"
-# include <stdbool.h>
-# include "parsing.h"
-# include "exec.h"
+typedef enum quote
+{
+	NONE,
+	SINGLE,
+	DOUBLE,
+	BACKSLASH,
+	END
+}	e_quote;
 
-char							**g_envp;
+typedef	enum mod
+{
+	GET,
+	DELETE,
+	FREE,
+	ADD
+}			e_mod;
+
+typedef enum token
+{
+	NON,
+	ARG,
+	BUILTIN,
+	OPEN_FILE,
+	HERE_DOC,
+	LIMITOR,
+	CREAT_FILE,
+	WRITE_FILE,
+	FILE_IN,
+	FILE_OUT,
+	FILE_OUT_OVER,
+	ENDS
+}				e_token;
 
 #endif
