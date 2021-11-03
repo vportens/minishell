@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/02 16:53:15 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 23:59:01 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		ft_built_in_export(char **str)
 	int i;
 
 	i = 0;
+	if (str[1] == NULL)
+	{
+		ft_built_in_show_export();
+		return 0;
+	}
 	while (str[i] != NULL)
 	{
 		if (ft_singletone(str[i], ADD) == 50)

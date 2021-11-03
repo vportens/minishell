@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 23:24:21 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 23:48:02 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_exec_builtin(char *str, char **args)
 	int i;
 
 	i = 0;
-	printf("start\n");
+	printf("******************\n");
 	if (str == NULL)
 			return (0);
 	while (i < 7 && !ft_strcmp(built[i], str))
@@ -29,6 +29,13 @@ int	ft_exec_builtin(char *str, char **args)
 		tb_tk[i](args);
 	if (ft_strcmp("exit", str))
 		return (2);
+	if (i < 7)
+	{
+	printf("******************\n");
+		
+		printf("OK\n");
+		return (0);
+	}
 	printf("KO\n");
 	return (0);
 }

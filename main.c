@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 22:44:23 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 23:53:35 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 	int	res;
 
 	res = unclose_quote(str);
-	printf("sort de unclose_quote\n");
+//	printf("sort de unclose_quote\n");
 	if (res > 0)
 	{
 		free_all(cmd_line);
@@ -62,7 +62,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 			free(str);
 			return (50); // clean all arg;
 		}
-		printf("sort de get_cmd_line\n");
+//		printf("sort de get_cmd_line\n");
 		
 		if (split_all_cmdl_string_to_token(cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 		{
@@ -70,7 +70,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 			free(str);
 			return (50); // clean all arg
 		}
-		printf("sort de splitall\n");
+//		printf("sort de splitall\n");
 		
 		res = expend_words(cmd_line);
 		if (res != 0)
@@ -82,7 +82,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 				return (50);
 			}
 		}
-		printf("sort de expend_word\n");
+//		printf("sort de expend_word\n");
 		
 		if (organise_arg(cmd_line) != 0)
 		{
@@ -90,7 +90,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 			free(str);
 			return (50);
 		}
-		printf("sort de orga\n");
+//		printf("sort de orga\n");
 		
 	}
 	return (res);
@@ -165,6 +165,7 @@ int	main(int ac, char **av, char **envp)
 //	get_environment(envp);
 	g_envp = envp;
 	cmd_line = NULL;
+	ft_init_t_env(envp);
 	while (1)
 	{
 		str = readline("minishell$> ");
@@ -172,9 +173,9 @@ int	main(int ac, char **av, char **envp)
 		{
 			return (free_all(&cmd_line));
 		}
-		printf("on rentre dans pars\n");
+//		printf("on rentre dans pars\n");
 		res = pars(str, &cmd_line);
-		printf("on sort de pars");
+//		printf("on sort de pars");
 		if (res == 50)
 			return (50);
 		if (res == 0)
