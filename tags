@@ -44,15 +44,17 @@ WRITE_FILE	include/minishell.h	/^	WRITE_FILE,$/;"	e	enum:token
 alloc_dollar	parsing/get_env.c	/^char	*alloc_dollar(void)$/;"	f
 argv	include/minishell.h	/^	char			**argv;$/;"	m	struct:s_commande_line
 argv	include/minishell.h	/^	char	**argv;$/;"	m	struct:s_exec
+change_type_file	parsing/expend_word/expend_word.c	/^e_token	change_type_file(e_token type, int *file)$/;"	f
 check_open_fil	parsing/expend_word/expend_word.c	/^int	check_open_fil(t_commande_line **block)$/;"	f
 cmdl_add_back	parsing/lst_fonction/cmdl_add_back.c	/^void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back)$/;"	f
 copy_fake_env	parsing/expend_word/fake_env.c	/^char	*copy_fake_env(char *str)$/;"	f
+cp_type_change_file	parsing/expend_word/expend_word.c	/^e_token	cp_type_change_file(e_token type, int *file)$/;"	f
 create_add_back_token	parsing/creat_fill_lst/split_arg.c	/^int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)$/;"	f
 create_and_fill_cmd	parsing/creat_fill_lst/get_cmd_line.c	/^int	create_and_fill_cmd(char *str, int cur, int start, t_commande_line **first)$/;"	f
 devellope_limitor	parsing/expend_word/devellope_limitor.c	/^char	*devellope_limitor(t_token *stc, char *str, int i)$/;"	f
 e_quote	include/minishell.h	/^}	e_quote;$/;"	t	typeref:enum:quote
 e_token	include/minishell.h	/^}				e_token;$/;"	t	typeref:enum:token
-edit_type	parsing/expend_word/expend_word.c	/^int	edit_type(t_commande_line **block)$/;"	f
+edit_type	parsing/expend_word/expend_word.c	/^int	edit_type(t_commande_line **block, int limiter)$/;"	f
 end_word_unquote	parsing/expend_word/word_unquote_inter.c	/^char	*end_word_unquote(char *str, char *s1, int *i, int j)$/;"	f
 env_doublequote	parsing/expend_word/word_will_double.c	/^char	*env_doublequote(char *str, char *s1, int *i, int j)$/;"	f
 envp	include/minishell.h	/^	char			**envp;$/;"	m	struct:s_commande_line
@@ -108,6 +110,7 @@ is_builtin	builtin.c	/^int	is_builtin(char *str)$/;"	f
 is_env	parsing/get_env.c	/^int	is_env(char *str, char *env, int len)$/;"	f
 is_redirection	parsing/parsing_utils.c	/^int	is_redirection(char c)$/;"	f
 is_separator	parsing/parsing_utils.c	/^int	is_separator(char c)$/;"	f
+is_type_file	parsing/expend_word/expend_word.c	/^int	is_type_file(e_token type)$/;"	f
 iter_to_end_arg	parsing/creat_fill_lst/split_arg.c	/^int	iter_to_end_arg(int *cur, char *str)$/;"	f
 iter_to_end_or_redirection	parsing/creat_fill_lst/split_arg.c	/^void	iter_to_end_or_redirection(char	*str, int *cur)$/;"	f
 len_fake_env	parsing/expend_word/fake_env.c	/^int	len_fake_env(char *str)$/;"	f

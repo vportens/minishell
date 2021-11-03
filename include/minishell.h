@@ -6,7 +6,7 @@
 /*   By: viporten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/03 01:12:34 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:24:43 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		is_redirection(char c);
 
 int		expend_words(t_commande_line **block);
 int		limitor(t_token *stc, char *str);
+int		is_type_file(e_token type);
 char	*devellope_limitor(t_token *stc, char *str, int i);
 char	*word_will_single(char *str, int *i, char *s1);
 char	*word_will_double(char *str, int *i, char *s1);

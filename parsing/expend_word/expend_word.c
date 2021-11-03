@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 20:47:49 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:54:27 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 			else if (quote == NONE)
 				s1 = word_will_unquote(stc, str, &cur, s1);
 			if (s1 == NULL)
-			{
-				printf("modif word fail\n");
 				return (50);
-			}
 		}
 	}
 	free(str);
@@ -60,18 +57,24 @@ int	word_modif(t_token **stc, char *str, e_token token)
 	prec = NONE;
 	s1 = NULL;
 	if (token == LIMITOR)
-		return (limitor(*stc, str));//leaks
+		return (limitor(*stc, str));
 	return (word_modif_two(stc, str, quote, prec));
 }
 
-int	edit_type(t_commande_line **block)
+int	is_type_file(e_token type)
+{
+	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE
+		|| type == HERE_DOC)
+		return (1);
+	return (0);
+}
+
+int	edit_type(t_commande_line **block, int limiter)
 {
 	t_commande_line	*cur_b;
 	t_token			*cur_t;
-	int				limiter;
 
 	cur_b = *block;
-	limiter = 0;
 	while (cur_b)
 	{
 		cur_t = cur_b->first_token;
@@ -81,7 +84,7 @@ int	edit_type(t_commande_line **block)
 				limiter = 1;
 			else if (limiter == 1 && cur_t->str && cur_t->str[0] != '\0')
 			{
-				if (cur_t->type == CREAT_FILE || cur_t->type == WRITE_FILE || cur_t->type == OPEN_FILE || cur_t->type == HERE_DOC)
+				if (is_type_file(cur_t->type) == 1)
 					return (12);
 				cur_t->type = LIMITOR;
 				limiter = 0;
@@ -93,6 +96,24 @@ int	edit_type(t_commande_line **block)
 		cur_b = cur_b->next;
 	}
 	return (0);
+}
+
+e_token	change_type_file(e_token type, int *file)
+{
+	*file = 0;
+	if (type == OPEN_FILE)
+		return (FILE_IN);
+	else if (type == CREAT_FILE)
+		return (FILE_OUT);
+	else if (type == WRITE_FILE)
+		return (FILE_OUT_OVER);
+	return (NON);
+}
+
+e_token	cp_type_change_file(e_token type, int *file)
+{
+	*file = 1;
+	return (type);
 }
 
 int	check_open_fil(t_commande_line **block)
@@ -109,24 +130,12 @@ int	check_open_fil(t_commande_line **block)
 		cur_t = cur_b->first_token;
 		while (cur_t)
 		{
-			if ((cur_t->type == OPEN_FILE || cur_t->type == CREAT_FILE || cur_t->type == WRITE_FILE || cur_t->type == HERE_DOC) && file == 1)
+			if (is_type_file(cur_t->type) == 1 && file == 1)
 				return (12);
-			else if (cur_t->type == OPEN_FILE || cur_t->type == CREAT_FILE || cur_t->type == WRITE_FILE)
-			{
-				type = cur_t->type;
-				file = 1;
-			}
+			else if (is_type_file(cur_t->type) == 1)
+				type = cp_type_change_file(cur_t->type, &file);
 			else if (file == 1 && cur_t->str && (cur_t->str[0] != '\0'))
-			{
-				if (type == OPEN_FILE)
-					cur_t->type = FILE_IN;
-				else if (type == CREAT_FILE)
-					cur_t->type = FILE_OUT;
-				else if (type == WRITE_FILE)
-					cur_t->type = FILE_OUT_OVER;
-				printf("test str : %s\\n\n", cur_t->str);
-				file = 0;
-			}
+				cur_t->type = change_type_file(type, &file);
 			cur_t = cur_t->next;
 		}
 		if (file == 1)
@@ -143,7 +152,7 @@ int	expend_words(t_commande_line **block)
 	int				res;
 
 	cur_b = *block;
-	if (edit_type(block) != 0 || check_open_fil(block) != 0)
+	if (edit_type(block, 0) != 0 || check_open_fil(block) != 0)
 		return (12);
 	res = 0;
 	while (cur_b)
@@ -154,7 +163,7 @@ int	expend_words(t_commande_line **block)
 			if (cur_t->str && cur_t->str[0] != '\0')
 			{
 				printf("enter in word_modif avec str to modif :%s\\n\n", cur_t->str);
-				res = word_modif(&cur_t, cur_t->str, cur_t->type);//leaks
+				res = word_modif(&cur_t, cur_t->str, cur_t->type);
 				if (res != 0)
 					return (50);
 			}
