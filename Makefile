@@ -20,6 +20,8 @@ SRCS =  	main_env.c										\
 			parsing/creat_fill_lst/split_arg.c				\
 			parsing/lst_fonction/init_token.c				\
 			parsing/expend_word/expend_word.c				\
+			parsing/expend_word/expend_word_utils.c			\
+			parsing/expend_word/expend_word_utils_two.c		\
 			parsing/expend_word/devellope_limitor.c			\
 			parsing/expend_word/word_will_single.c			\
 			parsing/expend_word/word_will_double.c			\

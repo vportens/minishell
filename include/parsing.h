@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 15:15:32 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 19:31:47 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,15 @@ char	*word_will_unquote(t_token **stc, char *str, int *i, char *s1);
 char	*string_env(char *str, char *tmp, int *i);
 char	*end_word_unquote(char *str, char *s1, int *i, int j);
 
-char	*get_env(int *j, char *str);
+int		ret_file_without_obj(e_token type);
+int		is_type_file(e_token type);
+int		end_modif_two(char *str, t_token **stc, char *s1);
+char	*init_str(char **str, char *duplica, int *cur, char **s1);
+e_token	cp_type_change_file(e_token type, int *file);
+int		ret_error_file_without_file(t_commande_line *cur_b);
+e_token	change_type_file(e_token type, int *file);
 
+char	*get_env(int *j, char *str);
 
 char	*copy_fake_env(char *str);
 char	*fake_env(int *j, int len_str);
@@ -55,6 +62,7 @@ int		free_token_ret_malloc_error(t_token *tok);
 char	*free_str_ret_null(char *s1);
 void	free_split(char **split);
 char	*free_split_token(char **split, t_token *tok);
+int		free_str_ret_malloc_error(char *str);
 
 int		get_cmd_line(char *string, t_commande_line **first);
 
