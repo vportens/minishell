@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 01:54:27 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:05:33 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 			else if (quote == NONE)
 				s1 = word_will_unquote(stc, str, &cur, s1);
 			if (s1 == NULL)
+			{
+				free(str);
 				return (50);
+			}
 		}
 	}
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 01:14:41 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:04:11 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(int ac, char **av, char **envp)
 			if (get_cmd_line(str, &cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 			{
 				free_all(&cmd_line);
+				free(str);
 				write(1, "malloc error\n", ft_strlen("malloc error\n"));
 				return (50); // clean all arg;
 			}
@@ -93,6 +94,7 @@ int	main(int ac, char **av, char **envp)
 			if (split_all_cmdl_string_to_token(&cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 			{
 				free_all(&cmd_line);
+				free(str);
 				write(1, "malloc error\n", ft_strlen("malloc error\n"));
 				return (50); // clean all arg
 			}
@@ -105,6 +107,7 @@ int	main(int ac, char **av, char **envp)
 				free_all(&cmd_line);
 				if (res == 50)
 				{
+					free(str);
 					write(1, "malloc error\n", ft_strlen("malloc error\n"));
 					return (50);
 				}
@@ -116,6 +119,8 @@ int	main(int ac, char **av, char **envp)
 			if (organise_arg(&cmd_line) != 0)
 			{
 					write(1, "malloc error\n", ft_strlen("malloc error\n"));
+					free_all(&cmd_line);
+					free(str);
 					return (50);
 			}
 			write(1, "expend_word		success\n", ft_strlen("expend_word		success\n"));
@@ -178,7 +183,7 @@ int	main(int ac, char **av, char **envp)
 		if (str)
 			free(str);
 		printf("last free all\n");
-	//	free_all(&cmd_line);
+		free_all(&cmd_line);
 	//		cmd_line = cmd_line->next;
 
 	}
