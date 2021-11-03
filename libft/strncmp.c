@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 15:46:04 by viporten          #+#    #+#             */
-/*   Updated: 2021/10/30 19:18:09 by mlormois         ###   ########.fr       */
+/*   Updated: 2021/11/03 18:18:52 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_truestrncmp(char *str, char *to, int n)
 		return (-1);
 	while (i < n)
 	{
-		if (!str[i] || to[i] || str[i] != to[i])
+		if (!str[i] || !to[i] || str[i] != to[i])
 			return (str[i] - to[i]);
 		i++;
 	}

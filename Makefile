@@ -12,7 +12,7 @@ FLAGS 	= -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 
-SRCS =  	main.c											\
+SRCS =  	main_env.c										\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
 			parsing/parsing_utils.c							\
@@ -42,7 +42,8 @@ SRCS =  	main.c											\
 			built_in/ft_free_env.c							\
 			built_in/ft_get_value.c							\
 			built_in/ft_built_in.c							\
-			built_in/ft_built_in_unset.c				
+			built_in/ft_built_in_unset.c					\
+			built_in/ft_gestion_error.c
 
 SRCS_BONUS =
 

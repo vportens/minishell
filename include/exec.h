@@ -59,6 +59,7 @@ int		ft_add_value_to_env(t_env **env_list, char *env);
 /* -------------------------------------------------------------------------- */
 /*                      FILE = built_in/ft_built_in_cd.c                      */
 /* -------------------------------------------------------------------------- */
+int    ft_built_in_cd(char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = built_in/ft_push_front.c                       */
@@ -71,6 +72,11 @@ int		ft_push_front(char *env, t_env **begin_lst);
 void    ft_built_in_show_export(void);
 int		ft_built_in_export(char **str);
 void	ft_show_export(t_env **env);
+
+/* -------------------------------------------------------------------------- */
+/*                     FILE = built_in/ft_gestion_error.c                     */
+/* -------------------------------------------------------------------------- */
+int ft_print_error(char *str1, char *str2);
 
 /* -------------------------------------------------------------------------- */
 /*                       FILE = built_in/ft_init_env.c                        */

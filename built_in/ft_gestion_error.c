@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_value.c                                     :+:      :+:    :+:   */
+/*   ft_gestion_error.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 21:19:46 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 18:20:08 by lchristo         ###   ########.fr       */
+/*   Created: 2021/11/03 19:02:06 by lchristo          #+#    #+#             */
+/*   Updated: 2021/11/03 19:09:04 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_env(char *str)
+int ft_print_error(char *str1, char *str2)
 {
-	t_env	**env_list;
+    char *ret;
 
-	env_list = get_adress_env();
-	return (ft_get_value_of_env(env_list, str));	
-}
-
-char	*ft_get_value_of_env(t_env **env, char *str)
-{
-	t_env	*cpy;
-	int		len;
-
-	len = ft_get_lenkey(str);
-	cpy = *env;
-	while (cpy)
-	{
-		if (!ft_truestrncmp(cpy->str, str, len))
-			return (cpy->str + len + 1);		
-		cpy = cpy->next;
-	}
-	return (NULL);
+    ret = ft_strjoin(str1, str2);
+    if (ret == NULL)
+        return (50);
+    perror(ret);
+    free(ret);
+    return (0);
 }
