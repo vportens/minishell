@@ -12,7 +12,7 @@ FLAGS 	= -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 
-SRCS =  	main_test_2.c									\
+SRCS =  	main.c											\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
 			parsing/parsing_utils.c							\
