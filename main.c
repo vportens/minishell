@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test_2.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 14:04:11 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:00:49 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ int	main(int ac, char **av, char **envp)
 					write(1, "malloc error\n", ft_strlen("malloc error\n"));
 					return (50);
 				}
-				if (res == 12)
-					write(1, "*************************************\n*         erreur de syntaxe         *\n*************************************\n", ft_strlen("*************************************\n*         erreur de syntaxe         *\n*************************************\n"));
+			//	if (res == 12)
+		//			write(1, "*************************************\n*         erreur de syntaxe         *\n*************************************\n", ft_strlen("*************************************\n*         erreur de syntaxe         *\n*************************************\n"));
 				
 			}
 			
@@ -135,7 +135,7 @@ int	main(int ac, char **av, char **envp)
 		tmp = cmd_line;
 		while (cmd_line)
 		{
-			printf("cmd_line n %d to exec: %s \n", i, cmd_line->string);
+			printf("cmd_line n %d to exec: %s\\n\n", i, cmd_line->string);
 			first = cmd_line->first_token;
 			while (cmd_line->first_token)
 			{

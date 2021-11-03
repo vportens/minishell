@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 14:05:33 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:17:07 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ int	word_modif(t_token **stc, char *str, e_token token)
 	return (word_modif_two(stc, str, quote, prec));
 }
 
+int	ret_file_without_obj(e_token type)
+{
+	write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*         erreur de syntaxe"));
+	if (type == NON)
+		write(1, " newline\n", 9);
+	if (type == CREAT_FILE)
+		write(1, " >\n", 3);
+	else if (type == WRITE_FILE)
+		write(1, " >>\n", 4);
+	else if (type == OPEN_FILE)
+		write(1, " <\n", 3);
+	else if (type == HERE_DOC)
+		write(1, " <<\n", 4);
+	return (12);
+}
+
 int	is_type_file(e_token type)
 {
 	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE
@@ -88,14 +104,14 @@ int	edit_type(t_commande_line **block, int limiter)
 			else if (limiter == 1 && cur_t->str && cur_t->str[0] != '\0')
 			{
 				if (is_type_file(cur_t->type) == 1)
-					return (12);
+					return (ret_file_without_obj(cur_t->type));
 				cur_t->type = LIMITOR;
 				limiter = 0;
 			}
 			cur_t = cur_t->next;
 		}
 		if (limiter == 1)
-			return (12);
+			return (ret_file_without_obj(NON));
 		cur_b = cur_b->next;
 	}
 	return (0);
@@ -134,7 +150,7 @@ int	check_open_fil(t_commande_line **block)
 		while (cur_t)
 		{
 			if (is_type_file(cur_t->type) == 1 && file == 1)
-				return (12);
+				return (ret_file_without_obj(cur_t->type));
 			else if (is_type_file(cur_t->type) == 1)
 				type = cp_type_change_file(cur_t->type, &file);
 			else if (file == 1 && cur_t->str && (cur_t->str[0] != '\0'))
@@ -142,7 +158,14 @@ int	check_open_fil(t_commande_line **block)
 			cur_t = cur_t->next;
 		}
 		if (file == 1)
+		{
+			write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*         erreur de syntaxe"));
+			if (cur_b->next)
+				write(1, " |\n", 3); 
+			else
+				write(1, " newline\n", 9);
 			return (12);
+		}
 		cur_b = cur_b->next;
 	}
 	return (0);
