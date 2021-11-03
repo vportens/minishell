@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 15:39:12 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 16:24:14 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:03:03 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back)
 	else
 	{
 		while (cur->next)
-			cur = cur->next;	
+			cur = cur->next;
 		cur->next = add_back;
 	}
 }

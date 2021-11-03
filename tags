@@ -71,7 +71,7 @@ free_both	parsing/free_utils.c	/^void	free_both(char *s1, char *s2)$/;"	f
 free_cmdl_ret_malloc_error	parsing/free_utils.c	/^int	free_cmdl_ret_malloc_error(t_commande_line *stc)$/;"	f
 free_split	parsing/free_utils.c	/^void	free_split(char **split)$/;"	f
 free_split_ret_str	parsing/expend_word/word_will_unquote.c	/^char	*free_split_ret_str(char **split, char *str)$/;"	f
-free_split_token	parsing/expend_word/word_will_unquote.c	/^char	*free_split_token(char **split, t_token *tok)$/;"	f
+free_split_token	parsing/expend_word/word_unquote_inter.c	/^char	*free_split_token(char **split, t_token *tok)$/;"	f
 free_str_ret_null	parsing/free_utils.c	/^char	*free_str_ret_null(char *s1)$/;"	f
 free_token_ret_malloc_error	parsing/free_utils.c	/^int	free_token_ret_malloc_error(t_token *tok)$/;"	f
 ft_atoi	libft/atoi.c	/^int	ft_atoi(char *str)$/;"	f

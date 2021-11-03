@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 00:53:57 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:14:41 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,14 @@ int	main(int ac, char **av, char **envp)
 		//	write(1, "pars_cmd_line\n", ft_strlen("pars_cmd_line\n"));
 		}
 		i = 0;
+		t_commande_line	*tmp;
+		t_token	*first;
+
+		tmp = cmd_line;
 		while (cmd_line)
 		{
 			printf("cmd_line n %d to exec: %s \n", i, cmd_line->string);
+			first = cmd_line->first_token;
 			while (cmd_line->first_token)
 			{
 				printf("	word : %s\\n\n", cmd_line->first_token->str);
@@ -160,6 +165,7 @@ int	main(int ac, char **av, char **envp)
 				cmd_line->first_token = cmd_line->first_token->next;  
 			}
 			i = 0;
+			cmd_line->first_token = first;
 			while (cmd_line->argv[i])
 			{
 				printf("	argv[%d] : %s\n", i, cmd_line->argv[i]);
@@ -168,6 +174,7 @@ int	main(int ac, char **av, char **envp)
 			cmd_line = cmd_line->next;
 			printf("end of lst word\n");
 		}
+		cmd_line = tmp;
 		if (str)
 			free(str);
 		printf("last free all\n");

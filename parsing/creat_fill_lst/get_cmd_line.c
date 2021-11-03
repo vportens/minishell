@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 15:58:09 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:03:50 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_cmd_line(char *string, t_commande_line **first_stc)
 		go_to_the_pipe(&cur, string);
 		if (create_and_fill_cmd(string, cur, start, first_stc) > 0)
 			return (50);
-		start  = cur;
+		start = cur;
 	}
 	return (0);
 }

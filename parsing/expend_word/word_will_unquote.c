@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 01:27:37 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 23:15:02 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:12:38 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@ char	*free_split_ret_str(char **split, char *str)
 {
 	free_split(split);
 	return (str);
-}
-
-char	*free_split_token(char **split, t_token *tok)
-{
-	free_split(split);
-	if (tok)
-	{
-		if (tok->str)
-			free(tok->str);
-	}
-	return (NULL);
 }
 
 char	*new_token_env(t_token **stc, char **split, int i)
@@ -64,7 +53,8 @@ char	*if_no_env(char *str, int *i, char *s1)
 	int		start;
 
 	start = *i;
-	while (str[(*i)] && str[(*i)] != '\'' && str[(*i)] != '"' && str[(*i)] != '$')
+	while (str[(*i)] && str[(*i)] != '\'' && str[(*i)] != '"'
+		&& str[(*i)] != '$')
 		(*i)++;
 	new = malloc(sizeof(char) * ((*i) - start + 1));
 	if (new == NULL)
@@ -99,7 +89,6 @@ char	*if_env(t_token **stc, char *str, char *s1, int *i)
 		return (free_split_ret_str(split, join));
 	(*stc)->str = join;
 	return (new_token_env(stc, split, 1));
-	
 }
 
 char	*word_will_unquote(t_token **stc, char *str, int *cur, char *s1)

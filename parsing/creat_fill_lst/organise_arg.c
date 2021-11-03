@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:15:07 by laclide           #+#    #+#             */
-/*   Updated: 2021/10/30 15:31:46 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:04:42 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ int	nbr_arg_cmd(t_commande_line *cmd)
 
 int	organise_arg(t_commande_line **cmd)
 {
-	t_commande_line *cur_b;
+	t_commande_line	*cur_b;
 	int				len_arg;
 	char			**new;
 
-
 	cur_b = *cmd;
-	
 	while (cur_b)
 	{
 		len_arg = nbr_arg_cmd(cur_b);

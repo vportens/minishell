@@ -6,7 +6,7 @@
 /*   By: viporten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/03 00:54:27 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:12:34 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int		free_cmdl_ret_malloc_error(t_commande_line *str);
 int		free_token_ret_malloc_error(t_token *tok);
 char	*free_str_ret_null(char *s1);
 void	free_split(char **split);
+char	*free_split_token(char **split, t_token *tok);
 
 int		get_cmd_line(char *string, t_commande_line **first);
 

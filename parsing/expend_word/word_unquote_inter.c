@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:14:42 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 22:56:34 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 01:11:56 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*string_env(char *str, char *tmp, int *cur)
 		return (free_str_ret_null(tmp));
 	return (tmp2);
 }
-
 
 char	*string_before_env(char *str, char *s1, int *cur, int start)
 {
@@ -49,7 +48,7 @@ char	*end_word_unquote(char *str, char *s1, int *i, int j)
 	s3 = NULL;
 	if ((*i) - j == 0)
 		return (s1);
-	printf("start cpy :%d\nend cpy :%d\nstr to cpy :%s\n",j, *i, str);
+	printf("start cpy :%d\nend cpy :%d\nstr to cpy :%s\n", j, *i, str);
 	s2 = malloc(sizeof(char) * ((*i) - j + 1));
 	if (s2 == NULL)
 		return (free_str_ret_null(s1));
@@ -59,4 +58,15 @@ char	*end_word_unquote(char *str, char *s1, int *i, int j)
 	free_both(s1, s2);
 	printf("s3 end_word_unquote :%s\n", s3);
 	return (s3);
+}
+
+char	*free_split_token(char **split, t_token *tok)
+{
+	free_split(split);
+	if (tok)
+	{
+		if (tok->str)
+			free(tok->str);
+	}
+	return (NULL);
 }
