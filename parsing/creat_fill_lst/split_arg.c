@@ -6,13 +6,14 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 15:36:17 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:22:52 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	create_add_back_token(int cur, int start, char *str, t_commande_line **stc)
+static int	create_add_back_token(int cur, int start, char *str,
+		t_commande_line **stc)
 {
 	t_token	*new;
 

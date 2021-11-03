@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 14:45:27 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:22:09 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	go_to_the_pipe(int *i, char *str)
 	return ;
 }
 
-static int	create_and_fill_cmd(char *str, int cur, int start, t_commande_line **first)
+static int	create_and_fill_cmd(char *str, int cur, int start,
+		t_commande_line **first)
 {
 	t_commande_line	*tmp;
 	t_commande_line	*new;

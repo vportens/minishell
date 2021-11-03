@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 18:17:07 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 19:04:51 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 	int		cur;
 	char	*str;
 
-	str = ft_strdup(duplica);
-	if (duplica)
-		free(duplica);
-	cur = 0;
-	s1 = NULL;
+	if (init_str(&str, duplica, &cur, &s1) == NULL)
+		return (50);
 	while (str[cur])
 	{
 		quote = update_quote_status(str[cur], quote);
@@ -37,15 +34,10 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 			else if (quote == NONE)
 				s1 = word_will_unquote(stc, str, &cur, s1);
 			if (s1 == NULL)
-			{
-				free(str);
-				return (50);
-			}
+				return (free_str_ret_malloc_error(str));
 		}
 	}
-	free(str);
-	(*stc)->str = s1;
-	return (0);
+	return (end_modif_two(str, stc, s1));
 }
 
 int	word_modif(t_token **stc, char *str, e_token token)
@@ -62,30 +54,6 @@ int	word_modif(t_token **stc, char *str, e_token token)
 	if (token == LIMITOR)
 		return (limitor(*stc, str));
 	return (word_modif_two(stc, str, quote, prec));
-}
-
-int	ret_file_without_obj(e_token type)
-{
-	write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*         erreur de syntaxe"));
-	if (type == NON)
-		write(1, " newline\n", 9);
-	if (type == CREAT_FILE)
-		write(1, " >\n", 3);
-	else if (type == WRITE_FILE)
-		write(1, " >>\n", 4);
-	else if (type == OPEN_FILE)
-		write(1, " <\n", 3);
-	else if (type == HERE_DOC)
-		write(1, " <<\n", 4);
-	return (12);
-}
-
-int	is_type_file(e_token type)
-{
-	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE
-		|| type == HERE_DOC)
-		return (1);
-	return (0);
 }
 
 int	edit_type(t_commande_line **block, int limiter)
@@ -117,24 +85,6 @@ int	edit_type(t_commande_line **block, int limiter)
 	return (0);
 }
 
-e_token	change_type_file(e_token type, int *file)
-{
-	*file = 0;
-	if (type == OPEN_FILE)
-		return (FILE_IN);
-	else if (type == CREAT_FILE)
-		return (FILE_OUT);
-	else if (type == WRITE_FILE)
-		return (FILE_OUT_OVER);
-	return (NON);
-}
-
-e_token	cp_type_change_file(e_token type, int *file)
-{
-	*file = 1;
-	return (type);
-}
-
 int	check_open_fil(t_commande_line **block)
 {
 	t_commande_line	*cur_b;
@@ -158,14 +108,7 @@ int	check_open_fil(t_commande_line **block)
 			cur_t = cur_t->next;
 		}
 		if (file == 1)
-		{
-			write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*         erreur de syntaxe"));
-			if (cur_b->next)
-				write(1, " |\n", 3); 
-			else
-				write(1, " newline\n", 9);
-			return (12);
-		}
+			return (ret_error_file_without_file(cur_b->next));
 		cur_b = cur_b->next;
 	}
 	return (0);
