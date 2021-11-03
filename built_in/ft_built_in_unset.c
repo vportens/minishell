@@ -6,13 +6,13 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:11:00 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/02 16:51:44 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:25:41 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_built_in_unset(char **str)
+int    ft_built_in_unset(char **str)
 {
     int i;
 
@@ -22,4 +22,5 @@ void    ft_built_in_unset(char **str)
         ft_singletone(str[i], DELETE);
         i++;
     }
+    return (0);
 }

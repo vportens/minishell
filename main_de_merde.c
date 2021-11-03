@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 22:44:23 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 20:18:11 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,32 @@ int	free_all(t_commande_line **cmd_line)
 	{
 	while (*cmd_line)
 	{
+		printf("start_free_all\n");
 		tmp = (*cmd_line)->next;
 		if ((*cmd_line)->string)
 			free((*cmd_line)->string);
+
+		printf("free_all_string\n");
 		if ((*cmd_line)->argv)
 			free((*cmd_line)->argv);
+		printf("free_all_argv\n");
 		if ((*cmd_line)->first_token)
 		{
 			while ((*cmd_line)->first_token)
 			{
+				printf("start_free_all_token\n");
 				tok = (*cmd_line)->first_token->next;
 				if ((*cmd_line)->first_token->str)
 					free((*cmd_line)->first_token->str);
 				free((*cmd_line)->first_token);
 				(*cmd_line)->first_token = tok;
+
+				printf("end_free_all_token\n");
 			}
 		}
 		free((*cmd_line));
+		printf("end_free_all_cmd\n");
+		
 		*cmd_line = tmp;
 	}
 	}
@@ -49,28 +58,32 @@ int	pars(char *str, t_commande_line **cmd_line)
 	int	res;
 
 	res = unclose_quote(str);
-	printf("sort de unclose_quote\n");
 	if (res > 0)
 	{
+		write(1, "unclose quote\n", 14);
 		free_all(cmd_line);
 	}
 	else
 	{
+		write(1, "entre dans get_cmd_line\n", ft_strlen("entre dans get_cmd_line\n"));
 		if (get_cmd_line(str, cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 		{
 			free_all(cmd_line);
 			free(str);
+			write(1, "malloc error\n", ft_strlen("malloc error\n"));
 			return (50); // clean all arg;
 		}
-		printf("sort de get_cmd_line\n");
-		
+		write(1, "get_cmd_line		succes\n", ft_strlen("get_cmd_line		succes\n"));
+		write(1, "entre dans split_arg\n", ft_strlen("entre dans split_arg\n"));
 		if (split_all_cmdl_string_to_token(cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 		{
 			free_all(cmd_line);
 			free(str);
+			write(1, "malloc error\n", ft_strlen("malloc error\n"));
 			return (50); // clean all arg
 		}
-		printf("sort de splitall\n");
+		write(1, "split_arg			success\n", ft_strlen("split_arg			success\n"));
+		write(1, "entre dans expend_word\n", ft_strlen("entre dans expend_word\n"));
 		
 		res = expend_words(cmd_line);
 		if (res != 0)
@@ -79,21 +92,25 @@ int	pars(char *str, t_commande_line **cmd_line)
 			if (res == 50)
 			{
 				free(str);
+				write(1, "malloc error\n", ft_strlen("malloc error\n"));
 				return (50);
 			}
 		}
-		printf("sort de expend_word\n");
 		
 		if (organise_arg(cmd_line) != 0)
 		{
+			write(1, "malloc error\n", ft_strlen("malloc error\n"));
 			free_all(cmd_line);
 			free(str);
 			return (50);
 		}
-		printf("sort de orga\n");
-		
+		write(1, "expend_word		success\n", ft_strlen("expend_word		success\n"));
+
+			
 	}
 	return (res);
+
+
 }
 
 void	print_cmdl(t_commande_line **cmdl)
@@ -140,7 +157,6 @@ void	print_cmdl(t_commande_line **cmdl)
 				printf("	expanded : FALSE\n");
 			if (cur_t->expanded == 1)
 				printf("	expanded : TRUE\n");
-			printf("\n");
 			cur_t = cur_t->next;  
 		}
 		i = 0;
@@ -151,6 +167,7 @@ void	print_cmdl(t_commande_line **cmdl)
 		}
 		cur_b = cur_b->next;
 		j++;
+		printf("end of lst word\n");
 	}
 }
 
@@ -170,21 +187,21 @@ int	main(int ac, char **av, char **envp)
 		str = readline("minishell$> ");
 		if (str == NULL)
 		{
+			write(1, "readline return NULL\n", ft_strlen("readline return NULL\n"));
 			return (free_all(&cmd_line));
 		}
-		printf("on rentre dans pars\n");
 		res = pars(str, &cmd_line);
-		printf("on sort de pars");
 		if (res == 50)
 			return (50);
 		if (res == 0)
 		{
-			//print_cmdl(&cmd_line);
 			if (ft_exec(&cmd_line, str) == 50)
 				return (50);
 		}
+		print_cmdl(&cmd_line);
 		if (str)
 			free(str);
+		printf("last free all\n");
 		free_all(&cmd_line);
 	//		cmd_line = cmd_line->next;
 

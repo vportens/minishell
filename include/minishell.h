@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/03 18:48:18 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:04:04 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include "parsing.h"
 # include "exec.h"
+# include "builtin.h"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>

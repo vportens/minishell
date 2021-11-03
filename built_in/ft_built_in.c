@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   ft_built_in.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 14:59:48 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/03 23:24:21 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(char *str)
+int	ft_exec_builtin(char *str, char **args)
 {
+	printf("OK\n");
+	int (*tb_tk[7])(char **) = {&ft_built_in_cd, &ft_built_in_echo, &ft_built_in_env, &ft_built_in_pwd, &ft_built_in_export, &ft_built_in_unset};
+	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
+	int i;
+
+	i = 0;
+	printf("start\n");
 	if (str == NULL)
 			return (0);
-		if (ft_strcmp(str, "echo") || ft_strcmp(str, "cd") || ft_strcmp(str, "pwd") || ft_strcmp(str, "export") || ft_strcmp(str, "env") || ft_strcmp(str, "unset") || ft_strcmp(str, "exit"))
-		return (1);
+	while (i < 7 && !ft_strcmp(built[i], str))
+		i++;
+	if (i < 7)
+		tb_tk[i](args);
+	if (ft_strcmp("exit", str))
+		return (2);
+	printf("KO\n");
 	return (0);
 }

@@ -12,7 +12,8 @@ FLAGS 	= -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 
-SRCS =  	main.c										\
+SRCS =  	main.c											\
+			parsing/ft_is_builtin.c							\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
 			parsing/parsing_utils.c							\
@@ -32,21 +33,22 @@ SRCS =  	main.c										\
 			parsing/expend_word/word_unquote_inter.c		\
 			parsing/creat_fill_lst/organise_arg.c			\
 			parsing/lst_fonction/token_add_back.c			\
-			built_in/ft_built_in_pwd.c						\
-			built_in/ft_built_in_echo.c						\
-			built_in/ft_built_in_env.c						\
-			built_in/ft_delete_key.c						\
-			built_in/ft_env_singletone.c					\
-			built_in/ft_add_value.c							\
-			built_in/ft_built_in_cd.c						\
-			built_in/ft_push_front.c						\
-			built_in/ft_built_in_export.c					\
-			built_in/ft_init_env.c							\
-			built_in/ft_free_env.c							\
-			built_in/ft_get_value.c							\
-			built_in/ft_built_in.c							\
-			built_in/ft_built_in_unset.c					\
-			built_in/ft_gestion_error.c
+			built_in/ft_built_in_pwd.c\
+			built_in/ft_built_in_echo.c\
+			built_in/ft_built_in_env.c\
+			built_in/ft_delete_key.c\
+			built_in/ft_env_singletone.c\
+			built_in/ft_built_in.c\
+			built_in/ft_add_value.c\
+			built_in/ft_built_in_cd.c\
+			built_in/ft_push_front.c\
+			built_in/ft_built_in_export.c\
+			built_in/ft_gestion_error.c\
+			built_in/ft_init_env.c\
+			built_in/ft_free_env.c\
+			built_in/ft_get_value.c\
+			built_in/ft_built_in_unset.c\
+			exec/ft_exec.c
 
 SRCS_BONUS =
 
@@ -63,13 +65,14 @@ all : header
 	@make $(NAME)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I include/.
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I include/
 
 get_src:
 	@find built_in -type f -name "*.c" | tr "\n" "|" | sed -r 's/["|"]+/\\ \n/g'
 
 header:
-	  @Headermaker built_in include/exec.h -inc struct 
+	  @Headermaker built_in include/builtin.h -inc struct 
+	  @Headermaker exec include/exec.h -inc struct 
 
 $(NAME)	: $(OBJ)
 	$(CC) $(FLAGS) -I libft/includes/ -I include/. $(OBJ) libft/libft.a -o $(NAME) $(LIB)

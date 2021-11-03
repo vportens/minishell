@@ -6,18 +6,21 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:25:49 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/02 14:21:42 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:30:10 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_built_in_env(void)
+int ft_built_in_env(char **str)
 {
     t_env **env;
 
+    if (*str == NULL)
+        return (0);
     env = get_adress_env();
     ft_built_in_show_env(env);
+    return (0);
 }
 
 int     ft_is_equal(char *str)

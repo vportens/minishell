@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expend_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 19:04:51 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/03 20:22:28 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	expend_words(t_commande_line **block)
 		{
 			if (cur_t->str && cur_t->str[0] != '\0')
 			{
-				printf("enter in word_modif avec str to modif :%s\\n\n", cur_t->str);
+		//		printf("enter in word_modif avec str to modif :%s\\n\n", cur_t->str);
 				res = word_modif(&cur_t, cur_t->str, cur_t->type);
 				if (res != 0)
 					return (50);

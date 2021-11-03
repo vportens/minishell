@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:18:40 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/02 18:18:55 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:24:55 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int     ft_check_n(char **str)
     return (cpt);
 }
 
-void    ft_built_in_echo(char **str)
+int    ft_built_in_echo(char **str)
 {
     int i;
     int y;
@@ -57,4 +57,5 @@ void    ft_built_in_echo(char **str)
     }
     if (y == 0)
         printf("\n");
+    return (0);
 }
