@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 14:47:13 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/03 15:36:17 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static int	create_add_back_token(int cur, int start, char *str, t_commande_line 
 
 static void	iter_to_end_or_redirection(char	*str, int *cur)
 {
-	while (str[*cur] && is_redirection(str[*cur]))
+	char	c;
+
+	c = str[*cur];
+	while (str[*cur] && str[*cur] == c)
 		(*cur)++;
 }
 
