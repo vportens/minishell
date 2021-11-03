@@ -12,11 +12,12 @@ FLAGS 	= -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 
-SRCS =  	main_env.c										\
+SRCS =  	main.c										\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
 			parsing/parsing_utils.c							\
 			parsing/free_utils.c							\
+			parsing/free_utils_2.c							\
 			parsing/creat_fill_lst/split_arg.c				\
 			parsing/lst_fonction/init_token.c				\
 			parsing/expend_word/expend_word.c				\
