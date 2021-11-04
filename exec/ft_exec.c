@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 19:16:53 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 19:38:45 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ void    ft_no_fork_exec(t_commande_line **cmd_line, char *str)
     }
 }
 
-int     ft_execute_cmd(t_commande_line **s_cmd_line)
+int     ft_execute_cmd(t_commande_line *cur)
 {
-    t_commande_line *cur;
     char **str;
 
-    cur = *s_cmd_line;
     str = ft_t_env_to_enp(get_adress_env());
     if (str == NULL)
         return (50);
@@ -43,8 +41,14 @@ int     ft_execute_cmd(t_commande_line **s_cmd_line)
     if (cur->pid == 0)
     {
         execve(cur->argv[0], cur->argv, str);
-        strerror(errno);
+		printf("commande echoue\n");
+		// free_all; pb ici on est pas au cmd_line first solution on le rajout en parametre
+		exit(1);
     }
+	else
+	{
+		printf("wait pid\n");	
+	}
     return (1);
 }
 
@@ -52,6 +56,7 @@ int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 {
     t_commande_line *cur;
 	int				i;
+	int				nbr_fork;
 
 	i = 0;
     cur = *s_cmd_line;
@@ -61,19 +66,20 @@ int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 	{
         if (cur->argv[0] == NULL)
             return (0);
-		if (i == 0 && fill_fd(&cur) && cur->pipe[0] == -1)
-			printf("erno error\n");
-		else if  (i == 0 && ft_is_builtin(cur->argv[0]) && cur->next == NULL)
+		if (i == 0)
+			nbr_fork = fill_fd(&cur);
+		if  (i == 0 && cur->pipe[0] != -1 && ft_is_builtin(cur->argv[0]) && cur->next == NULL)
      	   ft_no_fork_exec(s_cmd_line, str);
-		else
+		else if (cur->pipe[0] != -1)
         {
-           	if (ft_exist(cur))//securiser le retour 50
-                ft_execute_cmd(s_cmd_line);
-            else
-                ft_print_error("minishell :", cur->argv[0]);
+           	//if (ft_exist(cur))//securiser le retour 50
+                ft_execute_cmd(cur);
+            //else
+              //  ft_print_error("minishell :", cur->argv[0]);
         }
 		cur = cur->next;
 		i++;
 	}
+	// wait all pib active (if pipe[0] != -1 allor pid est active)
     return (0);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 16:43:14 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/01 16:43:19 by lchristo         ###   ########.fr       */
+/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
+/*   Updated: 2021/10/19 15:08:54 by rmechety         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "struct.h"
+#include "struct.h"
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = exec/ft_exist.c                           */
@@ -37,7 +37,7 @@ int	fill_fd(t_commande_line **stc);
 /*                           FILE = exec/ft_exec.c                            */
 /* -------------------------------------------------------------------------- */
 void    ft_no_fork_exec(t_commande_line **cmd_line, char *str);
-int     ft_execute_cmd(t_commande_line **s_cmd_line);
+int     ft_execute_cmd(t_commande_line *cur);
 int     ft_exec(t_commande_line	**s_cmd_line, char *str);
 
 

@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:05:45 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 15:46:24 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 19:34:59 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	fill_pipe(t_commande_line **stc, t_token *tok)
 {
 	int	ret;
 
+	ret = 0;
 	if (tok->type == FILE_IN)
 	{
 		ret = open(tok->str, O_RDONLY);
@@ -46,6 +47,7 @@ static int	fill_pipe(t_commande_line **stc, t_token *tok)
 		// ret = creat_file_limitor();   // je dois readline, jusqu'a' avoir le limitor et attention au tok->expend, put ca dans un file et ret le fd du file
 		return (ret);
 	}
+	return (ret);
 }
 
 int	fill_fd(t_commande_line **stc)
