@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 01:27:37 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 13:24:21 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:18:19 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*new_token_env(t_token **stc, char **split, int i)
 	return (new->str);
 }
 
-char	*if_no_env(char *str, int *i, char *s1)
+static char	*if_no_env(char *str, int *i, char *s1)
 {
 	char	*new;
 	char	*join;
@@ -65,7 +65,7 @@ char	*if_no_env(char *str, int *i, char *s1)
 	return (join);
 }
 
-char	*if_env(t_token **stc, char *str, char *s1, int *i)
+static char	*if_env(t_token **stc, char *str, char *s1, int *i)
 {
 	char	*env;
 	char	**split;

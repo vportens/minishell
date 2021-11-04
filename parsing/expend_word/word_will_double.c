@@ -1,68 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_till_double.c                                 :+:      :+:    :+:   */
+/*   word_will_double.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 19:30:25 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 20:14:24 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 10:18:04 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*env_doublequote(char *str, char *s1, int *i, int j)
+static char	*if_no_env(char *str, char *s1, int *cur)
 {
-	char	*s2;
-	char	*s3;
-	char	*s4;
+	char	*new;
+	char	*join;
+	int		start;
 
-	s2 = NULL;
-	s3 = NULL;
-	s4 = NULL;
-	s2 = malloc(sizeof(char) * ((*i) - j + 1));
-	if (s2 == NULL)
+	start = *cur;
+	while (str[*cur] && str[*cur] != '"' && str[*cur] != '$')
+		(*cur)++;
+	new = malloc(sizeof(char) * ((*cur) - start));
+	if (new == NULL)
 		return (free_str_ret_null(s1));
-	s2 = ft_strncpy(s2, str + j, (*i) - j);
-	s3 = ft_strjoin(s1, s2);
-	free_both(s1, s2);
-	if (s3 == NULL)
-		return (NULL);
-	s2 = NULL;
-	s2 = get_env(i, str);
-	if (s2 == NULL)
-		return (free_str_ret_null(s3));
-	s4 = ft_strjoin(s3, s2);
-	free_both(s2, s3);
-	return (s4);
+	new = ft_strncpy(new, str + start, ((*cur) - start));
+	join = ft_strjoin(s1, new);
+	free_both(s1, new);
+	return (join);
 }
 
-char	*word_will_double(char *str, int *i, char *s1)
+static char	*if_env(char *str, char *s1, int *cur)
 {
-	int		j;
-	char	*s2;
-	char	*s3;
+	char	*env;
+	char	*join;
 
-	j = *i;
-	s2 = NULL;
-	s3 = NULL;
-	while (str && str[(*i)] && str[(*i)] != '"')
+	env = string_env(str, s1, cur);
+	if (env == NULL)
+		return (free_str_ret_null(s1));
+	join = ft_strjoin(s1, env);
+	free_both(s1, env);
+	return (join);
+}
+
+char	*word_will_double(char *str, int *cur, char *s1)
+{
+	int		start;
+
+	start = *cur;
+	while (str && str[*cur] && str[*cur] != '"')
 	{
-		if (str[(*i)] == '$')
+		if (str[*cur] == '$')
 		{
-			s1 = env_doublequote(str, s1, i, j);
+			s1 = if_env(str, s1, cur);
 			if (s1 == NULL)
 				return (NULL);
-			j = *i + 1;
 		}
-		(*i)++;
+		else
+		{
+			s1 = if_no_env(str, s1, cur);
+			if (s1 == NULL)
+				return (NULL);
+		}
 	}
-	s2 = malloc(sizeof(char) * ((*i) - j + 1));
-	if (s2 == NULL)
-		return (free_str_ret_null(s1));
-	s2 = ft_strncpy(s2, str + j, (*i) - j);
-	s3 = ft_strjoin(s1, s2);
-	free_both(s1, s2);
-	return (s3);
+	return (s1);
 }

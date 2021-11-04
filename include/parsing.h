@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 22:13:27 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:03:41 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*free_str_ret_null(char *s1);
 void	free_split(char **split);
 char	*free_split_token(char **split, t_token *tok);
 int		free_str_ret_malloc_error(char *str);
+
+char	*free_split_ret_str(char **split, char *str);
 
 int		get_cmd_line(char *string, t_commande_line **first);
 
