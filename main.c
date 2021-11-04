@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 10:13:26 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 11:10:15 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,10 @@ int	main(int ac, char **av, char **envp)
 	//	if (res == 0)
 	//	{
 			//print_cmdl(&cmd_line);
-	//		if (ft_exec(&cmd_line, str) == 50)
-	//			return (50);
+		if (ft_exec(&cmd_line, str) == 50)
+			return (50);
 	//	}
-			print_cmdl(&cmd_line);
+		//	print_cmdl(&cmd_line);
 		if (str)
 			free(str);
 		free_all(&cmd_line);

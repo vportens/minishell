@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 23:46:03 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 11:06:21 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	split_all_cmdl_string_to_token(t_commande_line **first)
 	cur = *first;
 	while (cur)
 	{
-		printf("start split\n");
+	//	printf("start split\n");
 		if (split_string_cur_cmdl(&cur) > 0)
 			return (50);
 		cur = cur->next;
