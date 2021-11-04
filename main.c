@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 16:40:20 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:44:48 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,6 @@ int	main(int ac, char **av, char **envp)
 	int				res;
 	t_commande_line	*cmd_line;
 	
-//	get_environment(envp);
 	g_envp = envp;
 	cmd_line = NULL;
 	ft_init_t_env(envp);

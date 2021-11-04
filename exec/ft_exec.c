@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 17:33:56 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:55:16 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,14 @@ int     ft_execute_cmd(t_commande_line **s_cmd_line)
     char **str;
 
     cur = *s_cmd_line;
-    str = ft_lst_to_str(cur);
+    str = ft_t_env_to_enp(get_adress_env());
+    if (str == NULL)
+        return (50);
+    cur->pid = fork();
+    if (cur->pid == 0)
+    {
+        execve(cur->argv[0], cur->argv, str);
+    }
     return (1);
 }
 
