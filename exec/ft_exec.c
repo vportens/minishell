@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 15:16:38 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:45:44 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,27 @@ void    ft_no_fork_exec(t_commande_line **cmd_line, char *str)
 
 int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 {
-    t_commande_line *cmd_line;
+    t_commande_line *cur;
+	int				i;
 
-    cmd_line = *s_cmd_line;
-    if (cmd_line->argv == NULL)
+	i = 0;
+    cur = *s_cmd_line;
+    if (cur->argv == NULL)
         return (0);
-    if  (ft_is_builtin(cmd_line->argv[0]) && cmd_line->next == NULL)
-        ft_no_fork_exec(s_cmd_line, str);
-    else
-    {
-        while (cmd_line)
-        {
-            if (ft_is_extendable())
-            cmd_line = cmd_line->next;
-        }
-    }
+	while (cur)
+	{
+		if (fill_fd(cur) && cur->pipe[0] == -1)
+			printf("erno error\n");
+		else if  (i == 0 && ft_is_builtin(cur->argv[0]) && cur->next == NULL)
+     	   ft_no_fork_exec(s_cmd_line, str);
+		else
+  		{
+    		while (cur)
+    		{
+            	if (ft_is_extendable())
+            	cur = cur->next;
+        	}
+    	}
+	}
     return (0);
 }

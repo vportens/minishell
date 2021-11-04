@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:05:45 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 13:58:48 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 15:46:24 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static int	fill_pipe(t_commande_line **stc, t_token *tok)
 		(*stc)->pipe[1] = ret;
 		return (ret);
 	}
+	if (tok->type == LIMITOR)
+	{
+		// ret = creat_file_limitor();   // je dois readline, jusqu'a' avoir le limitor et attention au tok->expend, put ca dans un file et ret le fd du file
+		return (ret);
+	}
 }
 
 int	fill_fd(t_commande_line **stc)
@@ -54,6 +59,8 @@ int	fill_fd(t_commande_line **stc)
 	cur = *stc;
 	while (cur)
 	{
+		cur->pipe[0] = 0;
+		cur->pipe[1] = 0;
 		if (i != 0)
 			cur->pipe[0] = file_out_last_cmd;
 		cur_t = cur->first_token;
@@ -62,13 +69,15 @@ int	fill_fd(t_commande_line **stc)
 			if (is_file_to_read_or_creat(cur_t->type))
 			{
 				if (fill_pipe(&cur, cur_t) == -1)
-					return (-1); // return errono error
+				{
+					break ;
+				}
 			}
 			cur_t = cur_t->next;
 		}
-		file_out_last_cmd = (*stc)->pipe[1];
+		file_out_last_cmd = (*stc)->pipe[1]; // ici je pense pas que ce soitca si open fail
 		i++;
 		cur = cur->next;
 	}
-	return (0);
+	return (1);
 }
