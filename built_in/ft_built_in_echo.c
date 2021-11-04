@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:18:40 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 23:50:49 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:29:20 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ int    ft_built_in_echo(char **str)
     int i;
     int y;
 
-    y = 0;
+
+    /*
+    **    fix this
+    */
     str++;
+    y = 0;
     i = ft_check_n(str);
     if (i > 0)
         y++;

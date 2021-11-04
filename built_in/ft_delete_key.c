@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 21:21:22 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/02 12:01:56 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:34:22 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ft_delete_env_call(t_env **env, char *key)
 	cpy = *env;
 	while (cpy)
 	{
-		if (!ft_truestrncmp(cpy->str, key, len))
+		if (len == ft_get_lenkey(cpy->str) && !ft_truestrncmp(cpy->str, key, len))
 		{
 			if (prev == NULL)
-				env = &cpy;
+				*env = cpy->next;
 			else
 				prev->next = cpy->next;
 			ft_free_env_elem(cpy);

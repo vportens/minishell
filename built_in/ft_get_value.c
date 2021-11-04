@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 21:19:46 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 18:20:08 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:33:45 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_get_value_of_env(t_env **env, char *str)
 	cpy = *env;
 	while (cpy)
 	{
-		if (!ft_truestrncmp(cpy->str, str, len))
+		if (len == ft_get_lenkey(cpy->str) && !ft_truestrncmp(cpy->str, str, len))
 			return (cpy->str + len + 1);		
 		cpy = cpy->next;
 	}

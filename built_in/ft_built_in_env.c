@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:25:49 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 00:11:21 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 09:46:37 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_built_in_show_env(t_env **env)
 	t_env			*cur;
 	
 	cur = *env;
+    
 	while(cur)
 	{
         if (ft_is_equal(cur->str))

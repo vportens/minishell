@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 23:59:01 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:46:32 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		ft_built_in_export(char **str)
 {
 	int i;
 
-	i = 0;
-	if (str[1] == NULL)
+	i = 1;
+	if (*(str + 1) == NULL)
 	{
 		ft_built_in_show_export();
 		return 0;
