@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 15:15:16 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/04 12:07:21 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ struct				s_commande_line
 	t_token			*first_token;
 	char			**envp;
 	char			**argv;
+	int				pipe[2];
 	t_commande_line	*next;
 };
 
