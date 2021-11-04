@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/10/19 15:08:54 by rmechety         ###   ########.fr       */
+/*   Created: 2021/11/01 16:43:14 by lchristo          #+#    #+#             */
+/*   Updated: 2021/11/01 16:43:19 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "struct.h"
+# include "struct.h"
+
+/* -------------------------------------------------------------------------- */
+/*                          FILE = exec/ft_extend.c                           */
+/* -------------------------------------------------------------------------- */
+int ft_is_path();
+int ft_is_extendable();
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = exec/fill_fd.c                            */
@@ -23,7 +29,8 @@ int	fill_fd(t_commande_line **stc);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = exec/ft_exec.c                            */
 /* -------------------------------------------------------------------------- */
-int     ft_exec(t_commande_line	**cmd_line, char *str);
+void    ft_no_fork_exec(t_commande_line **cmd_line, char *str);
+int     ft_exec(t_commande_line	**s_cmd_line, char *str);
 
 
 #endif
