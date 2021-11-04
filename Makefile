@@ -49,7 +49,9 @@ SRCS =  	main.c											\
 			built_in/ft_get_value.c							\
 			built_in/ft_built_in_unset.c					\
 			exec/ft_exec.c									\
-			exec/ft_extend.c
+			exec/ft_exist.c									\
+			exec/fill_fd.c									\
+			exec/ft_lst_to_str.c
 
 SRCS_BONUS =
 

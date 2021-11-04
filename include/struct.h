@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 12:07:21 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 17:19:27 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ struct				s_commande_line
 	char			**envp;
 	char			**argv;
 	int				pipe[2];
+	int				pid;
 	t_commande_line	*next;
 };
 
