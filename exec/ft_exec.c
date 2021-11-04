@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 15:45:44 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/04 15:49:56 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,9 @@ int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 		else if  (i == 0 && ft_is_builtin(cur->argv[0]) && cur->next == NULL)
      	   ft_no_fork_exec(s_cmd_line, str);
 		else
-  		{
-    		while (cur)
-    		{
-            	if (ft_is_extendable())
-            	cur = cur->next;
-        	}
-    	}
+           	if (ft_is_extendable())
+		cur = cur->next;
+		i++;
 	}
     return (0);
 }
