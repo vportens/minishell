@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/10/19 15:08:54 by rmechety         ###   ########.fr       */
+/*   Created: 2021/11/01 16:43:14 by lchristo          #+#    #+#             */
+/*   Updated: 2021/11/01 16:43:19 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "struct.h"
+# include "struct.h"
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = exec/ft_exist.c                           */
@@ -21,6 +21,9 @@
 int ft_expend(t_commande_line *cmd_line);
 int ft_test_exist(t_commande_line *cmd_line);
 int ft_exist(t_commande_line *cmd_line);
+char	*get_acces(char *str, char *path);
+int	try_acces(char *str, char *path);
+char	*get_bin_argv_zero(char *str, char *path);
 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = exec/ft_lst_to_str.c                         */

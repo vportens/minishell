@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 19:38:45 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/05 04:22:11 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int     ft_execute_cmd(t_commande_line *cur)
     cur->pid = fork();
     if (cur->pid == 0)
     {
+		printf("argv[0] envoyer dans l'exec : %s\n", cur->argv[0]);
         execve(cur->argv[0], cur->argv, str);
 		printf("commande echoue\n");
 		// free_all; pb ici on est pas au cmd_line first solution on le rajout en parametre
@@ -47,6 +48,7 @@ int     ft_execute_cmd(t_commande_line *cur)
     }
 	else
 	{
+		waitpid(cur->pid, NULL, 0);
 		printf("wait pid\n");	
 	}
     return (1);
@@ -73,6 +75,10 @@ int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 		else if (cur->pipe[0] != -1)
         {
            	//if (ft_exist(cur))//securiser le retour 50
+				cur->argv[0] = get_bin_argv_zero(cur->argv[0], ft_get_env("PATH")); // go avoir le path
+			// 	if (cur->argv[0] == NULL)
+			// 		return (50):
+				printf("argv de cur en envoyer a exec : %s\n", cur->argv[0]);
                 ft_execute_cmd(cur);
             //else
               //  ft_print_error("minishell :", cur->argv[0]);
