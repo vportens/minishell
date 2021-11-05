@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/05 11:53:15 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/05 12:10:28 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,41 @@ int	free_all(t_commande_line **cmd_line)
 
 	if (cmd_line)
 	{
-	printf("cmdl exist\n");
+//	printf("cmdl exist\n");
 	while (*cmd_line)
 	{
-		printf("je rentre dans cmdl\n");
+//		printf("je rentre dans cmdl\n");
 		tmp = (*cmd_line)->next;
 		if ((*cmd_line)->string)
 			free((*cmd_line)->string);
 		
-		printf("je free string\n");
+//		printf("je free string\n");
 		if ((*cmd_line)->argv)
 			free((*cmd_line)->argv);
-		printf("je free argvl\n");
+//		printf("je free argvl\n");
 		if ((*cmd_line)->first_token)
 		{
 			
-			printf("je rentre dans token\n");
+//			printf("je rentre dans token\n");
 			i = 0;	
 			while ((*cmd_line)->first_token)
 			{ 
-				printf("token %d\n", i);
-				printf("token str %s\n",(*cmd_line)->first_token->str);
+//				printf("token %d\n", i);
+//				printf("token str %s\n",(*cmd_line)->first_token->str);
 
 				tok = (*cmd_line)->first_token->next;
 				if ((*cmd_line)->first_token->str)
 					free((*cmd_line)->first_token->str);
-				printf("str de tok free\n");
+//				printf("str de tok free\n");
 
 				free((*cmd_line)->first_token);
-				printf("tok free\n");
+//				printf("tok free\n");
 				(*cmd_line)->first_token = tok;
 				i++;
 			}
-			printf("je sort dans token\n");
+//			printf("je sort dans token\n");
 		}
-		printf("je free cmdl\n");
+//		printf("je free cmdl\n");
 		free((*cmd_line));
 		*cmd_line = tmp;
 	}
@@ -195,13 +195,13 @@ int	main(int ac, char **av, char **envp)
 //		printf("on sort de pars");
 		if (res == 50)
 			return (50);
-	//	if (res == 0)
-	//	{
+		if (res == 0)
+		{
 			//print_cmdl(&cmd_line);
 		if (str != NULL && cmd_line != NULL)
 			if (ft_exec(&cmd_line, str) == 50)
 				return (50);
-	//	}
+	}
 		//	print_cmdl(&cmd_line);
 		if (str)
 			free(str);

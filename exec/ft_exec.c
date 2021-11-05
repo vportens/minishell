@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/05 11:55:45 by victor           ###   ########.fr       */
+/*   Updated: 2021/11/05 12:10:03 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int     ft_exec(t_commande_line	**s_cmd_line, char *str)
 	i = 0;
 	while (i < nbr_fork)
 	{
+		printf("%d nbr_fork ,waitpid[%d] \n", nbr_fork, i);
 		waitpid(pid[i], NULL, 0);
 		i++;
 	}

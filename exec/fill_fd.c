@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:05:45 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 19:48:00 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/05 12:14:28 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ int	fill_fd(t_commande_line **stc)
 	t_commande_line	*cur;
 	t_token			*cur_t;
 	int				file_out_last_cmd;
+	int				j;
 
 	i = 0;
+	j = 0;
 	cur = *stc;
 	while (cur)
 	{
+		j++;
 		cur->pipe[0] = 0;
 		cur->pipe[1] = 0;
 		if (i != 0)
@@ -72,6 +75,7 @@ int	fill_fd(t_commande_line **stc)
 			{
 				if (fill_pipe(&cur, cur_t) == -1)
 				{
+					j--;
 					printf("errno error to printf : fill_fd.c\nfill no exit\n");
 					break ;
 				}
@@ -82,5 +86,5 @@ int	fill_fd(t_commande_line **stc)
 		i++;
 		cur = cur->next;
 	}
-	return (1);
+	return (j);
 }
