@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/05 11:40:02 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/05 11:53:15 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	free_all(t_commande_line **cmd_line)
 {
 	t_commande_line *tmp;
 	t_token			*tok;
+	int				i;
 
 	if (cmd_line)
 	{
@@ -35,13 +36,21 @@ int	free_all(t_commande_line **cmd_line)
 		{
 			
 			printf("je rentre dans token\n");
+			i = 0;	
 			while ((*cmd_line)->first_token)
-			{
+			{ 
+				printf("token %d\n", i);
+				printf("token str %s\n",(*cmd_line)->first_token->str);
+
 				tok = (*cmd_line)->first_token->next;
 				if ((*cmd_line)->first_token->str)
 					free((*cmd_line)->first_token->str);
+				printf("str de tok free\n");
+
 				free((*cmd_line)->first_token);
+				printf("tok free\n");
 				(*cmd_line)->first_token = tok;
+				i++;
 			}
 			printf("je sort dans token\n");
 		}
