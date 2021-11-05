@@ -63,7 +63,7 @@ OBJ_B = ${SRCS_BONUS:.c=.o}
 OBJS_B = *.o
 
 
-all : header
+all :
 	@make -C $(LIBFT)
 	@make $(NAME)
 

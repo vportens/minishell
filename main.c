@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 18:44:48 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/05 11:40:02 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,22 @@ int	free_all(t_commande_line **cmd_line)
 
 	if (cmd_line)
 	{
+	printf("cmdl exist\n");
 	while (*cmd_line)
 	{
+		printf("je rentre dans cmdl\n");
 		tmp = (*cmd_line)->next;
 		if ((*cmd_line)->string)
 			free((*cmd_line)->string);
+		
+		printf("je free string\n");
 		if ((*cmd_line)->argv)
 			free((*cmd_line)->argv);
+		printf("je free argvl\n");
 		if ((*cmd_line)->first_token)
 		{
+			
+			printf("je rentre dans token\n");
 			while ((*cmd_line)->first_token)
 			{
 				tok = (*cmd_line)->first_token->next;
@@ -36,7 +43,9 @@ int	free_all(t_commande_line **cmd_line)
 				free((*cmd_line)->first_token);
 				(*cmd_line)->first_token = tok;
 			}
+			printf("je sort dans token\n");
 		}
+		printf("je free cmdl\n");
 		free((*cmd_line));
 		*cmd_line = tmp;
 	}
@@ -187,7 +196,9 @@ int	main(int ac, char **av, char **envp)
 		//	print_cmdl(&cmd_line);
 		if (str)
 			free(str);
+		printf("free all entre\n");
 		free_all(&cmd_line);
+		printf("free all sorti\n");
 	//		cmd_line = cmd_line->next;
 
 	}
