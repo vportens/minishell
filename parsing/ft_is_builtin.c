@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 22:11:14 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 23:45:14 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:27:05 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_is_builtin(char *str)
 		i++;
 	}
 //	printf("end ftstrcmp\n");
-
+	if (i == 6)
+		return (2);
 	if(i < 7)
 		return 1;
 	return (0);

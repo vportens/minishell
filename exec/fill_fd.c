@@ -6,13 +6,13 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:05:45 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/05 12:14:28 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/07 15:44:24 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_file_to_read_or_creat(e_token type)
+/*static int	is_file_to_read_or_creat(e_token type)
 {
 	if (type == FILE_IN || type == FILE_OUT || type == FILE_OUT_OVER || type == LIMITOR)
 		return (1);
@@ -88,3 +88,4 @@ int	fill_fd(t_commande_line **stc)
 	}
 	return (j);
 }
+*/

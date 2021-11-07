@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 10:03:41 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/07 13:51:49 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int     ft_is_builtin(char *str);
 
 void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back);
 void	token_add_back(t_token **first, t_token *add_back);
+int		len_cmd(t_commande_line *cmd);
 
 int		unclose_quote(char	*str);
 e_quote	update_quote_status(char c, e_quote quote);

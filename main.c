@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/05 12:10:28 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/07 17:48:30 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,9 +205,9 @@ int	main(int ac, char **av, char **envp)
 		//	print_cmdl(&cmd_line);
 		if (str)
 			free(str);
-		printf("free all entre\n");
+//		printf("free all entre\n");
 		free_all(&cmd_line);
-		printf("free all sorti\n");
+//		printf("free all sorti\n");
 	//		cmd_line = cmd_line->next;
 
 	}

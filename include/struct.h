@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 19:16:34 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:27:23 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ typedef struct s_env			t_env;
 
 struct		s_exec
 {
-	char	*path;
 	char	**argv;
-	char	*file_in;
-	char	*file_out;
 	int		fd_in;
 	int		fd_out;
 	t_exec	*next;	
@@ -45,8 +42,8 @@ struct				s_commande_line
 	t_token			*first_token;
 	char			**envp;
 	char			**argv;
-	int				pipe[2];
-	int				pid;
+	int				fd_in;
+	int				fd_out;
 	t_commande_line	*next;
 };
 

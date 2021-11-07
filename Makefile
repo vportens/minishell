@@ -16,6 +16,7 @@ SRCS =  	main.c											\
 			parsing/ft_is_builtin.c							\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
+			parsing/lst_fonction/len_cmd.c					\
 			parsing/parsing_utils.c							\
 			parsing/free_utils.c							\
 			parsing/free_utils_2.c							\

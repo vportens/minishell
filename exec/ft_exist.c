@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/05 12:07:54 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/07 18:45:24 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,8 @@ char	*get_bin_argv_zero(char *str, char *path)
 		}
 		i++;
 	}
+	write(1, "minishell: ", 11);
+	write(1, str, ft_strlen(str));
+	write(1, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
 	return (str);
 }
