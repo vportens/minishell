@@ -52,7 +52,10 @@ SRCS =  	main.c											\
 			exec/ft_exec.c									\
 			exec/ft_exist.c									\
 			exec/fill_fd.c									\
-			exec/ft_lst_to_str.c
+			exec/ft_lst_to_str.c							\
+			exec/pipe.c										\
+			exec/open_fd.c									\
+			exec/utils.c
 
 SRCS_BONUS =
 
