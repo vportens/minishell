@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/07 18:45:24 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 11:41:15 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	try_acces(char *str, char *path)
 		return (50);
 	if (access(try, X_OK) == 0)
 	{
+		free(try);
 		return (1);
 	}
 	free(try);

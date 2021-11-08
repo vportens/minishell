@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/07 17:48:30 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 11:45:52 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		str = readline("minishell$> ");
+		add_history(str);
 		if (str == NULL)
 		{
 			return (free_all(&cmd_line));
