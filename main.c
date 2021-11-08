@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/08 11:45:52 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 14:51:08 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,13 +195,29 @@ int	main(int ac, char **av, char **envp)
 		res = pars(str, &cmd_line);
 //		printf("on sort de pars");
 		if (res == 50)
+		{
+			free(str);
+			free_all(&cmd_line);
+			write(1, "malloc error\n", 13);
 			return (50);
+		}
 		if (res == 0)
 		{
 			//print_cmdl(&cmd_line);
 		if (str != NULL && cmd_line != NULL)
-			if (ft_exec(&cmd_line, str) == 50)
-				return (50);
+		{
+			res = ft_exec(&cmd_line);
+			if (res != 0)
+			{
+				if (res == 40)
+					write(1, "pipe fails\n", 11);
+				if (res == 50)
+					write(1, "malloc error\n", 13);
+				free(str);
+				free_all(&cmd_line);
+				return (1);
+			}
+		}
 	}
 		//	print_cmdl(&cmd_line);
 		if (str)

@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 19:14:44 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/07 19:27:45 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 14:53:25 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	redirect_file_in(t_commande_line **cmdl, t_token *cur, e_token type)
 	else if (type == LIMITOR)
 		return (0); // good luck Victor
 	return (0);
-
-
 }
 
 int	redirect_file_out(t_commande_line **cmdl, t_token *cur, e_token type)
@@ -50,7 +48,7 @@ int	redirect_file_out(t_commande_line **cmdl, t_token *cur, e_token type)
 
 int	open_fd(t_commande_line **cmdl)
 {
-	t_token *cur;
+	t_token	*cur;
 
 	cur = (*cmdl)->first_token;
 	while (cur)

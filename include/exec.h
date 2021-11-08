@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/07 19:36:54 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 14:20:01 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	fill_fd(t_commande_line **stc);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = exec/ft_exec.c                            */
 /* -------------------------------------------------------------------------- */
-int     ft_exec(t_commande_line	**s_cmd_line, char *str);
+int     ft_exec(t_commande_line	**s_cmd_line);
 
 int		open_pipe(t_commande_line **cmdl);
 void	close_fd_all(t_commande_line **cmdl);

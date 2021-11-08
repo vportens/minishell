@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 18:54:15 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/08 11:11:47 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 14:54:53 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_nfd(int **nfd)
 
 void	close_fd_all(t_commande_line **cmdl)
 {
-	t_commande_line *cur;
+	t_commande_line	*cur;
 
 	cur = *cmdl;
 	while (cur)
@@ -36,7 +36,7 @@ void	close_fd_all(t_commande_line **cmdl)
 			close(cur->fd_in);
 		if (cur->fd_out != 1)
 			close(cur->fd_out);
-		cur = cur->next;	
+		cur = cur->next;
 	}
 }
 
@@ -49,7 +49,7 @@ int	init_pipe(int **nfd, int i, t_commande_line *cur)
 		return (40);
 	if (i == 0)
 		cur->fd_in = 0;
-	else 
+	else
 		cur->fd_in = nfd[i - 1][0];
 	if (cur->next == NULL)
 		cur->fd_out = 1;
@@ -60,7 +60,7 @@ int	init_pipe(int **nfd, int i, t_commande_line *cur)
 
 int	open_pipe(t_commande_line **cmdl)
 {
-	t_commande_line *cur;
+	t_commande_line	*cur;
 	int				**nfd;
 	int				i;
 	int				ret;
@@ -82,5 +82,6 @@ int	open_pipe(t_commande_line **cmdl)
 		cur = cur->next;
 		i++;
 	}
+	free_nfd(nfd);
 	return (0);
 }

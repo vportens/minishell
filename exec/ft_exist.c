@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/08 11:41:15 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 14:38:22 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ char	*get_bin_argv_zero(char *str, char *path)
 		if (ret == 1)
 		{
 			try = get_acces(str, split_path[i]);
+			free_split(split_path);
 			return (try);
 		}
 		if (ret == 50)
 		{
+			free_split(split_path);
 			return (NULL);
 		}
 		i++;
