@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/07 19:40:52 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/08 11:16:17 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	{
 //	printf("go execve\n");
 //	printf("avec argv[0] : %s, str : %s\n", (*cmdl)->argv[0], str[0]);
-	execve((*cmdl)->argv[0], (*cmdl)->argv, str);
+		execve((*cmdl)->argv[0], (*cmdl)->argv, str);
 //	printf("execve fail\n");
 
-	exit(1);
+		exit(1);
 	}
 }
 
@@ -85,7 +85,12 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 		if (open_fd(&cur) != -1)
 			ft_execve_fct(&cur, cmdl);
 		}
-		close_fd_all(cmdl);
+		if (cur->fd_in != 0)
+			close(cur->fd_in);
+		if (cur->fd_out != 1)
+			close(cur->fd_out);
+		
+//		close_fd_all(cmdl);
 		cur = cur->next;
 		i++;
 	}
