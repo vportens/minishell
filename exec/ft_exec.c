@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/08 15:05:05 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 22:38:16 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	}
 	dup2((*cmdl)->fd_in, STDIN_FILENO);
 	dup2((*cmdl)->fd_out, STDOUT_FILENO);
+	if ((*cmdl)->name_file != NULL)
+		unlink((*cmdl)->name_file);
 	close_fd_all(first);
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
 	{
