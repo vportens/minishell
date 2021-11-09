@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/09 22:38:16 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 23:51:51 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 	i = 0;
 	cur = *cmdl;
 	len = len_cmd(cur);
+	while (cur)
+	{
+		open_fd(&cur);
+		cur = cur->next;
+	}
+	cur = *cmdl;
 	if (len == 1 && ft_is_builtin(cur->argv[0]))
 		return (no_forking(cmdl));
 	while (i < len)
@@ -86,7 +92,6 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 			exit(1); // kill all ;
 		if (pid[i] == 0)
 		{
-			if (open_fd(&cur) != -1)
 				ft_execve_fct(&cur, cmdl);
 		}
 		if (cur->fd_in != 0)

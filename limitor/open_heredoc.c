@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 22:26:17 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 22:26:38 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 23:54:30 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,14 @@ int	write_in_fd(int	fd, char *limitor, bool expanded)
 			return (45);
 		if (ft_strcmp(limitor, str) == 1)
 			break ;
+		if (str[0] != '\0')
+		{
 		if (expanded == 0)
 		{
 			str = expanded_str(str);
 			if (str == NULL)
 				return (50);
+		}
 		}
 	//	printf("str : %s\n", str);
 		write(fd, str, ft_strlen(str));
@@ -99,7 +102,9 @@ int	create_heredoc_fd(t_commande_line **cmdl, t_token **cur)
 {
 	int		fd;
 	char	*name_file;
+	int		ret;
 
+	name_file = NULL;
 	fd = -1;
 	while (fd == -1)
 	{
@@ -108,7 +113,8 @@ int	create_heredoc_fd(t_commande_line **cmdl, t_token **cur)
 		name_file = creat_aleatori_name();
 		fd = open(name_file, O_CREAT | O_EXCL | O_RDWR, 0644);
 	}
-	write_in_fd(fd, (*cur)->str, (*cur)->expanded);
+	ret = write_in_fd(fd, (*cur)->str, (*cur)->expanded);
+	printf("ret : %d\n", ret);
 	fd = open(name_file, O_RDONLY);
 	(*cmdl)->fd_in = fd;
 	if ((*cmdl)->name_file != NULL)
