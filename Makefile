@@ -54,7 +54,9 @@ SRCS =  	main.c											\
 			exec/ft_lst_to_str.c							\
 			exec/pipe.c										\
 			exec/open_fd.c									\
-			exec/utils.c
+			exec/utils.c									\
+			limitor/creat_file.c							\
+			limitor/open_heredoc.c
 
 SRCS_BONUS =
 

@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 18:22:09 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 22:32:10 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_cmdl(t_commande_line *new)
 	new->string = NULL;
 	new->first_token = NULL;
 	new->argv = NULL;
+	new->name_file = NULL;
 	new->next = NULL;
 }
 

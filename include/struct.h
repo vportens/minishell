@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/07 13:27:23 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 22:33:08 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ struct				s_commande_line
 	char			**argv;
 	int				fd_in;
 	int				fd_out;
+	char			*name_file;
 	t_commande_line	*next;
 };
 

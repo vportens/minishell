@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/08 14:20:01 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 22:29:17 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ int		open_pipe(t_commande_line **cmdl);
 void	close_fd_all(t_commande_line **cmdl);
 int		open_fd(t_commande_line **cmdl);
 char	**env_to_tabtab(t_env **envp);
+
+int		create_heredoc_fd(t_commande_line **cmdl, t_token **cur);
+char	*creat_aleatori_name(void);
 
 #endif
