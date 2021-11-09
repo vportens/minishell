@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:49:27 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 18:50:34 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 19:39:01 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	end_modif_two(char *str, t_token **stc, char *s1)
 
 int	is_type_file(e_token type)
 {
-	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE
-		|| type == HERE_DOC)
+	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE || type == HERE_DOC)
 		return (1);
 	return (0);
 }

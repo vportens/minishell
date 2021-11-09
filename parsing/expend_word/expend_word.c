@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 20:22:28 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:37:29 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int	edit_type(t_commande_line **block, int limiter)
 				limiter = 1;
 			else if (limiter == 1 && cur_t->str && cur_t->str[0] != '\0')
 			{
+				printf("test\n");
 				if (is_type_file(cur_t->type) == 1)
 					return (ret_file_without_obj(cur_t->type));
+				printf("nest\n");
 				cur_t->type = LIMITOR;
 				limiter = 0;
 			}
@@ -122,7 +124,7 @@ int	expend_words(t_commande_line **block)
 
 	cur_b = *block;
 	if (edit_type(block, 0) != 0 || check_open_fil(block) != 0)
-		return (12);
+		return (12);	
 	res = 0;
 	while (cur_b)
 	{

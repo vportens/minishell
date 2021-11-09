@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:56:16 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/03 19:04:53 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 19:41:58 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ e_token	change_type_file(e_token type, int *file)
 		return (FILE_OUT);
 	else if (type == WRITE_FILE)
 		return (FILE_OUT_OVER);
+	else if (type == HERE_DOC)
+		return (LIMITOR);
 	return (NON);
 }

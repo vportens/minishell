@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/08 14:51:08 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/09 19:22:45 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	main(int ac, char **av, char **envp)
 			write(1, "malloc error\n", 13);
 			return (50);
 		}
-		if (res == 0)
+/*		if (res == 0)
 		{
 			//print_cmdl(&cmd_line);
 		if (str != NULL && cmd_line != NULL)
@@ -218,8 +218,8 @@ int	main(int ac, char **av, char **envp)
 				return (1);
 			}
 		}
-	}
-		//	print_cmdl(&cmd_line);
+	}*/
+		print_cmdl(&cmd_line);
 		if (str)
 			free(str);
 //		printf("free all entre\n");
