@@ -70,11 +70,12 @@ int	main(int ac, char **av, char **envp)
 			write(fd, "\n", 1);
 			free(str);
 		}
+		fd = open(name_file, O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 		dup2(1, STDOUT_FILENO);
-	//	close(fd);
-	//	unlink(name_file);
-		printf("argv[0] : %s\n", argv[0]);
+		close(fd);
+		unlink(name_file);
+	//	printf("argv[0] : %s\n", argv[0]);
 		execve(argv[0], argv,envp);
 		printf("je passe pas par execve\n");
 		exit(1);
