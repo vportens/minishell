@@ -1,6 +1,8 @@
 #include "minishell.h"
 #include "signal.h"
 #include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 int	g_status;
 char	*str;
@@ -32,9 +34,10 @@ void	signal_handler(int sig)
 			//free_all;
 			// free str
 			// return str == NULL
-			free(str);
-			str = malloc(sizeof(char));
-			str[0] = '\0';
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+     	   rl_redisplay();
 			printf("modif str status to null\n");
 			return ;
 
