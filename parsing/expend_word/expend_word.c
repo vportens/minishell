@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 19:37:29 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/15 20:06:15 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 	{
 		quote = update_quote_status(str[cur], quote);
 		if (prec != quote)
-			prec = update_quote_succes(*stc, &cur, quote);
+			prec = update_quote_succes(*stc, &cur, quote, &s1);
 		else
 		{
 			if (quote == SINGLE)
@@ -33,9 +33,9 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 				s1 = word_will_double(str, &cur, s1);
 			else if (quote == NONE)
 				s1 = word_will_unquote(stc, str, &cur, s1);
-			if (s1 == NULL)
-				return (free_str_ret_malloc_error(str));
 		}
+		if (s1 == NULL)
+			return (free_str_ret_malloc_error(str));
 	}
 	return (end_modif_two(str, stc, s1));
 }

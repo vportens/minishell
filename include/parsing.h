@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/07 13:51:49 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/15 20:11:30 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		len_cmd(t_commande_line *cmd);
 
 int		unclose_quote(char	*str);
 e_quote	update_quote_status(char c, e_quote quote);
-e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote);
+e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote, char **s1);
 int		pars_cmd_line(t_commande_line **cmd_lst, char *str);
 
 int		is_separator(char c);

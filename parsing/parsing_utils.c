@@ -6,7 +6,7 @@
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:04:51 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/02 23:23:49 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/15 20:10:23 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,16 @@ e_quote	update_quote_status(char c, e_quote quote)
 	return (quote);
 }
 
-e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote)
+e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote, char **s1)
 {
 	(*i)++;
 	stc->expanded = true;
+	if (*s1 == NULL)
+	{
+		*s1 = malloc(sizeof(char));
+		if (*s1 != NULL)
+			(*s1)[0] = '\0';
+	}
 	return (quote);
 }
 
