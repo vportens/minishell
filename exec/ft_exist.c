@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/08 14:38:22 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/16 12:35:23 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_bin_argv_zero(char *str, char *path)
 	split_path = ft_strsplit(path, ':');
 	if (split_path == NULL)
 		return (NULL);
-	while (split_path[i])
+	while (split_path[i] && str[0] != '\0')
 	{
 		ret = try_acces(str, split_path[i]);
 		if (ret == 1)
