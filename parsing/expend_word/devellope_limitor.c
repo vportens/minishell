@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   devellipe_limitor.c                                :+:      :+:    :+:   */
+/*   devellope_limitor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:25:25 by laclide           #+#    #+#             */
-/*   Updated: 2021/10/27 13:25:10 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/16 11:54:09 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*devellope_limitor(t_token *stc, char *str, int i)
 	{
 		quote = update_quote_status(str[i], quote);
 		if (prec != quote)
-			prec = update_quote_succes(stc, &i, quote);
+			prec = update_quote_succes(stc, &i, quote, &expand_str);
 		else
 		{
 			expand_str = limitor_unquote(str, &i, expand_str, quote);
