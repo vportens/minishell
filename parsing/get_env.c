@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:08:09 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 10:53:26 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/16 14:18:19 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ char	*get_envp(char *str, int *cur)
 	printf("new env path : %s\n", cpy);
 	env = ft_get_env(cpy);
 	free(cpy);
-	if (env == NULL)	
-		return (fake_env(cur, len_str));	
+	if (env == NULL)
+		return (fake_env(cur, len_str));
 	*cur = *cur + len_str + 1;
 	cpy = ft_strdup(env);
 	return (cpy);

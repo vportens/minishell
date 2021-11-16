@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:14:42 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 11:07:49 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/16 14:15:24 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,12 @@ char	*end_word_unquote(char *str, char *s1, int *i, int j)
 	s3 = NULL;
 	if ((*i) - j == 0)
 		return (s1);
-//	printf("start cpy :%d\nend cpy :%d\nstr to cpy :%s\n", j, *i, str);
 	s2 = malloc(sizeof(char) * ((*i) - j + 1));
 	if (s2 == NULL)
 		return (free_str_ret_null(s1));
 	s2 = ft_strncpy(s2, str + j, (*i) - j);
-//	printf("s1 env_unquote :%s\ns2 end_word_unquote :%s\n", s1, s2);
 	s3 = ft_strjoin(s1, s2);
 	free_both(s1, s2);
-//	printf("s3 end_word_unquote :%s\n", s3);
 	return (s3);
 }
 
