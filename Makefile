@@ -78,9 +78,6 @@ all :
 get_src:
 	@find built_in -type f -name "*.c" | tr "\n" "|" | sed -r 's/["|"]+/\\ \n/g'
 
-header:
-	  @Headermaker built_in include/builtin.h -inc struct 
-	  @Headermaker exec include/exec.h -inc struct 
 
 $(NAME)	: $(OBJ)
 	$(CC) $(FLAGS) -I libft/includes/ -I include/. $(OBJ) libft/libft.a -o $(NAME) $(LIB)

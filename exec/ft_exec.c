@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/09 23:51:51 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/17 15:26:57 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	dup2((*cmdl)->fd_in, STDIN_FILENO);
 	dup2((*cmdl)->fd_out, STDOUT_FILENO);
 	if ((*cmdl)->name_file != NULL)
+	{
 		unlink((*cmdl)->name_file);
+		free((*cmdl)->name_file);
+	}
 	close_fd_all(first);
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
 	{

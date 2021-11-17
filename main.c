@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 22:34:07 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/17 15:24:00 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	free_all(t_commande_line **cmd_line)
 			}
 //			printf("je sort dans token\n");
 		}
+		if ((*cmd_line)->name_file)
+			free((*cmd_line)->name_file);
 //		printf("je free cmdl\n");
 		free((*cmd_line));
 		*cmd_line = tmp;
@@ -180,7 +182,6 @@ int	main(int ac, char **av, char **envp)
 	int				res;
 	t_commande_line	*cmd_line;
 	
-	g_envp = envp;
 	cmd_line = NULL;
 	ft_init_t_env(envp);
 	while (1)

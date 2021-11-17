@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 22:26:17 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 23:54:30 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/17 15:29:06 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	write_in_fd(int	fd, char *limitor, bool expanded)
 		write(fd, "\n", 1);
 		free(str);
 	}
+	free(str);
 //	close(fd);
 	return (0);
 }
@@ -120,6 +121,7 @@ int	create_heredoc_fd(t_commande_line **cmdl, t_token **cur)
 	if ((*cmdl)->name_file != NULL)
 	{
 		unlink((*cmdl)->name_file);
+		free((*cmdl)->name_file);
 	}
 	(*cmdl)->name_file = name_file;
 	return (fd);
