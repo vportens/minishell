@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/17 18:58:20 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:50:13 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,11 @@ void	signal_cmd(int sig)
         rl_on_new_line();
         rl_replace_line("", 0);
         rl_redisplay();
+	}
+	if (sig == SIGQUIT)
+	{
+		printf("Quit (core dumped)\n");
+		exit (1);
 	}
 }
 

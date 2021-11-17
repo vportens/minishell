@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/17 19:01:40 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:50:18 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 		if (pid[i] == 0)
 		{
 			signal(SIGINT, signal_cmd);
-			signal(SIGQUIT, SIG_DFL);
-				ft_execve_fct(&cur, cmdl);
+			signal(SIGQUIT, signal_cmd);
+			ft_execve_fct(&cur, cmdl);
 		}
 		if (cur->fd_in != 0)
 			close(cur->fd_in);
