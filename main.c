@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/17 18:27:51 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:58:20 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,7 @@ void	signal_cmd(int sig)
         rl_on_new_line();
         rl_replace_line("", 0);
         rl_redisplay();
-
 	}
-
-
 }
 
 int	main(int ac, char **av, char **envp)
@@ -196,14 +193,17 @@ int	main(int ac, char **av, char **envp)
 	
 	cmd_line = NULL;
 	ft_init_t_env(envp);
-		signal(SIGINT, signal_cmd);
-		signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		str = readline("minishell$> ");
 		add_history(str);
+		signal(SIGINT, signal_cmd);
+		signal(SIGQUIT, SIG_IGN);
 		if (str == NULL)
 		{
+			printf("exit\n");
 			return (free_all(&cmd_line));
 
 		}
