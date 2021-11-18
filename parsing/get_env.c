@@ -6,11 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:08:09 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/18 16:40:20 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:46:00 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int exit_status;
 
 int	get_len_env_var(char *str)
 {
@@ -19,6 +21,8 @@ int	get_len_env_var(char *str)
 	i = 0;
 	if (str[0] == '$')
 		str++;
+	if (str[0] && str[0] == '?')
+		return (1);
 	while (str[i] && (ft_is_alpha_num(str[i]) == 0 || str[i] == '_'))
 		i++;
 	return (i);
@@ -56,6 +60,11 @@ char	*alloc_dollar(void)
 	return (NULL);
 }
 
+char	*alloc_exit_status(void)
+{
+	return (ft_itoa(exit_status));
+}
+
 char	*get_envp(char *str, int *cur)
 {
 	int		len_str;
@@ -68,6 +77,11 @@ char	*get_envp(char *str, int *cur)
 	{
 		*cur = *cur + 1;
 		return (alloc_dollar());
+	}
+	if (len_str == 1 && str[1] == '?')
+	{
+		*cur = *cur + 2;
+		return (alloc_exit_status());
 	}
 	cpy = malloc(sizeof(char) * (len_str + 1));
 	if (cpy == NULL)
