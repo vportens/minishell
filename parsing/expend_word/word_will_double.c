@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_will_double.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 19:30:25 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 10:18:04 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:38:32 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ static char	*if_env(char *str, char *s1, int *cur)
 
 char	*word_will_double(char *str, int *cur, char *s1)
 {
-	int		start;
-
-	start = *cur;
 	while (str && str[*cur] && str[*cur] != '"')
 	{
 		if (str[*cur] == '$')

@@ -6,14 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/18 16:19:09 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:16:15 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//:w
-extern int g_fdout;
+extern int exit_status;
 
 int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 {
@@ -57,6 +56,7 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 		execve((*cmdl)->argv[0], (*cmdl)->argv, str);
 		exit(1);
 	}
+	return (0);
 }
 
 int	no_forking(t_commande_line **cmdl)
@@ -100,7 +100,6 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 			exit(1); // kill all ;
 		if (pid[i] == 0)
 		{
-			g_fdout = cur->fd_out;
 	//		signal(SIGINT, signal_cmd);
 			signal(SIGQUIT, signal_cmd);
 			ft_execve_fct(&cur, cmdl);
@@ -128,7 +127,7 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 		return (0);
 	while (i < len)
 	{
-		waitpid(pid[i], NULL, 0);
+		waitpid(pid[i], &exit_status, 0);
 		i++;
 	}
 	return (0);
@@ -137,7 +136,6 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 int	ft_exec(t_commande_line **cmdl)
 {
 	t_commande_line	*cur;
-	int				res;
 	pid_t			*pid;
 	int				ret;
 
@@ -148,7 +146,7 @@ int	ft_exec(t_commande_line **cmdl)
 	pid = malloc(sizeof(pid_t) * len_cmd(cur));
 	if (pid == NULL)
 		return (50);
-	res = forking(cmdl, pid);
+	forking(cmdl, pid);
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
 	wait_pid(cmdl, pid);

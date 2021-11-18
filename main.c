@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/17 20:37:41 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:13:34 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-int	g_fdout;
+int	exit_status;
 
 int	free_all(t_commande_line **cmd_line)
 {
@@ -81,6 +81,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 		if (get_cmd_line(str, cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 		{
 			free_all(cmd_line);
+			//free_env();
 			free(str);
 			return (50); // clean all arg;
 		}
@@ -178,6 +179,7 @@ void	print_cmdl(t_commande_line **cmdl)
 
 void	signal_cmd(int sig)
 {
+	exit_status += sig;
 	if (sig == 2)
 	{
         printf("\n");
@@ -187,7 +189,7 @@ void	signal_cmd(int sig)
 	}
 	if (sig == SIGQUIT)
 	{
-		write(g_fdout,"Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
+		write(2 ,"Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
 		exit (1);
 	}
 }
@@ -199,9 +201,12 @@ int	main(int ac, char **av, char **envp)
 	t_commande_line	*cmd_line;
 	
 	cmd_line = NULL;
+	exit_status = 0;
 	ft_init_t_env(envp);
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
+	if (ac && av)
+	{
 	while (1)
 	{
 		str = readline("minishell$> ");
@@ -250,5 +255,6 @@ int	main(int ac, char **av, char **envp)
 //		printf("free all sorti\n");
 	//		cmd_line = cmd_line->next;
 
+	}
 	}
 }

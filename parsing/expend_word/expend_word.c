@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expend_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/15 20:06:15 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:39:22 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 
 int	word_modif(t_token **stc, char *str, e_token token)
 {
-	char	*s1;
-	int		i;
 	e_quote	quote;
 	e_quote	prec;
 
-	i = 0;
 	quote = NONE;
 	prec = NONE;
-	s1 = NULL;
 	if (token == LIMITOR)
 		return (limitor(*stc, str));
 	return (word_modif_two(stc, str, quote, prec));

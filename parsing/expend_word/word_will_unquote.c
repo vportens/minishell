@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_will_unquote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 01:27:37 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/04 10:18:19 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:38:03 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ static char	*if_env(t_token **stc, char *str, char *s1, int *i)
 
 char	*word_will_unquote(t_token **stc, char *str, int *cur, char *s1)
 {
-	int		start;
-
-	start = *cur;
 	while (str[*cur] && str[*cur] != '\'' && str[*cur] != '"')
 	{
 		if (str[*cur] != '$')

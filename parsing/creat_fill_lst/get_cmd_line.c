@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 22:32:10 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:42:23 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ static void	go_to_the_pipe(int *i, char *str)
 static int	create_and_fill_cmd(char *str, int cur, int start,
 		t_commande_line **first)
 {
-	t_commande_line	*tmp;
 	t_commande_line	*new;
 
-	tmp = *first;
 	new = malloc(sizeof(t_commande_line));
 	if (new == NULL)
 		return (50);

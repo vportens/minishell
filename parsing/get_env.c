@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:08:09 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/16 14:18:19 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:40:20 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ char	*alloc_dollar(void)
 
 char	*get_envp(char *str, int *cur)
 {
-	int		i;
 	int		len_str;
 	char	*cpy;
 	char	*env;
 
-	i = 0;
 	cpy = NULL;
 	len_str = get_len_env_var(str);
 	if (len_str == 0)
