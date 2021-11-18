@@ -6,11 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/17 19:50:13 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/17 20:37:41 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
+
+int	g_fdout;
 
 int	free_all(t_commande_line **cmd_line)
 {
@@ -185,7 +187,7 @@ void	signal_cmd(int sig)
 	}
 	if (sig == SIGQUIT)
 	{
-		printf("Quit (core dumped)\n");
+		write(g_fdout,"Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
 		exit (1);
 	}
 }

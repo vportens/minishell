@@ -6,11 +6,14 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/17 19:50:18 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:19:09 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//:w
+extern int g_fdout;
 
 int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 {
@@ -97,7 +100,8 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 			exit(1); // kill all ;
 		if (pid[i] == 0)
 		{
-			signal(SIGINT, signal_cmd);
+			g_fdout = cur->fd_out;
+	//		signal(SIGINT, signal_cmd);
 			signal(SIGQUIT, signal_cmd);
 			ft_execve_fct(&cur, cmdl);
 		}
@@ -145,6 +149,8 @@ int	ft_exec(t_commande_line **cmdl)
 	if (pid == NULL)
 		return (50);
 	res = forking(cmdl, pid);
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
 	wait_pid(cmdl, pid);
 	free(pid);
 	return (0);
