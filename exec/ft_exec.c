@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 16:42:51 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:57:35 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_non_int(char *str);
 
 int	ft_sup_int(char *str);
 
-extern int exit_status;
+extern int	exit_status;
 
 int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 {
-	char	**str;
-	struct stat buff;
+	char		**str;
+	struct stat	buff;
 
 	str = env_to_tabtab(get_adress_env());
 	if (str == NULL)
@@ -94,6 +94,26 @@ int	no_forking(t_commande_line **cmdl)
 	return (0);
 }
 
+int	multi_fork(pid_t *pid, int i, t_commande_line **cmdl, t_commande_line **cur)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	pid[i] = fork();
+	if (pid[i] == -1)
+		exit(1);
+	if (pid[i] == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		ft_execve_fct(cur, cmdl);
+	}
+	if ((*cur)->fd_in != 0)
+		close((*cur)->fd_in);
+	if ((*cur)->fd_out != 1)
+		close((*cur)->fd_out);
+	return (0);
+}
+
 int	forking(t_commande_line **cmdl, pid_t *pid)
 {
 	int				len;
@@ -113,21 +133,7 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 		return (no_forking(cmdl));
 	while (i < len)
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-		pid[i] = fork();
-		if (pid[i] == -1)
-			exit(1); // kill all ;
-		if (pid[i] == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			ft_execve_fct(&cur, cmdl);
-		}
-		if (cur->fd_in != 0)
-			close(cur->fd_in);
-		if (cur->fd_out != 1)
-			close(cur->fd_out);
+		multi_fork(pid, i, cmdl, &cur);
 		cur = cur->next;
 		i++;
 	}
@@ -152,7 +158,6 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 			exit_status = WEXITSTATUS(exit_status);
 		else if (WIFSIGNALED(exit_status))
 			exit_status = 128 + WTERMSIG(exit_status);
-	
 		i++;
 	}
 	return (0);
