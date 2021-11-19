@@ -6,17 +6,20 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 12:40:35 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 14:45:17 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/types.h>
+#include <sys/stat.h>
 
 extern int exit_status;
 
 int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 {
 	char	**str;
+	struct stat buff;
 
 	str = env_to_tabtab(get_adress_env());
 	if (str == NULL)
@@ -57,7 +60,14 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	else
 	{
 		execve((*cmdl)->argv[0], (*cmdl)->argv, str);
-		exit(1);
+		if (stat((*cmdl)->argv[0], &buff) == 0)
+		{
+			write(2, "minishell: ", ft_strlen("minishell: "));
+			write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
+			write(2, ": Permission denied\n", ft_strlen(": Permission denied\n"));
+			exit(126);
+		}
+		exit(exit_status);
 	}
 	return (0);
 }

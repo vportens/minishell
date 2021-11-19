@@ -6,11 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 12:46:14 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 14:08:07 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int exit_status;
 
 char	*get_acces(char *str, char *path)
 {
@@ -56,9 +58,9 @@ char	*get_bin_argv_zero(char *str, char *path)
 	split_path = ft_strsplit(path, ':');
 	if (split_path == NULL)
 	{
-		write(1, "minishell: ", 11);
-		write(1, str, ft_strlen(str));
-		write(1, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
+		write(2, "minishell: ", 11);
+		write(2, str, ft_strlen(str));
+		write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
 		free(str);
 		return (NULL);
 	}
@@ -79,8 +81,9 @@ char	*get_bin_argv_zero(char *str, char *path)
 		i++;
 	}
 	free_split(split_path);
-	write(1, "minishell: ", 11);
-	write(1, str, ft_strlen(str));
-	write(1, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
+	write(2, "minishell: ", 11);
+	write(2, str, ft_strlen(str));
+	write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
+	exit_status = 127;
 	return (str);
 }

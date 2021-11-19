@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_built_in_export.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 15:32:20 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/19 14:02:20 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int exit_status;
 
 void    ft_built_in_show_export(void)
 {
@@ -41,6 +43,7 @@ int		ft_built_in_export(char **str)
 	int i;
 
 	i = 1;
+	exit_status = 0;
 	if (*(str + 1) == NULL)
 	{
 		ft_built_in_show_export();
@@ -50,6 +53,7 @@ int		ft_built_in_export(char **str)
 	{
 		if (ft_export_is_incorrect(str[i]))
 		{
+			exit_status = 1;
 			printf("minishell: export: '%s': not a valid identifier\n", str[i]);
 		}
 		else if (ft_singletone(str[i], ADD) == 50)

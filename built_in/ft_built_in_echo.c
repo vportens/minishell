@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_built_in_echo.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:18:40 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 10:29:20 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/19 13:59:43 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int exit_status;
 
 int     ft_check_n(char **str)
 {
@@ -62,5 +64,6 @@ int    ft_built_in_echo(char **str)
     }
     if (y == 0)
         printf("\n");
+   exit_status = 0; 
     return (0);
 }
