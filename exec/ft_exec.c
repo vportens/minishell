@@ -6,13 +6,19 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 14:45:17 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:42:51 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+
+int	exit_bltin(char **args);
+
+int	ft_non_int(char *str);
+
+int	ft_sup_int(char *str);
 
 extern int exit_status;
 
@@ -74,15 +80,16 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 
 int	no_forking(t_commande_line **cmdl)
 {
-	int	ret;
-
-	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) == 2)
+	if ((*cmdl)->argv == NULL)
+		return (0);
+	if (ft_strcmp((*cmdl)->argv[0], "exit"))
 	{
-		if ((*cmdl)->argv[1] != NULL)
-			ret = ft_atoi((*cmdl)->argv[1]);
-		else
-			ret = 0;
-		exit(ret);
+		exit_bltin((*cmdl)->argv);
+		return (1);
+	}
+	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) != 0)
+	{
+		return (0);
 	}
 	return (0);
 }
