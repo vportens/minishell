@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 17:17:49 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:23:59 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str)
 {
 	struct stat	buff;
 
+	printf("passe dans ft exec cmd\n");
 	execve((*cmdl)->argv[0], (*cmdl)->argv, str);
+	printf("lol\n");
 	if (stat((*cmdl)->argv[0], &buff) == 0)
 	{
 		write(2, "minishell: ", ft_strlen("minishell: "));
@@ -53,6 +55,10 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str)
 		write(2, ": Permission denied\n", ft_strlen(": Permission denied\n"));
 		exit(126);
 	}
+	write(2, "minishell: ", ft_strlen("minishell: "));
+	write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
+	write(2, ": No such file or directory\n", ft_strlen(": No such file or directory\n"));
+	exit_status = 127;
 	exit(exit_status);
 	return (0);
 }
@@ -74,7 +80,8 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	if (str == NULL)
 		free_fd_all_exit_malloc_error(first);
 	if (ft_is_builtin((*cmdl)->argv[0]) == 0)
-		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0], ft_get_env("PATH"));
+		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0],
+				ft_get_env("PATH"));
 	if ((*cmdl)->argv[0] == NULL)
 		free_str_fd_exit_malloc_error(str, first);
 	dup2((*cmdl)->fd_in, STDIN_FILENO);

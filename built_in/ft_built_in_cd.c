@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_built_in_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 21:52:54 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 17:34:13 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:26:59 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	exit_status;
 
 int		ft_equal(char *str)
 {
