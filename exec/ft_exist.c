@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/17 14:48:07 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:46:14 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,13 @@ char	*get_bin_argv_zero(char *str, char *path)
 		return (str);
 	split_path = ft_strsplit(path, ':');
 	if (split_path == NULL)
+	{
+		write(1, "minishell: ", 11);
+		write(1, str, ft_strlen(str));
+		write(1, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
+		free(str);
 		return (NULL);
+	}
 	while (split_path[i] && str[0] != '\0')
 	{
 		ret = try_acces(str, split_path[i]);

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/18 16:39:22 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:14:32 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ int	edit_type(t_commande_line **block, int limiter)
 				limiter = 1;
 			else if (limiter == 1 && cur_t->str && cur_t->str[0] != '\0')
 			{
-				printf("test\n");
 				if (is_type_file(cur_t->type) == 1)
 					return (ret_file_without_obj(cur_t->type));
-				printf("nest\n");
 				cur_t->type = LIMITOR;
 				limiter = 0;
 			}

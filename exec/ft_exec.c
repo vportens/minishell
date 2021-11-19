@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 11:57:38 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:40:35 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 		exit (50);
 	}
 	if (ft_is_builtin((*cmdl)->argv[0]) == 0)
+	{
 		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0], ft_get_env("PATH"));
+	}
 	if ((*cmdl)->argv[0] == NULL)
 	{
 		free(str);

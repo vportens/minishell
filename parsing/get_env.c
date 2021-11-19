@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:08:09 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/18 17:46:00 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:20:23 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*get_envp(char *str, int *cur)
 	if (cpy == NULL)
 		return (NULL);
 	cpy = ft_strncpy(cpy, str + 1, len_str);
-	printf("new env path : %s\n", cpy);
 	env = ft_get_env(cpy);
 	free(cpy);
 	if (env == NULL)
@@ -101,6 +100,7 @@ char	*get_env(int *cur, char *str)
 {
 	char	*s3;
 
+	printf("je passe par la\n");
 	s3 = get_envp(str + *cur, cur);
 	return (s3);
 }

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 22:26:17 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/17 15:29:06 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:15:16 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	create_heredoc_fd(t_commande_line **cmdl, t_token **cur)
 {
 	int		fd;
 	char	*name_file;
-	int		ret;
 
 	name_file = NULL;
 	fd = -1;
@@ -114,8 +113,7 @@ int	create_heredoc_fd(t_commande_line **cmdl, t_token **cur)
 		name_file = creat_aleatori_name();
 		fd = open(name_file, O_CREAT | O_EXCL | O_RDWR, 0644);
 	}
-	ret = write_in_fd(fd, (*cur)->str, (*cur)->expanded);
-	printf("ret : %d\n", ret);
+	write_in_fd(fd, (*cur)->str, (*cur)->expanded);
 	fd = open(name_file, O_RDONLY);
 	(*cmdl)->fd_in = fd;
 	if ((*cmdl)->name_file != NULL)
