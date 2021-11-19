@@ -102,6 +102,6 @@ char	*ft_get_str_of_env(t_env **env, char *str);
 /*                    FILE = built_in/ft_built_in_unset.c                     */
 /* -------------------------------------------------------------------------- */
 int    ft_built_in_unset(char **str);
-
+int		ft_equal(char *str);
 
 #endif

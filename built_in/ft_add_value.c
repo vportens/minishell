@@ -17,6 +17,31 @@ int		ft_add_env(char *str)
 	return (ft_singletone(str, ADD));	
 }
 
+char	*ft_final_add(char *env)
+{
+	int len;
+	char *s;
+	int i;
+	int y;
+
+	i = 0;
+	y = 0;
+	len = ft_get_lenkey(env) - 1;
+	s = malloc(sizeof(char) * ft_strlen(env));
+	if (s == NULL)
+		return (NULL);
+	while (env[y])
+	{
+		s[i] = env[y];
+		i++;
+		y++;
+		if (y == len)
+			y++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+
 int		ft_add_value_to_env(t_env **env_list, char *env)
 {
 	int len;
@@ -25,12 +50,16 @@ int		ft_add_value_to_env(t_env **env_list, char *env)
 
 	declare = 0;
 	cpy = *env_list;
+	if (env[ft_get_lenkey(env) - 1] == '+')
+		env = ft_final_add(env);
 	len = ft_get_lenkey(env);
 	while (cpy)
 	{
 		declare = cpy->declare;
 		if (len == ft_get_lenkey(cpy->str) && !ft_truestrncmp(env, cpy->str, len))
 		{
+			if (ft_equal(cpy->str) && !ft_equal(env))
+				return (0);
 			free(cpy->str);
 			cpy->str = ft_strdup(env);
 			if (cpy->str == NULL)
@@ -44,4 +73,3 @@ int		ft_add_value_to_env(t_env **env_list, char *env)
 	}
 	return (ft_push_front(env, env_list, declare));
 }
-

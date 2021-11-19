@@ -31,8 +31,11 @@ int		ft_export_is_incorrect(char *s)
 		return (1);
 	while (s[i] && s[i] != '=')
 	{
-		if ((ft_is_alpha_num(s[i]) && s[0] != '_'))
-			return (1);
+		if ((ft_is_alpha_num(s[i]) && s[i] != '_'))
+		{
+			if (!(s[i] == '+' && s[i + 1] == '='))
+				return (1);
+		}
 		i++;
 	}
 	return (0);
