@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 16:57:35 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:17:49 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,61 @@ int	ft_sup_int(char *str);
 
 extern int	exit_status;
 
+void	free_fd_all_exit_malloc_error(t_commande_line **first)
+{
+	close_fd_all(first);
+	exit (50);
+}
+
+void	free_str_fd_exit_malloc_error(char **str, t_commande_line **first)
+{
+	free(str);
+	close_fd_all(first);
+	exit (50);
+}
+
+void	free_str_exit_fd_error(char **str)
+{
+	free(str);
+	exit(1);
+}
+
+int	ft_exec_cmd(t_commande_line **cmdl, char **str)
+{
+	struct stat	buff;
+
+	execve((*cmdl)->argv[0], (*cmdl)->argv, str);
+	if (stat((*cmdl)->argv[0], &buff) == 0)
+	{
+		write(2, "minishell: ", ft_strlen("minishell: "));
+		write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
+		write(2, ": Permission denied\n", ft_strlen(": Permission denied\n"));
+		exit(126);
+	}
+	exit(exit_status);
+	return (0);
+}
+
+int	exec_builtin(char **str, t_commande_line **cmdl)
+{
+	free(str);
+	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) == 2)
+		exit(1);
+	exit(0);
+	return (0);
+}
+
 int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 {
 	char		**str;
-	struct stat	buff;
 
 	str = env_to_tabtab(get_adress_env());
 	if (str == NULL)
-	{
-		close_fd_all(first);
-		exit (50);
-	}
+		free_fd_all_exit_malloc_error(first);
 	if (ft_is_builtin((*cmdl)->argv[0]) == 0)
-	{
 		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0], ft_get_env("PATH"));
-	}
 	if ((*cmdl)->argv[0] == NULL)
-	{
-		free(str);
-		close_fd_all(first);
-		exit (50);
-	}
+		free_str_fd_exit_malloc_error(str, first);
 	dup2((*cmdl)->fd_in, STDIN_FILENO);
 	dup2((*cmdl)->fd_out, STDOUT_FILENO);
 	if ((*cmdl)->name_file != NULL)
@@ -52,29 +86,11 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	}
 	close_fd_all(first);
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
-	{
-		free(str);
-		exit(1);
-	}
+		free_str_exit_fd_error(str);
 	if (ft_is_builtin((*cmdl)->argv[0]))
-	{
-		free(str);
-		if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) == 2)
-			exit(1);
-		exit(0);
-	}
+		exec_builtin(str, cmdl);
 	else
-	{
-		execve((*cmdl)->argv[0], (*cmdl)->argv, str);
-		if (stat((*cmdl)->argv[0], &buff) == 0)
-		{
-			write(2, "minishell: ", ft_strlen("minishell: "));
-			write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
-			write(2, ": Permission denied\n", ft_strlen(": Permission denied\n"));
-			exit(126);
-		}
-		exit(exit_status);
-	}
+		ft_exec_cmd(cmdl, str);
 	return (0);
 }
 
