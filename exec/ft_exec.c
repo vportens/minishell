@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 17:23:59 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 20:55:09 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str)
 {
 	struct stat	buff;
 
-	printf("passe dans ft exec cmd\n");
 	execve((*cmdl)->argv[0], (*cmdl)->argv, str);
-	printf("lol\n");
 	if (stat((*cmdl)->argv[0], &buff) == 0)
 	{
 		write(2, "minishell: ", ft_strlen("minishell: "));
@@ -58,15 +56,16 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str)
 	write(2, "minishell: ", ft_strlen("minishell: "));
 	write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
 	write(2, ": No such file or directory\n", ft_strlen(": No such file or directory\n"));
+	free_all(cmdl);
 	exit_status = 127;
 	exit(exit_status);
 	return (0);
 }
 
-int	exec_builtin(char **str, t_commande_line **cmdl)
+int	exec_builtin(char **str, t_commande_line **cmdl, t_commande_line **first)
 {
 	free(str);
-	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) == 2)
+	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, first) == 2)
 		exit(1);
 	exit(0);
 	return (0);
@@ -95,7 +94,7 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
 		free_str_exit_fd_error(str);
 	if (ft_is_builtin((*cmdl)->argv[0]))
-		exec_builtin(str, cmdl);
+		exec_builtin(str, cmdl, first);
 	else
 		ft_exec_cmd(cmdl, str);
 	return (0);
@@ -103,6 +102,18 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 
 int	no_forking(t_commande_line **cmdl)
 {
+	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
+	dup2((*cmdl)->fd_in, STDIN_FILENO);
+	dup2((*cmdl)->fd_out, STDOUT_FILENO);
+	if ((*cmdl)->name_file != NULL)
+	{
+		unlink((*cmdl)->name_file);
+		free((*cmdl)->name_file);
+	}
+	if ((*cmdl)->fd_out != 1)
+		close((*cmdl)->fd_out);
+	if ((*cmdl)->fd_in != 0)
+		close((*cmdl)->fd_in);
 	if ((*cmdl)->argv == NULL)
 		return (0);
 	if (ft_strcmp((*cmdl)->argv[0], "exit"))
@@ -110,7 +121,7 @@ int	no_forking(t_commande_line **cmdl)
 		exit_bltin((*cmdl)->argv);
 		return (1);
 	}
-	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) != 0)
+	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, cmdl) != 0)
 	{
 		return (0);
 	}
@@ -148,12 +159,16 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 	len = len_cmd(cur);
 	while (cur)
 	{
+		printf("je passe par forking - open fd\n");
 		open_fd(&cur);
 		cur = cur->next;
 	}
 	cur = *cmdl;
 	if (len == 1 && ft_is_builtin(cur->argv[0]))
+	{
+		free(pid);
 		return (no_forking(cmdl));
+	}
 	while (i < len)
 	{
 		multi_fork(pid, i, cmdl, &cur);
@@ -173,7 +188,11 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 	cur = *cmdl;
 	len = len_cmd(cur);
 	if (len == 1 && ft_is_builtin((*cmdl)->argv[0]))
+	{
+		write(2, "ca ne passe pas par la boucle waitpid\n", ft_strlen("ca ne passe pas par la boucle waitpid\n"));
+		printf("je passe pas par la boucle waitpid\n");
 		return (0);
+	}
 	while (i < len)
 	{
 		waitpid(pid[i], &exit_status, 0);
@@ -203,6 +222,8 @@ int	ft_exec(t_commande_line **cmdl)
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
 	wait_pid(cmdl, pid);
+	write(2, "avant\n", 6);
 	free(pid);
+	write(2, "apres\n", 6);
 	return (0);
 }

@@ -8,7 +8,7 @@ MAC_B =
 
 LIBFT = libft
 
-FLAGS 	= -Wall -Wextra
+FLAGS 	= -g -Wall -Wextra
 
 LIB =  -L/usr/include -lreadline
 

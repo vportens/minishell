@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 16:04:57 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 20:53:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	exit_bltin(char **args)
 	return (0);
 }
 
-int	ft_exec_builtin(char *str, char **args)
+int	ft_exec_builtin(char *str, char **args, t_commande_line **first)
 {
 	int (*tb_tk[7])(char **) = {&ft_built_in_cd, &ft_built_in_echo, &ft_built_in_env, &ft_built_in_pwd, &ft_built_in_export, &ft_built_in_unset};
 	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
@@ -109,6 +109,7 @@ int	ft_exec_builtin(char *str, char **args)
 		i++;
 	if (i < 7)
 		tb_tk[i](args);
+	free_all(first); // free env;
 	if (i < 7)
 		return (0);
 	return (0);

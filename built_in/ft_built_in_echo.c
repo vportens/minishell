@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:18:40 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 13:59:43 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:13:11 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int    ft_built_in_echo(char **str)
     }
     if (y == 0)
         printf("\n");
-   exit_status = 0; 
+    exit_status = 0; 
     return (0);
 }
