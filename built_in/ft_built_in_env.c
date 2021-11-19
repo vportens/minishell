@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_built_in_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:25:49 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/18 16:41:35 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/04 09:46:37 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_built_in_show_env(t_env **env)
 	
 	cur = *env;
     
-	while(cur)
+	while (cur)
 	{
         if (ft_is_equal(cur->str))
         {

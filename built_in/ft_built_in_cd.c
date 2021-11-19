@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 21:52:54 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 13:17:08 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/16 17:34:13 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ char	*ft_get_home(void)
 	return (NULL);
 }
 
+int		ft_pwd(char *s)
+{
+	char *oldpwd;
+	char *pwd;
+	int ret;
+	
+	ret = 0;
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+	{
+		free(pwd);	
+		return (50);
+	}
+	oldpwd = ft_strjoin(s, pwd);
+	free(pwd);
+	if (oldpwd == NULL)
+	{
+		free(oldpwd);
+		return (50);
+	}
+	ret = ft_add_env(oldpwd);
+	free(oldpwd);
+	return (ret);
+}
+
 int    ft_built_in_cd(char **str)
 {
     if (*(str + 1) == NULL)
@@ -59,8 +84,12 @@ int    ft_built_in_cd(char **str)
 		if (str[1][0] == '\0')
 			return (0);
 	}
+	if (ft_pwd("OLDPWD=") == 50)
+		return (50);
 	if (chdir(*(str + 1)) == -1)
         if (ft_print_error("minishell: cd: ", *(str + 1)) == 50)
             return (50);
+	if (ft_pwd("PWD=") == 50)
+		return (50);
     return (0);
 }

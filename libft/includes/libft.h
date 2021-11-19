@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 20:34:46 by laclide           #+#    #+#             */
-/*   Updated: 2021/10/08 19:00:31 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/16 13:56:54 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		ft_strncmp(char *str, char *to, int n);
 int		ft_strcmp(char *str, char *in);
 int		ft_atoi(char *str);
 int		ft_is_alpha_num(char c);
+int		ft_is_alpha(char c);
 
 #endif

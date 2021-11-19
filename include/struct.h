@@ -51,6 +51,7 @@ struct				s_commande_line
 struct		s_env
 {
 	char	*str;
+	int		declare;
 	t_env	*next;
 };
 

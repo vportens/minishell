@@ -6,7 +6,7 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/04 10:46:32 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:32:20 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@ void    ft_built_in_show_export(void)
 
     env = get_adress_env();
     ft_show_export(env);
+}
+
+int		ft_export_is_incorrect(char *s)
+{
+	int i;
+
+	i = 1;
+	if ((ft_is_alpha(s[0]) && s[0] != '_'))
+		return (1);
+	while (s[i] && s[i] != '=')
+	{
+		if ((ft_is_alpha_num(s[i]) && s[0] != '_'))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int		ft_built_in_export(char **str)
@@ -32,7 +48,11 @@ int		ft_built_in_export(char **str)
 	}
 	while (str[i] != NULL)
 	{
-		if (ft_singletone(str[i], ADD) == 50)
+		if (ft_export_is_incorrect(str[i]))
+		{
+			printf("minishell: export: '%s': not a valid identifier\n", str[i]);
+		}
+		else if (ft_singletone(str[i], ADD) == 50)
 			return (50);
 		i++;
 	}
@@ -48,7 +68,10 @@ void	ft_show_export(t_env **env)
 	while(cur)
 	{
 		len = ft_get_lenkey(cur->str);
-		printf("export %.*s", len, cur->str);
+		if (cur->declare == 1)
+			printf("declare -x %.*s", len, cur->str);
+		else
+			printf("export %.*s", len, cur->str);
 		if (len < (int)ft_strlen(cur->str))
 			printf("=\"%s\"", cur->str + len + 1);
 		printf("\n");

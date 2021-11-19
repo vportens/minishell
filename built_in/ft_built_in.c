@@ -22,7 +22,10 @@ int	ft_exec_builtin(char *str, char **args)
 	if (str == NULL)
 			return (0);
 	if (ft_strcmp("exit", str))
+	{
+		ft_clean_env();
 		return (2);
+	}
 	while (i < 7 && !ft_strcmp(built[i], str))
 		i++;
 	if (i < 7)

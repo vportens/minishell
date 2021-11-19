@@ -64,7 +64,7 @@ int    ft_built_in_cd(char **str);
 /* -------------------------------------------------------------------------- */
 /*                      FILE = built_in/ft_push_front.c                       */
 /* -------------------------------------------------------------------------- */
-int		ft_push_front(char *env, t_env **begin_lst);
+int		ft_push_front(char *env, t_env **begin_lst, int declare);
 
 /* -------------------------------------------------------------------------- */
 /*                    FILE = built_in/ft_built_in_export.c                    */
@@ -96,6 +96,7 @@ void	ft_free_env_elem(t_env *env);
 /* -------------------------------------------------------------------------- */
 char	*ft_get_env(char *str);
 char	*ft_get_value_of_env(t_env **env, char *str);
+char	*ft_get_str_of_env(t_env **env, char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                    FILE = built_in/ft_built_in_unset.c                     */

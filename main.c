@@ -81,7 +81,6 @@ int	pars(char *str, t_commande_line **cmd_line)
 		if (get_cmd_line(str, cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 		{
 			free_all(cmd_line);
-			//free_env();
 			free(str);
 			return (50); // clean all arg;
 		}
@@ -216,6 +215,7 @@ int	main(int ac, char **av, char **envp)
 		if (str == NULL)
 		{
 			printf("exit\n");
+			ft_clean_env();
 			return (free_all(&cmd_line));
 
 		}
@@ -226,6 +226,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			free(str);
 			free_all(&cmd_line);
+			ft_clean_env();
 			write(1, "malloc error\n", 13);
 			return (50);
 		}
@@ -242,6 +243,7 @@ int	main(int ac, char **av, char **envp)
 				if (res == 50)
 					write(1, "malloc error\n", 13);
 				free(str);
+				ft_clean_env();
 				free_all(&cmd_line);
 				return (1);
 			}
