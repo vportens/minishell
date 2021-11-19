@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 20:55:09 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:07:07 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str)
 	return (0);
 }
 
-int	exec_builtin(char **str, t_commande_line **cmdl, t_commande_line **first)
+int	exec_builtin(char **str, t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 {
 	free(str);
-	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, first) == 2)
+	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, first, pid) == 2)
 		exit(1);
 	exit(0);
 	return (0);
 }
 
-int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
+int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 {
 	char		**str;
 
@@ -94,13 +94,13 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
 		free_str_exit_fd_error(str);
 	if (ft_is_builtin((*cmdl)->argv[0]))
-		exec_builtin(str, cmdl, first);
+		exec_builtin(str, cmdl, first, pid);
 	else
 		ft_exec_cmd(cmdl, str);
 	return (0);
 }
 
-int	no_forking(t_commande_line **cmdl)
+int	no_forking(t_commande_line **cmdl, pid_t *pid)
 {
 	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
 	dup2((*cmdl)->fd_in, STDIN_FILENO);
@@ -121,7 +121,7 @@ int	no_forking(t_commande_line **cmdl)
 		exit_bltin((*cmdl)->argv);
 		return (1);
 	}
-	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, cmdl) != 0)
+	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, cmdl, pid) != 0)
 	{
 		return (0);
 	}
@@ -139,7 +139,7 @@ int	multi_fork(pid_t *pid, int i, t_commande_line **cmdl, t_commande_line **cur)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		ft_execve_fct(cur, cmdl);
+		ft_execve_fct(cur, cmdl, pid);
 	}
 	if ((*cur)->fd_in != 0)
 		close((*cur)->fd_in);
@@ -167,7 +167,7 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 	if (len == 1 && ft_is_builtin(cur->argv[0]))
 	{
 		free(pid);
-		return (no_forking(cmdl));
+		return (no_forking(cmdl, pid));
 	}
 	while (i < len)
 	{

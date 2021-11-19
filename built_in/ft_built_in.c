@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 20:53:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:04:45 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_non_int(char *str)
 	return (ft_sup_int(str));
 }
 
-int	exit_bltin(char **args)
+int	exit_bltin(char **args, t_commande_line **first)
 {
 	int	ret;
 
@@ -83,25 +83,28 @@ int	exit_bltin(char **args)
 			return (2);
 		}
 		ft_clean_env();
+		free_all(first);
 		exit(ret);
 	}
 	ft_clean_env();
+	free_all(first);
 	exit (0);
 	return (0);
 }
 
-int	ft_exec_builtin(char *str, char **args, t_commande_line **first)
+int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 {
 	int (*tb_tk[7])(char **) = {&ft_built_in_cd, &ft_built_in_echo, &ft_built_in_env, &ft_built_in_pwd, &ft_built_in_export, &ft_built_in_unset};
 	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
 	int i;
 
 	i = 0;
+	free(pid);
 	if (str == NULL)
 			return (0);
 	if (ft_strcmp("exit", str))
 	{
-		exit_bltin(args);
+		exit_bltin(args, first);
 		exit (1); // just not if not forking
 		return (1);
 	}
@@ -109,6 +112,7 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first)
 		i++;
 	if (i < 7)
 		tb_tk[i](args);
+	ft_clean_env();
 	free_all(first); // free env;
 	if (i < 7)
 		return (0);

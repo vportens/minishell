@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/19 20:53:57 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:04:34 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_singletone(char *str, int mode);
 /* -------------------------------------------------------------------------- */
 /*                       FILE = built_in/ft_built_in.c                        */
 /* -------------------------------------------------------------------------- */
-int	ft_exec_builtin(char *str, char **args, t_commande_line **first);
+int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid);
 
 /* -------------------------------------------------------------------------- */
 /*                       FILE = built_in/ft_add_value.c                       */
