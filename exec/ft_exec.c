@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/18 18:22:23 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/19 11:57:38 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first)
 		free(str);
 		if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv) == 2)
 			exit(1);
+		exit(0);
 	}
 	else
 	{
