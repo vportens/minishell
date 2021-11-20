@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/20 16:09:52 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:03:22 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,14 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 	int i;
 
 	i = 0;
-	free(pid);
 	if (str == NULL)
 			return (0);
 	if (ft_strcmp("exit", str))
 	{
 		exit_bltin(args, first, pid);
+		free(pid);
+		free_all(first);
+		ft_clean_env();
 		exit (1); // just not if not forking
 		return (1);
 	}
@@ -116,6 +118,7 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 		i++;
 	if (i < 7)
 		tb_tk[i](args);
+	free(pid);
 	ft_clean_env();
 	free_all(first); // free env;
 	if (i < 7)
