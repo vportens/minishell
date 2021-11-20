@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 17:43:26 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:31:22 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,17 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid)
 	return (0);
 }
 
+void	signal_cmd_2(int sig)
+{
+	exit_status += sig;
+	if (sig == 2)
+	{
+        printf("\n");
+        rl_replace_line("", 0);
+        rl_redisplay();
+	}
+}
+
 int	multi_fork(pid_t *pid, int i, t_commande_line **cmdl, t_commande_line **cur)
 {
 	signal(SIGINT, SIG_IGN);
@@ -143,7 +154,6 @@ int	multi_fork(pid_t *pid, int i, t_commande_line **cmdl, t_commande_line **cur)
 	if (pid[i] == 0)
 	{
 		
-		write(2, "ici\n", 4);
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		ft_execve_fct(cur, cmdl, pid);
@@ -223,9 +233,11 @@ int	ft_exec(t_commande_line **cmdl)
 	if (pid == NULL)
 		return (50);
 	forking(cmdl, pid);
-	signal(SIGINT, signal_cmd);
+	signal(SIGINT, signal_cmd_2);
 	signal(SIGQUIT, SIG_IGN);
 	wait_pid(cmdl, pid);
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
 	free(pid);
 	return (0);
 }
