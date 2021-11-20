@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 20:37:10 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:13:40 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,6 @@ int	main(int ac, char **av, char **envp)
 		if (str != NULL && cmd_line != NULL)
 		{
 			res = ft_exec(&cmd_line);
-			write(2, "apres exec\n", ft_strlen("apres exec\n"));
 			if (res != 0)
 			{
 				if (res == 40)
@@ -248,7 +247,6 @@ int	main(int ac, char **av, char **envp)
 				free_all(&cmd_line);
 				return (1);
 			}
-			write(2, "apres encore exec\n", ft_strlen("apres encore exec\n"));
 		}
 	}
 	

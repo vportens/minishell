@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/20 16:01:01 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:09:52 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,6 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 
 int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *pid)
 {
-	int (*tb_tk[7])(char **, int) = {&ft_built_in_cd, &ft_built_in_echo_fd, &ft_built_in_env_fd, &ft_built_in_pwd_fd, &ft_built_in_export_fd, &ft_built_in_unset};
-	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
-	int i;
-
-	i = 0;
-	printf("enter exec builtin fd\n");
 	if (str == NULL)
 			return (0);
 	if (ft_strcmp("exit", str))
@@ -138,11 +132,17 @@ int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *p
 		exit_bltin(args, first, pid);
 		return (1);
 	}
-	while (i < 7 && !ft_strcmp(built[i], str))
-		i++;
-	if (i < 7)
-		tb_tk[i](args, (*first)->fd_out);
-	if (i < 7)
-		return (0);
+	if (ft_strcmp("cd", str))
+		ft_built_in_cd(args);
+	else if (ft_strcmp("echo", str))
+		ft_built_in_echo_fd(args, (*first)->fd_out);
+	else if (ft_strcmp("env", str))
+		ft_built_in_env_fd(args, (*first)->fd_out);
+	else if (ft_strcmp("pwd", str))
+		ft_built_in_pwd_fd(args,(*first)->fd_out);
+	else if (ft_strcmp("export", str))
+		ft_built_in_export_fd(args, (*first)->fd_out);
+	else if (ft_strcmp("unset", str))
+		ft_built_in_unset(args);
 	return (0);
 }
