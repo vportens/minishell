@@ -16,7 +16,7 @@ static int ft_init_env(t_env **env_list)
 {
 	char *s;
 
-	s = getcwd(NULL, 0);
+	s = ft_strjoin("PWD=", getcwd(NULL, 0));
 	if (s == NULL)
 		return (50);
 	if (ft_push_front("SHLVL=1", env_list, 1) == 50)

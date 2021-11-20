@@ -75,7 +75,7 @@ int		ft_pwd(char *s)
 
 int    ft_built_in_cd(char **str)
 {
-    if (*(str + 1) == NULL)
+    if (*(str + 1) == NULL || ft_strcmp(str[1], "~"))
 	{
 		*(str + 1) = ft_get_home();
 		if (*(str + 1) == NULL)

@@ -87,6 +87,7 @@ int		ft_built_in_export_fd(char **str, int fd);
 void	ft_show_export(t_env **env);
 int		ft_built_in_export_fd(char **str, int fd);
 int		ft_export_is_incorrect(char *s);
+char	*ft_final_add(char *env);
 
 /* -------------------------------------------------------------------------- */
 /*                     FILE = built_in/ft_gestion_error.c                     */
