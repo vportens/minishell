@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 16:17:59 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:32:25 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_str_exit_fd_error(char **str)
 	exit(1);
 }
 
-int	ft_exec_cmd(t_commande_line **cmdl, char **str, pid_t *pid)
+int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first, char **str, pid_t *pid)
 {
 	struct stat	buff;
 
@@ -56,7 +56,7 @@ int	ft_exec_cmd(t_commande_line **cmdl, char **str, pid_t *pid)
 	write(2, "minishell: ", ft_strlen("minishell: "));
 	write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
 	write(2, ": No such file or directory\n", ft_strlen(": No such file or directory\n"));
-	free_all(cmdl);
+	free_all(first);
 	free(str);
 	free(pid);
 	ft_clean_env();
@@ -99,7 +99,7 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 	if (ft_is_builtin((*cmdl)->argv[0]))
 		exec_builtin(str, cmdl, first, pid);
 	else
-		ft_exec_cmd(cmdl, str, pid);
+		ft_exec_cmd(cmdl, first, str, pid);
 	return (0);
 }
 
