@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 19:14:44 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 18:59:20 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:43:09 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	redirect_file_in(t_commande_line **cmdl, t_token *cur, e_token type)
 {
 	if (type == FILE_IN)
 	{
+		if ((*cmdl)->fd_in != 0)
+			close((*cmdl)->fd_in);
 		(*cmdl)->fd_in = open(cur->str, O_RDONLY);
 		if ((*cmdl)->fd_in == -1)
 		{
@@ -26,6 +28,8 @@ int	redirect_file_in(t_commande_line **cmdl, t_token *cur, e_token type)
 	}
 	else if (type == LIMITOR)
 	{
+		if ((*cmdl)->fd_in != 0)
+			close((*cmdl)->fd_in);
 		(*cmdl)->fd_in = create_heredoc_fd(cmdl, &cur);
 		if ((*cmdl)->fd_in == -1)
 			return (-1);
@@ -37,12 +41,16 @@ int	redirect_file_out(t_commande_line **cmdl, t_token *cur, e_token type)
 {
 	if (type == FILE_OUT)
 	{
+		if ((*cmdl)->fd_out != 1)
+			close((*cmdl)->fd_out);
 		(*cmdl)->fd_out = open(cur->str, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if ((*cmdl)->fd_out == -1)
 			return (-1);
 	}
 	else if (type == FILE_OUT_OVER)
 	{
+		if ((*cmdl)->fd_out != 1)
+			close((*cmdl)->fd_out);
 		(*cmdl)->fd_out = open(cur->str, O_CREAT | O_RDWR | O_APPEND, 0644);
 		if ((*cmdl)->fd_out == -1)
 			return (-1);
