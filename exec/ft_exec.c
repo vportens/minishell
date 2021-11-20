@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 18:31:22 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:37:21 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	signal_cmd_2(int sig)
 	exit_status += sig;
 	if (sig == 2)
 	{
+		exit_status = 130;
         printf("\n");
         rl_replace_line("", 0);
         rl_redisplay();
