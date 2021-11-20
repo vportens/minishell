@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 18:54:15 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/08 14:54:53 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/20 18:17:21 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ int	init_pipe(int **nfd, int i, t_commande_line *cur)
 	else
 		cur->fd_in = nfd[i - 1][0];
 	if (cur->next == NULL)
+	{
+		close(nfd[i][0]);
+		close(nfd[i][1]);
 		cur->fd_out = 1;
+	}
 	else
 		cur->fd_out = nfd[i][1];
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 17:22:12 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:43:26 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 {
 	char		**str;
 
+	dup2((*cmdl)->fd_in, STDIN_FILENO);
+	dup2((*cmdl)->fd_out, STDOUT_FILENO);
+	close_fd_all(first);
 	str = env_to_tabtab(get_adress_env());
 	if (str == NULL)
 	{
@@ -98,14 +101,12 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 	}
 	if ((*cmdl)->argv[0] == NULL)
 		free_str_fd_exit_malloc_error(str, first);
-	dup2((*cmdl)->fd_in, STDIN_FILENO);
-	dup2((*cmdl)->fd_out, STDOUT_FILENO);
+
 	if ((*cmdl)->name_file != NULL)
 	{
 		unlink((*cmdl)->name_file);
 		free((*cmdl)->name_file);
 	}
-	close_fd_all(first);
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
 	{
 		free_all(first);
