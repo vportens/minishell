@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 13:09:43 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 15:53:58 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,6 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid)
 	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
 	if ((*cmdl)->argv == NULL)
 		return (0);
-	if (ft_strcmp((*cmdl)->argv[0], "exit"))
-	{
-		exit_bltin((*cmdl)->argv);
-		return (1);
-	}
 	else if (ft_exec_builtin_fd((*cmdl)->argv[0], (*cmdl)->argv, cmdl, pid) != 0)
 	{
 		return (0);

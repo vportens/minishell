@@ -1,541 +1,194 @@
-==29176== Memcheck, a memory error detector
-==29176== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==29176== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==29176== Command: ./minishell
-==29176== Parent PID: 28269
-==29176== 
---29176-- 
---29176-- Valgrind options:
---29176--    --suppressions=realineignor
---29176--    --leak-check=full
---29176--    --show-leak-kinds=all
---29176--    --track-origins=yes
---29176--    --verbose
---29176--    --log-file=valgrind-out.txt
---29176-- Contents of /proc/version:
---29176--   Linux version 5.4.0-90-generic (buildd@lgw01-amd64-054) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #101-Ubuntu SMP Fri Oct 15 20:00:55 UTC 2021
---29176-- 
---29176-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---29176-- Page sizes: currently 4096, max supported 4096
---29176-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---29176-- Reading syms from /mnt/nfs/homes/viporten/Desktop/minishell_dir/minishell2/minishell
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---29176--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---29176--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---29176--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---29176--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---29176--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---29176--   .. CRC is valid
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---29176--    object doesn't have a symbol table
---29176--    object doesn't have a dynamic symbol table
---29176-- Scheduler: using generic scheduler lock implementation.
---29176-- Reading suppressions file: realineignor
---29176-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==29176== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-29176-by-viporten-on-???
-==29176== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-29176-by-viporten-on-???
-==29176== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-29176-by-viporten-on-???
-==29176== 
-==29176== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==29176== don't want to do, unless you know exactly what you're doing,
-==29176== or are doing some strange experiment):
-==29176==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=29176 ...command...
-==29176== 
-==29176== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==29176==   /path/to/gdb ./minishell
-==29176== and then give GDB the following command
-==29176==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=29176
-==29176== --pid is optional if only one valgrind process is running
-==29176== 
---29176-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---29176-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---29176--    object doesn't have a symbol table
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---29176--    object doesn't have a symbol table
-==29176== WARNING: new redirection conflicts with existing -- ignoring it
---29176--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---29176--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---29176-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---29176-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
---29176--    object doesn't have a symbol table
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---29176--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---29176--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---29176--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---29176--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---29176--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---29176--   .. CRC is valid
---29176-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
---29176--    object doesn't have a symbol table
---29176-- REDIR: 0x4955600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4956dd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4971e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49719a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49542d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49556c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4971960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49547f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49543b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955ad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49730d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49719e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49549a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49547b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x495dd20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49559d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4971ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954c60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49558d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4956e10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955a20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4954830 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x49e28e0 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4955470 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---29176-- REDIR: 0x4a3d490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---29176-- REDIR: 0x494f260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---29176-- REDIR: 0x4a3d660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
---29176-- REDIR: 0x4a3eba0 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
---29176-- REDIR: 0x4a3d2a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
---29176-- REDIR: 0x48fb670 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
---29176-- REDIR: 0x4a3d070 (libc.so.6:__strchr_avx2) redirected to 0x483ebf0 (index)
---29176-- REDIR: 0x4a38fa0 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
---29176-- REDIR: 0x4950000 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---29176-- REDIR: 0x4a40670 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
---29176-- REDIR: 0x4a40650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
---29176-- REDIR: 0x4a38b60 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
---29176-- REDIR: 0x4950c90 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---29176-- REDIR: 0x4a3d800 (libc.so.6:__strnlen_avx2) redirected to 0x483eee0 (strnlen)
---29176-- REDIR: 0x494f850 (libc.so.6:free) redirected to 0x483c9d0 (free)
---29176-- REDIR: 0x4955120 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---29176-- REDIR: 0x4a40660 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4843b10 (__memcpy_chk)
---29176-- REDIR: 0x4a3ef30 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
---29176-- REDIR: 0x4a394c0 (libc.so.6:__memchr_avx2) redirected to 0x4840050 (memchr)
---29176-- REDIR: 0x4a3f890 (libc.so.6:__stpcpy_avx2) redirected to 0x4842300 (stpcpy)
---29176-- REDIR: 0x4a3a030 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
---29176-- REDIR: 0x4a3b6b0 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
---29176-- REDIR: 0x4a40af0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
---29176-- REDIR: 0x4a39c50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
-==29248== 
-==29248== HEAP SUMMARY:
-==29248==     in use at exit: 204,700 bytes in 219 blocks
-==29248==   total heap usage: 596 allocs, 377 frees, 230,649 bytes allocated
-==29248== 
-==29248== Searching for pointers to 219 not-freed blocks
-==29248== Checked 211,096 bytes
-==29248== 
-==29248== LEAK SUMMARY:
-==29248==    definitely lost: 0 bytes in 0 blocks
-==29248==    indirectly lost: 0 bytes in 0 blocks
-==29248==      possibly lost: 0 bytes in 0 blocks
-==29248==    still reachable: 0 bytes in 0 blocks
-==29248==         suppressed: 204,700 bytes in 219 blocks
-==29248== 
-==29248== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---29248-- 
---29248-- used_suppression:     58 leak readline realineignor:2 suppressed: 200,628 bytes in 215 blocks
---29248-- used_suppression:      4 leak add_history realineignor:8 suppressed: 4,072 bytes in 4 blocks
-==29248== 
-==29248== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10CBA8: ft_exec_builtin (ft_built_in.c:102)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4b19d50 is 0 bytes inside a block of size 4 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E079: forking (ft_exec.c:169)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E23B: ft_exec (ft_exec.c:218)
-==29176==    by 0x109B45: main (main.c:238)
-==29176== 
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E2BB: ft_exec (ft_exec.c:226)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4b19d50 is 0 bytes inside a block of size 4 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E079: forking (ft_exec.c:169)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E23B: ft_exec (ft_exec.c:218)
-==29176==    by 0x109B45: main (main.c:238)
-==29176== 
-==29176== Invalid read of size 8
-==29176==    at 0x10D6DD: ft_clean_envlist (ft_free_env.c:30)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94b0 is 16 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== Invalid read of size 8
-==29176==    at 0x10D6E9: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6F3: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad9500 is 0 bytes inside a block of size 33 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6F3: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10F63D: ft_strdup (in /mnt/nfs/homes/viporten/Desktop/minishell_dir/minishell2/minishell)
-==29176==    by 0x10D169: ft_push_front (ft_push_front.c:22)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== Invalid read of size 8
-==29176==    at 0x10D6DD: ft_clean_envlist (ft_free_env.c:30)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x109AAD: main (main.c:218)
-==29176==  Address 0x4ad94b0 is 16 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== Invalid read of size 8
-==29176==    at 0x10D6E9: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x109AAD: main (main.c:218)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== HEAP SUMMARY:
-==29176==     in use at exit: 204,903 bytes in 235 blocks
-==29176==   total heap usage: 747 allocs, 776 frees, 232,410 bytes allocated
-==29176== 
-==29176== Searching for pointers to 235 not-freed blocks
-==29176== Checked 210,944 bytes
-==29176== 
-==29176== LEAK SUMMARY:
-==29176==    definitely lost: 0 bytes in 0 blocks
-==29176==    indirectly lost: 0 bytes in 0 blocks
-==29176==      possibly lost: 0 bytes in 0 blocks
-==29176==    still reachable: 0 bytes in 0 blocks
-==29176==         suppressed: 204,903 bytes in 235 blocks
-==29176== 
-==29176== ERROR SUMMARY: 524 errors from 8 contexts (suppressed: 0 from 0)
-==29176== 
-==29176== 2 errors in context 1 of 8:
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E2BB: ft_exec (ft_exec.c:226)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4b19d50 is 0 bytes inside a block of size 4 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E079: forking (ft_exec.c:169)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E23B: ft_exec (ft_exec.c:218)
-==29176==    by 0x109B45: main (main.c:238)
-==29176== 
-==29176== 
-==29176== 2 errors in context 2 of 8:
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10CBA8: ft_exec_builtin (ft_built_in.c:102)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4b19d50 is 0 bytes inside a block of size 4 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E079: forking (ft_exec.c:169)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10E23B: ft_exec (ft_exec.c:218)
-==29176==    by 0x109B45: main (main.c:238)
-==29176== 
-==29176== 
-==29176== 65 errors in context 3 of 8:
-==29176== Invalid read of size 8
-==29176==    at 0x10D6E9: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x109AAD: main (main.c:218)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== 65 errors in context 4 of 8:
-==29176== Invalid read of size 8
-==29176==    at 0x10D6DD: ft_clean_envlist (ft_free_env.c:30)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x109AAD: main (main.c:218)
-==29176==  Address 0x4ad94b0 is 16 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== 65 errors in context 5 of 8:
-==29176== Invalid read of size 8
-==29176==    at 0x10D6E9: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== 65 errors in context 6 of 8:
-==29176== Invalid read of size 8
-==29176==    at 0x10D6DD: ft_clean_envlist (ft_free_env.c:30)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94b0 is 16 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== 130 errors in context 7 of 8:
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad94a0 is 0 bytes inside a block of size 24 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6FF: ft_clean_envlist (ft_free_env.c:32)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D14B: ft_push_front (ft_push_front.c:19)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
-==29176== 
-==29176== 130 errors in context 8 of 8:
-==29176== Invalid free() / delete / delete[] / realloc()
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6F3: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Address 0x4ad9500 is 0 bytes inside a block of size 33 free'd
-==29176==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10D6F3: ft_clean_envlist (ft_free_env.c:31)
-==29176==    by 0x10C7B4: ft_singletone (ft_env_singletone.c:36)
-==29176==    by 0x10D6A8: ft_clean_env (ft_free_env.c:17)
-==29176==    by 0x10CC53: ft_exec_builtin (ft_built_in.c:115)
-==29176==    by 0x10DEAC: no_forking (ft_exec.c:124)
-==29176==    by 0x10E08C: forking (ft_exec.c:170)
-==29176==    by 0x10E263: ft_exec (ft_exec.c:221)
-==29176==    by 0x109B45: main (main.c:238)
-==29176==  Block was alloc'd at
-==29176==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29176==    by 0x10F63D: ft_strdup (in /mnt/nfs/homes/viporten/Desktop/minishell_dir/minishell2/minishell)
-==29176==    by 0x10D169: ft_push_front (ft_push_front.c:22)
-==29176==    by 0x10D668: ft_init_t_env (ft_init_env.c:63)
-==29176==    by 0x109A24: main (main.c:204)
-==29176== 
---29176-- 
---29176-- used_suppression:     60 leak readline realineignor:2 suppressed: 200,688 bytes in 220 blocks
---29176-- used_suppression:      4 leak add_history realineignor:8 suppressed: 4,215 bytes in 15 blocks
-==29176== 
-==29176== ERROR SUMMARY: 524 errors from 8 contexts (suppressed: 0 from 0)
+==54835== Memcheck, a memory error detector
+==54835== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==54835== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==54835== Command: ./minishell
+==54835== Parent PID: 52237
+==54835== 
+--54835-- 
+--54835-- Valgrind options:
+--54835--    --suppressions=realineignor
+--54835--    --leak-check=full
+--54835--    --show-leak-kinds=all
+--54835--    --track-origins=yes
+--54835--    --verbose
+--54835--    --log-file=valgrind-out.txt
+--54835-- Contents of /proc/version:
+--54835--   Linux version 5.4.0-90-generic (buildd@lgw01-amd64-054) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #101-Ubuntu SMP Fri Oct 15 20:00:55 UTC 2021
+--54835-- 
+--54835-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--54835-- Page sizes: currently 4096, max supported 4096
+--54835-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--54835-- Reading syms from /mnt/nfs/homes/viporten/Desktop/minishell_dir/minishell3/minishell
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--54835--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--54835--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--54835--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--54835--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--54835--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--54835--   .. CRC is valid
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--54835--    object doesn't have a symbol table
+--54835--    object doesn't have a dynamic symbol table
+--54835-- Scheduler: using generic scheduler lock implementation.
+--54835-- Reading suppressions file: realineignor
+--54835-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==54835== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-54835-by-viporten-on-???
+==54835== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-54835-by-viporten-on-???
+==54835== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-54835-by-viporten-on-???
+==54835== 
+==54835== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==54835== don't want to do, unless you know exactly what you're doing,
+==54835== or are doing some strange experiment):
+==54835==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=54835 ...command...
+==54835== 
+==54835== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==54835==   /path/to/gdb ./minishell
+==54835== and then give GDB the following command
+==54835==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=54835
+==54835== --pid is optional if only one valgrind process is running
+==54835== 
+--54835-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--54835-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--54835--    object doesn't have a symbol table
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--54835--    object doesn't have a symbol table
+==54835== WARNING: new redirection conflicts with existing -- ignoring it
+--54835--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--54835--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--54835-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--54835-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
+--54835--    object doesn't have a symbol table
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--54835--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--54835--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--54835--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--54835--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--54835--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--54835--   .. CRC is valid
+--54835-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
+--54835--    object doesn't have a symbol table
+--54835-- REDIR: 0x4955600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4956dd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4971e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49719a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49542d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49556c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4971960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49547f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49543b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955ad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49730d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49719e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49549a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49547b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x495dd20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49559d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4971ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954c60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49558d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4956e10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955a20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4954830 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x49e28e0 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4955470 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--54835-- REDIR: 0x4a3d490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--54835-- REDIR: 0x494f260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--54835-- REDIR: 0x4a3d660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--54835-- REDIR: 0x4a3eba0 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+--54835-- REDIR: 0x4a3d2a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--54835-- REDIR: 0x48fb670 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
+--54835-- REDIR: 0x4a3d070 (libc.so.6:__strchr_avx2) redirected to 0x483ebf0 (index)
+--54835-- REDIR: 0x4a38fa0 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
+--54835-- REDIR: 0x4950000 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--54835-- REDIR: 0x4a40670 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--54835-- REDIR: 0x4a40650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
+--54835-- REDIR: 0x4a38b60 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
+--54835-- REDIR: 0x4950c90 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--54835-- REDIR: 0x4a3d800 (libc.so.6:__strnlen_avx2) redirected to 0x483eee0 (strnlen)
+--54835-- REDIR: 0x494f850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--54835-- REDIR: 0x4955120 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--54835-- REDIR: 0x4a40660 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4843b10 (__memcpy_chk)
+--54835-- REDIR: 0x4a3ef30 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
+--54835-- REDIR: 0x4a394c0 (libc.so.6:__memchr_avx2) redirected to 0x4840050 (memchr)
+--54835-- REDIR: 0x4a3f890 (libc.so.6:__stpcpy_avx2) redirected to 0x4842300 (stpcpy)
+--54835-- REDIR: 0x4a3a030 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+--54835-- REDIR: 0x4a3b6b0 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--54835-- REDIR: 0x4a40af0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+--54835-- REDIR: 0x4a39c50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
+==55051== 
+==55051== HEAP SUMMARY:
+==55051==     in use at exit: 204,833 bytes in 228 blocks
+==55051==   total heap usage: 694 allocs, 466 frees, 252,997 bytes allocated
+==55051== 
+==55051== Searching for pointers to 228 not-freed blocks
+==55051== Checked 211,144 bytes
+==55051== 
+==55051== LEAK SUMMARY:
+==55051==    definitely lost: 0 bytes in 0 blocks
+==55051==    indirectly lost: 0 bytes in 0 blocks
+==55051==      possibly lost: 0 bytes in 0 blocks
+==55051==    still reachable: 0 bytes in 0 blocks
+==55051==         suppressed: 204,833 bytes in 228 blocks
+==55051== 
+==55051== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--55051-- 
+--55051-- used_suppression:     58 leak readline realineignor:2 suppressed: 200,631 bytes in 215 blocks
+--55051-- used_suppression:      4 leak add_history realineignor:8 suppressed: 4,202 bytes in 13 blocks
+==55051== 
+==55051== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==55053== 
+==55053== HEAP SUMMARY:
+==55053==     in use at exit: 204,833 bytes in 228 blocks
+==55053==   total heap usage: 686 allocs, 458 frees, 244,549 bytes allocated
+==55053== 
+==55053== Searching for pointers to 228 not-freed blocks
+==55053== Checked 211,144 bytes
+==55053== 
+==55053== LEAK SUMMARY:
+==55053==    definitely lost: 0 bytes in 0 blocks
+==55053==    indirectly lost: 0 bytes in 0 blocks
+==55053==      possibly lost: 0 bytes in 0 blocks
+==55053==    still reachable: 0 bytes in 0 blocks
+==55053==         suppressed: 204,833 bytes in 228 blocks
+==55053== 
+==55053== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--55053-- 
+--55053-- used_suppression:     58 leak readline realineignor:2 suppressed: 200,631 bytes in 215 blocks
+--55053-- used_suppression:      4 leak add_history realineignor:8 suppressed: 4,202 bytes in 13 blocks
+==55053== 
+==55053== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==54835== 
+==54835== HEAP SUMMARY:
+==54835==     in use at exit: 204,856 bytes in 231 blocks
+==54835==   total heap usage: 704 allocs, 473 frees, 244,317 bytes allocated
+==54835== 
+==54835== Searching for pointers to 231 not-freed blocks
+==54835== Checked 211,256 bytes
+==54835== 
+==54835== LEAK SUMMARY:
+==54835==    definitely lost: 0 bytes in 0 blocks
+==54835==    indirectly lost: 0 bytes in 0 blocks
+==54835==      possibly lost: 0 bytes in 0 blocks
+==54835==    still reachable: 0 bytes in 0 blocks
+==54835==         suppressed: 204,856 bytes in 231 blocks
+==54835== 
+==54835== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--54835-- 
+--54835-- used_suppression:     58 leak readline realineignor:2 suppressed: 200,613 bytes in 215 blocks
+--54835-- used_suppression:      4 leak add_history realineignor:8 suppressed: 4,243 bytes in 16 blocks
+==54835== 
+==54835== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

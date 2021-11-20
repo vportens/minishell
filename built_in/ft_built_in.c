@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 21:04:45 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:01:01 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_non_int(char *str)
 	return (ft_sup_int(str));
 }
 
-int	exit_bltin(char **args, t_commande_line **first)
+int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 {
 	int	ret;
 
@@ -73,6 +73,8 @@ int	exit_bltin(char **args, t_commande_line **first)
 		if (ft_non_int(args[1]))
 		{
 			ft_clean_env();
+			free_all(first);
+			free(pid);
 			exit (1);
 		}
 		ret = ft_atoi(args[1]);
@@ -82,10 +84,12 @@ int	exit_bltin(char **args, t_commande_line **first)
 			exit_status = 1;
 			return (2);
 		}
+		free(pid);
 		ft_clean_env();
 		free_all(first);
 		exit(ret);
 	}
+	free(pid);
 	ft_clean_env();
 	free_all(first);
 	exit (0);
@@ -104,7 +108,7 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 			return (0);
 	if (ft_strcmp("exit", str))
 	{
-		exit_bltin(args, first);
+		exit_bltin(args, first, pid);
 		exit (1); // just not if not forking
 		return (1);
 	}
@@ -112,7 +116,7 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 		i++;
 	if (i < 7)
 		tb_tk[i](args);
-//	ft_clean_env();
+	ft_clean_env();
 	free_all(first); // free env;
 	if (i < 7)
 		return (0);
@@ -127,21 +131,17 @@ int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *p
 
 	i = 0;
 	printf("enter exec builtin fd\n");
-//	free(pid);
 	if (str == NULL)
 			return (0);
 	if (ft_strcmp("exit", str))
 	{
-		exit_bltin(args, first);
-		exit (1); // just not if not forking
+		exit_bltin(args, first, pid);
 		return (1);
 	}
 	while (i < 7 && !ft_strcmp(built[i], str))
 		i++;
 	if (i < 7)
 		tb_tk[i](args, (*first)->fd_out);
-//	ft_clean_env();
-//	free_all(first); // free env;
 	if (i < 7)
 		return (0);
 	return (0);
