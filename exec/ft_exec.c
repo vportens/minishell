@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 21:07:07 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:09:43 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,6 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 int	no_forking(t_commande_line **cmdl, pid_t *pid)
 {
 	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
-	dup2((*cmdl)->fd_in, STDIN_FILENO);
-	dup2((*cmdl)->fd_out, STDOUT_FILENO);
-	if ((*cmdl)->name_file != NULL)
-	{
-		unlink((*cmdl)->name_file);
-		free((*cmdl)->name_file);
-	}
-	if ((*cmdl)->fd_out != 1)
-		close((*cmdl)->fd_out);
-	if ((*cmdl)->fd_in != 0)
-		close((*cmdl)->fd_in);
 	if ((*cmdl)->argv == NULL)
 		return (0);
 	if (ft_strcmp((*cmdl)->argv[0], "exit"))
