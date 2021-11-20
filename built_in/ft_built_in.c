@@ -112,8 +112,36 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 		i++;
 	if (i < 7)
 		tb_tk[i](args);
-	ft_clean_env();
+//	ft_clean_env();
 	free_all(first); // free env;
+	if (i < 7)
+		return (0);
+	return (0);
+}
+
+int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *pid)
+{
+	int (*tb_tk[7])(char **, int) = {&ft_built_in_cd, &ft_built_in_echo_fd, &ft_built_in_env_fd, &ft_built_in_pwd_fd, &ft_built_in_export_fd, &ft_built_in_unset};
+	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
+	int i;
+
+	i = 0;
+	printf("enter exec builtin fd\n");
+//	free(pid);
+	if (str == NULL)
+			return (0);
+	if (ft_strcmp("exit", str))
+	{
+		exit_bltin(args, first);
+		exit (1); // just not if not forking
+		return (1);
+	}
+	while (i < 7 && !ft_strcmp(built[i], str))
+		i++;
+	if (i < 7)
+		tb_tk[i](args, (*first)->fd_out);
+//	ft_clean_env();
+//	free_all(first); // free env;
 	if (i < 7)
 		return (0);
 	return (0);

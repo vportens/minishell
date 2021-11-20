@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_front.c                                    :+:      :+:    :+:   */
+/*   ft_built_in_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 21:30:18 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 15:27:26 by lchristo         ###   ########.fr       */
+/*   Created: 2021/11/02 13:25:49 by lchristo          #+#    #+#             */
+/*   Updated: 2021/11/04 09:46:37 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_push_front(char *env, t_env **begin_lst, int declare)
+int ft_built_in_env_fd(char **str, int fd)
 {
-	t_env *env_new;
+    t_env **env;
+
+    if (*str == NULL)
+        return (0);
+    env = get_adress_env();
+    ft_built_in_show_env_fd(env, fd);
+    return (0);
+}
+
+void	ft_built_in_show_env_fd(t_env **env, int fd)
+{
+	t_env			*cur;
 	
-	env_new = malloc(sizeof(t_env));
-	if (env_new == NULL)
-		return (50);
-	env_new->str = ft_strdup(env);
-	env_new->declare = declare;
-	if (env_new->str == NULL)
-		return (50);
-	env_new->next = *begin_lst;
-	*begin_lst = env_new;
-	return (0);
+	cur = *env;
+	while (cur)
+	{
+        if (ft_is_equal(cur->str))
+        {
+        	ft_putstr_fd(cur->str, fd);
+        	ft_putchar_fd('\n', fd);
+        }
+		cur = cur->next;
+	}
 }

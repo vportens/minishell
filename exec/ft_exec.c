@@ -110,7 +110,7 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid)
 		exit_bltin((*cmdl)->argv);
 		return (1);
 	}
-	else if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, cmdl, pid) != 0)
+	else if (ft_exec_builtin_fd((*cmdl)->argv[0], (*cmdl)->argv, cmdl, pid) != 0)
 	{
 		return (0);
 	}
@@ -155,7 +155,7 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 	cur = *cmdl;
 	if (len == 1 && ft_is_builtin(cur->argv[0]))
 	{
-		free(pid);
+		//free(pid);
 		return (no_forking(cmdl, pid));
 	}
 	while (i < len)

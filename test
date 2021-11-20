@@ -1,89 +1,56 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_exist.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 14:08:07 by viporten         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "minishell.h"
-
-extern int exit_status;
-
-char	*get_acces(char *str, char *path)
-{
-	char	*back_slash;
-	char	*new;
-
-	back_slash = ft_strjoin(path, "/");
-	if (back_slash == NULL)
-		return (NULL);
-	new = ft_strjoin(back_slash, str);
-	free(back_slash);
-	if (new == NULL)
-		return (NULL);
-	return (new);
-}
-
-int	try_acces(char *str, char *path)
-{
-	char	*try;
-
-	try = get_acces(str, path);
-	if (try == NULL)
-		return (50);
-	if (access(try, X_OK) == 0)
-	{
-		free(try);
-		return (1);
-	}
-	free(try);
-	return (0);
-}
-
-char	*get_bin_argv_zero(char *str, char *path)
-{
-	int		i;
-	int		ret;
-	char	**split_path;
-	char	*try;
-
-	i = 0;
-	if (str && (str[0] == '.' || str[0] == '/'))
-		return (str);
-	split_path = ft_strsplit(path, ':');
-	if (split_path == NULL)
-	{
-		write(2, "minishell: ", 11);
-		write(2, str, ft_strlen(str));
-		write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
-		free(str);
-		return (NULL);
-	}
-	while (split_path[i] && str[0] != '\0')
-	{
-		ret = try_acces(str, split_path[i]);
-		if (ret == 1)
-		{
-			try = get_acces(str, split_path[i]);
-			free_split(split_path);
-			return (try);
-		}
-		if (ret == 50)
-		{
-			free_split(split_path);
-			return (NULL);
-		}
-		i++;
-	}
-	free_split(split_path);
-	write(2, "minishell: ", 11);
-	write(2, str, ft_strlen(str));
-	write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
-	exit_status = 127;
-	return (str);
-}
+export GJS_DEBUG_TOPICS="JS ERROR;JS LOG"
+export LANGUAGE="en"
+export USER="lchristo"
+export SSH_AGENT_PID="27340"
+export XDG_SESSION_TYPE="x11"
+export SHLVL="1"
+export LD_LIBRARY_PATH="/usr/lib/debug"
+export HOME="/mnt/nfs/homes/lchristo"
+export OLDPWD="/mnt/nfs/homes/lchristo/minishell_solo/libft"
+export DESKTOP_SESSION="ubuntu"
+export GTK_MODULES="gail:atk-bridge"
+export XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+export MANAGERPID="27109"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/35876/bus"
+export COLORTERM="truecolor"
+export IM_CONFIG_PHASE="1"
+export MANDATORY_PATH="/usr/share/gconf/ubuntu.mandatory.path"
+export LOGNAME="lchristo"
+export JOURNAL_STREAM="9:119506"
+export _="/usr/bin/valgrind"
+export DEFAULTS_PATH="/usr/share/gconf/ubuntu.default.path"
+export XDG_SESSION_CLASS="user"
+export TERM="xterm-256color"
+export GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+export PATH="/mnt/nfs/homes/lchristo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export SESSION_MANAGER="local/e2r11p14.clusters.42paris.fr:@/tmp/.ICE-unix/27378,unix/e2r11p14.clusters.42paris.fr:/tmp/.ICE-unix/27378"
+export GDM_LANG="en"
+export INVOCATION_ID="ce67c5c4284c419a9dc3aac7bad98a4e"
+export GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/2ea7831c_27ee_4195_887b_7fe4a7442d61"
+export XDG_MENU_PREFIX="gnome-"
+export XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session0"
+export XDG_RUNTIME_DIR="/run/user/35876"
+export GLIBCPP_FORCE_NEW="1"
+export DISPLAY=":0"
+export LANG="en_US.UTF-8"
+export XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+export XDG_SESSION_DESKTOP="ubuntu"
+export GNOME_TERMINAL_SERVICE=":1.81"
+export XMODIFIERS="@im=ibus"
+export XAUTHORITY="/mnt/nfs/homes/lchristo/.Xauthority"
+export SSH_AUTH_SOCK="/run/user/35876/keyring/ssh"
+export XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/lchristo"
+export KRB5CCNAME="FILE:/tmp/krb5cc_35876_3QdrKM"
+export SHELL="/bin/zsh"
+export QT_ACCESSIBILITY="1"
+export GDMSESSION="ubuntu"
+export DOCKER_HOST="unix:///run/user/35876/docker.sock"
+export GPG_AGENT_INFO="/run/user/35876/gnupg/S.gpg-agent:0:1"
+export GJS_DEBUG_OUTPUT="stderr"
+export QT_IM_MODULE="ibus"
+export PWD="/mnt/nfs/homes/lchristo/minishell_solo"
+export XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+export XDG_DATA_DIRS="/usr/share/gnome:/usr/share/ubuntu:/mnt/nfs/homes/lchristo/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+export VTE_VERSION="6003"
+export GLIBCXX_FORCE_NEW="1"
+export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so:/usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so"

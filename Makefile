@@ -34,27 +34,31 @@ SRCS =  	main.c											\
 			parsing/expend_word/word_unquote_inter.c		\
 			parsing/creat_fill_lst/organise_arg.c			\
 			parsing/lst_fonction/token_add_back.c			\
-			built_in/ft_built_in_pwd.c						\
-			built_in/ft_built_in_echo.c						\
-			built_in/ft_built_in_env.c						\
-			built_in/ft_delete_key.c						\
-			built_in/ft_env_singletone.c					\
-			built_in/ft_built_in.c							\
-			built_in/ft_add_value.c							\
-			built_in/ft_built_in_cd.c						\
-			built_in/ft_push_front.c						\
-			built_in/ft_built_in_export.c					\
-			built_in/ft_gestion_error.c						\
-			built_in/ft_init_env.c							\
-			built_in/ft_free_env.c							\
-			built_in/ft_get_value.c							\
-			built_in/ft_built_in_unset.c					\
 			exec/ft_exec.c									\
 			exec/ft_exist.c									\
 			exec/ft_lst_to_str.c							\
 			exec/pipe.c										\
 			exec/open_fd.c									\
 			exec/utils.c									\
+			built_in/ft_add_value.c							\
+			built_in/ft_built_in_export_fd.c				\
+			built_in/ft_get_value.c							\
+			built_in/ft_env_singletone.c					\
+			built_in/ft_built_in.c							\
+			built_in/ft_built_in_env_fd.c					\
+			built_in/ft_built_in_echo.c						\
+			built_in/ft_free_env.c							\
+			built_in/ft_built_in_export.c					\
+			built_in/ft_built_in_pwd.c						\
+			built_in/ft_built_in_unset.c					\
+			built_in/ft_built_in_cd.c						\
+			built_in/ft_built_in_env.c						\
+			built_in/ft_init_env.c							\
+			built_in/ft_delete_key.c						\
+			built_in/ft_gestion_error.c						\
+			built_in/ft_built_in_pwd_fd.c					\
+			built_in/ft_push_front.c						\
+			built_in/ft_built_in_echo_fd.c					\
 			limitor/creat_file.c							\
 			limitor/open_heredoc.c
 
