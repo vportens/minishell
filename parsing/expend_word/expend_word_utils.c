@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:49:27 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 18:39:01 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:13:20 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	end_modif_two(char *str, t_token **stc, char *s1)
 	return (0);
 }
 
-int	is_type_file(e_token type)
+int	is_type_file(t_e_token type)
 {
 	if (type == CREAT_FILE || type == WRITE_FILE
 		|| type == OPEN_FILE || type == HERE_DOC)
@@ -38,7 +38,7 @@ int	is_type_file(e_token type)
 	return (0);
 }
 
-int	ret_file_without_obj(e_token type)
+int	ret_file_without_obj(t_e_token type)
 {
 	write(2, "minishell: erreur de syntaxe",
 		ft_strlen("minishell: erreur de syntaxe"));
@@ -55,7 +55,7 @@ int	ret_file_without_obj(e_token type)
 	return (12);
 }
 
-e_token	cp_type_change_file(e_token type, int *file)
+t_e_token	cp_type_change_file(t_e_token type, int *file)
 {
 	*file = 1;
 	return (type);

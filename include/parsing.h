@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 22:09:27 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:16:07 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		is_redirection(char c);
 
 int		expend_words(t_commande_line **block);
 int		limitor(t_token *stc, char *str);
-int		is_type_file(e_token type);
+int		is_type_file(t_e_token type);
 char	*devellope_limitor(t_token *stc, char *str, int i);
 char	*word_will_single(char *str, int *i, char *s1);
 char	*word_will_double(char *str, int *i, char *s1);
@@ -43,13 +43,13 @@ char	*word_will_unquote(t_token **stc, char *str, int *i, char *s1);
 char	*string_env(char *str, char *tmp, int *i);
 char	*end_word_unquote(char *str, char *s1, int *i, int j);
 
-int		ret_file_without_obj(e_token type);
-int		is_type_file(e_token type);
+int		ret_file_without_obj(t_e_token type);
+int		is_type_file(t_e_token type);
 int		end_modif_two(char *str, t_token **stc, char *s1);
 char	*init_str(char **str, char *duplica, int *cur, char **s1);
-e_token	cp_type_change_file(e_token type, int *file);
+t_e_token	cp_type_change_file(t_e_token type, int *file);
 int		ret_error_file_without_file(t_commande_line *cur_b);
-e_token	change_type_file(e_token type, int *file);
+t_e_token	change_type_file(t_e_token type, int *file);
 
 char	*get_env(int *j, char *str);
 

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 22:08:44 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:13:23 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	word_modif_two(t_token **stc, char *duplica, t_quote quote, t_quote prec)
 	return (end_modif_two(str, stc, s1));
 }
 
-int	word_modif(t_token **stc, char *str, e_token token)
+int	word_modif(t_token **stc, char *str, t_e_token token)
 {
 	t_quote	quote;
 	t_quote	prec;
@@ -86,7 +86,7 @@ int	check_open_fil(t_commande_line **block)
 	t_commande_line	*cur_b;
 	t_token			*cur_t;
 	int				file;
-	e_token			type;
+	t_e_token			type;
 
 	cur_b = *block;
 	file = 0;

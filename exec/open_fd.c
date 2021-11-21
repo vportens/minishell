@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 19:14:44 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/20 18:43:09 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:11:22 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	redirect_file_in(t_commande_line **cmdl, t_token *cur, e_token type)
+int	redirect_file_in(t_commande_line **cmdl, t_token *cur, t_e_token type)
 {
 	if (type == FILE_IN)
 	{
@@ -37,7 +37,7 @@ int	redirect_file_in(t_commande_line **cmdl, t_token *cur, e_token type)
 	return (0);
 }
 
-int	redirect_file_out(t_commande_line **cmdl, t_token *cur, e_token type)
+int	redirect_file_out(t_commande_line **cmdl, t_token *cur, t_e_token type)
 {
 	if (type == FILE_OUT)
 	{
