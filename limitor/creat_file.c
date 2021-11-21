@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   creat_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 22:25:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 22:25:32 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 19:02:29 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int aleatori_char(void)
+int	aleatori_char(void)
 {
 	char	buff[4];
 	int		nbr;
@@ -27,7 +27,7 @@ int aleatori_char(void)
 		nbr++;
 	if (nbr < 0)
 		nbr = nbr * (-1);
-	return ('a' + nbr % 26);	
+	return ('a' + nbr % 26);
 }
 
 char	*creat_aleatori_name(void)
