@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 20:00:02 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:45:22 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,9 @@ int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 			exit_status = 1;
 			return (2);
 		}
-		free(pid);
-		ft_clean_env();
-		free_all(first);
-		exit(ret);
+		free_in_builin(first, pid, ret);
 	}
-	free(pid);
-	ft_clean_env();
-	free_all(first);
-	exit (0);
-	return (0);
+	return (free_in_builin(first, pid, 0));
 }
 
 int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
@@ -103,22 +96,18 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 	if (ft_strcmp("exit", str))
 	{
 		exit_bltin(args, first, pid);
-		free(pid);
-		free_all(first);
-		ft_clean_env();
-		exit (1);
-		return (1);
+		return (free_in_builin(first, pid, 1));
 	}
 	if (ft_strcmp("cd", str))
 		ft_built_in_cd(args);
 	else if (ft_strcmp("echo", str))
-		ft_built_in_echo(args, (*first)->fd_out);
+		ft_built_in_echo(args);
 	else if (ft_strcmp("env", str))
-		ft_built_in_env(args, (*first)->fd_out);
+		ft_built_in_env(args);
 	else if (ft_strcmp("pwd", str))
-		ft_built_in_pwd(args, (*first)->fd_out);
+		ft_built_in_pwd(args);
 	else if (ft_strcmp("export", str))
-		ft_built_in_export(args, (*first)->fd_out);
+		ft_built_in_export(args);
 	else if (ft_strcmp("unset", str))
 		ft_built_in_unset(args);
 	free(pid);

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/19 21:04:34 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:43:56 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ char	*ft_get_str_of_env(t_env **env, char *str);
 int    ft_built_in_unset(char **str);
 int    ft_built_in_unset_fd(char **str, int fd);
 int		ft_equal(char *str);
+int	free_in_builin(t_commande_line **first, pid_t *pid, int ret);
 
 #endif

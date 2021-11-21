@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 17:09:38 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:53:48 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	pars(char *str, t_commande_line **cmd_line)
 	}
 	else
 	{
-		write(2, "gate2\n", 6);
 		if (get_cmd_line(str, cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 		{
 			free_all(cmd_line);
@@ -87,7 +86,6 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de get_cmd_line\n");
 		
-		write(2, "gate3\n", 6);
 		if (split_all_cmdl_string_to_token(cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 		{
 			free_all(cmd_line);
@@ -96,9 +94,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de splitall\n");
 		
-		write(2, "gate4\n", 6);
 		res = expend_words(cmd_line);
-		write(2, "gate5\n", 6);
 		if (res != 0)
 		{
 			free_all(cmd_line);
@@ -110,14 +106,12 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de expend_word\n");
 		
-		write(2, "gate6\n", 6);
 		if (organise_arg(cmd_line) != 0)
 		{
 			free_all(cmd_line);
 			free(str);
 			return (50);
 		}
-		write(2, "gate7\n", 6);
 //		printf("sort de orga\n");
 		
 	}

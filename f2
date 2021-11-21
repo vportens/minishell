@@ -62,7 +62,6 @@ SRCS =  	main.c											\
 			built_in/ft_built_in_pwd_fd.c					\
 			built_in/ft_push_front.c						\
 			built_in/ft_built_in_echo_fd.c					\
-			built_in/builin_free.c							\
 			limitor/creat_file.c							\
 			limitor/open_heredoc.c
 
