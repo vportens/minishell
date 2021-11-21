@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 18:13:55 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:52:56 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 
 int	no_forking(t_commande_line **cmdl, pid_t *pid)
 {
-	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
 	if ((*cmdl)->argv == NULL)
 		return (0);
 	else if (ft_exec_bd_fd((*cmdl)->argv[0],
