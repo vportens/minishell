@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 22:11:14 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 18:53:50 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:53:05 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 int	ft_is_builtin(char *str)
 {
-	char	*built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
-	int		i;
-
-	i = 0;
 	if (str == NULL)
 		return (0);
-	while (i < 7 && !ft_strcmp(built[i], str))
-	{
-		i++;
-	}
-	if (i == 6)
+	if (ft_strcmp("exit", str))
 		return (2);
-	if (i < 7)
+	if (ft_strcmp("cd", str))
+		return (1);
+	else if (ft_strcmp("echo", str))
+		return (1);
+	else if (ft_strcmp("env", str))
+		return (1);
+	else if (ft_strcmp("pwd", str))
+		return (1);
+	else if (ft_strcmp("export", str))
+		return (1);
+	else if (ft_strcmp("unset", str))
 		return (1);
 	return (0);
 }

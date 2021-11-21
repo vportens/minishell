@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 21:18:11 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 20:13:19 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:48:16 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ int	ft_special_lenkey(char *str)
 	return (i);
 }
 
-int	ft_add_value_to_env(t_env **env_list, char *env)
+int	ft_add_value_to_env(t_env **env_list, char *env, int declare)
 {
 	int		len;
-	int		declare;
 	t_env	*cpy;
 
-	declare = 0;
 	cpy = *env_list;
 	len = ft_special_lenkey(env);
 	while (cpy)

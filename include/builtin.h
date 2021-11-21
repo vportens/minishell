@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/21 20:43:56 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:49:04 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 /*                       FILE = built_in/ft_add_value.c                       */
 /* -------------------------------------------------------------------------- */
 int		ft_add_env(char *str);
-int		ft_add_value_to_env(t_env **env_list, char *env);
+int		ft_add_value_to_env(t_env **env_list, char *env, int declare);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = built_in/ft_built_in_cd.c                      */

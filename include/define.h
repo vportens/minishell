@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:07:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/03 15:30:46 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:55:18 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum quote
 	END
 }	e_quote;
 
-typedef	enum mod
+typedef enum mod
 {
 	GET,
 	DELETE,
