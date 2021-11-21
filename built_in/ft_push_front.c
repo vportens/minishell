@@ -19,7 +19,7 @@ int		ft_push_front(char *env, t_env **begin_lst, int declare)
 	env_new = malloc(sizeof(t_env));
 	if (env_new == NULL)
 		return (50);
-	env_new->str = ft_strdup(env);
+	env_new->str = ft_final_add(env);
 	env_new->declare = declare;
 	if (env_new->str == NULL)
 		return (50);
