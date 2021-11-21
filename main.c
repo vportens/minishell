@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 19:53:48 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:57:27 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	pars(char *str, t_commande_line **cmd_line)
 {
 	int	res;
 
-	res = unclose_quote(str);
-//	printf("sort de unclose_quote\n");
+	res = unclost_quote(str);
+//	printf("sort de unclost_quote\n");
 	if (res > 0)
 	{
 		free_all(cmd_line);

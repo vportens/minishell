@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:56:16 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 18:39:55 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:57:46 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ret_error_file_without_file(t_commande_line *cur_b)
 	return (12);
 }
 
-e_token	change_type_file(e_token type, int *file)
+t_token	change_type_file(t_token type, int *file)
 {
 	*file = 0;
 	if (type == OPEN_FILE)

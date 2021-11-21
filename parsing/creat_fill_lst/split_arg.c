@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/16 14:16:31 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 20:57:46 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	create_add_back_token(int cur, int start, char *str,
 	init_token(new);
 	new->str = malloc(sizeof(char *) * (cur - start + 1));
 	if (new->str == NULL)
-		return (free_token_ret_malloc_error(new));
+		return (fret_token_ret_malloc_error(new));
 	new->str = ft_strncpy(new->str, str + start, cur - start);
 	init_type(new);
 	token_add_back(&((*stc)->first_token), new);
@@ -41,12 +41,12 @@ static void	iter_to_end_or_redirection(char	*str, int *cur)
 
 int	iter_to_end_arg(int *cur, char *str)
 {
-	e_quote	quote;
+	t_quote	quote;
 
 	quote = NONE;
 	while (str[(*cur)])
 	{
-		quote = update_quote_status(str[*cur], quote);
+		quote = updatt_quote_status(str[*cur], quote);
 		if (is_separator(str[*cur]) == 1 && quote == NONE)
 			break ;
 		(*cur)++;

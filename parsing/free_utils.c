@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 16:44:35 by laclide           #+#    #+#             */
-/*   Updated: 2021/10/27 01:58:20 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 20:57:46 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	free_cmdl_ret_malloc_error(t_commande_line *stc)
 	return (50);
 }
 
-int	free_token_ret_malloc_error(t_token *tok)
+int	fret_token_ret_malloc_error(t_token *tok)
 {
 	if (tok)
 		free(tok);

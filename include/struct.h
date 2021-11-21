@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/09 22:33:08 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 20:57:46 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ struct		s_exec
 struct		s_token
 {
 	char	*str;
-	e_token	type;
+	t_token	type;
 	bool	expanded;
 	t_token	*next;
 };
