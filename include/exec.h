@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/21 17:40:36 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:16:44 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,12 @@ void	free_str_fd_exit_malloc_error(char **str, t_commande_line **first);
 void	free_str_exit_fd_error(char **str);
 void    free_str_fd_all_env_pid_exit(t_commande_line **cmd, pid_t *pid, char **str);
 void    free_file_name(char *file_name);
+
+
+int	wait_pid(t_commande_line **cmdl, pid_t *pid);
+int	no_forking(t_commande_line **cmdl, pid_t *pid);
+int	exec_builtin(char **str, t_commande_line **cmdl,
+	t_commande_line **first, pid_t *pid);
+void	signal_cmd_2(int sig);
 
 #endif
