@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/18 16:42:23 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 16:49:04 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ int	get_cmd_line(char *string, t_commande_line **first_stc)
 		if (create_and_fill_cmd(string, cur, start, first_stc) > 0)
 			return (50);
 		start = cur;
+		if (cur == 0)
+		{
+			cur++;
+			start++;
+		}
 	}
 	return (0);
 }

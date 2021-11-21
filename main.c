@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/20 18:35:00 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:09:38 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 	}
 	else
 	{
+		write(2, "gate2\n", 6);
 		if (get_cmd_line(str, cmd_line) > 0)		/* ici on malloc et remplit cmd_line->string*/
 		{
 			free_all(cmd_line);
@@ -86,6 +87,7 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de get_cmd_line\n");
 		
+		write(2, "gate3\n", 6);
 		if (split_all_cmdl_string_to_token(cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 		{
 			free_all(cmd_line);
@@ -94,7 +96,9 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de splitall\n");
 		
+		write(2, "gate4\n", 6);
 		res = expend_words(cmd_line);
+		write(2, "gate5\n", 6);
 		if (res != 0)
 		{
 			free_all(cmd_line);
@@ -106,12 +110,14 @@ int	pars(char *str, t_commande_line **cmd_line)
 		}
 //		printf("sort de expend_word\n");
 		
+		write(2, "gate6\n", 6);
 		if (organise_arg(cmd_line) != 0)
 		{
 			free_all(cmd_line);
 			free(str);
 			return (50);
 		}
+		write(2, "gate7\n", 6);
 //		printf("sort de orga\n");
 		
 	}
@@ -194,6 +200,28 @@ void	signal_cmd(int sig)
 	}
 }
 
+int	check_str(char *str)
+{
+	int	i;
+	int	dif;
+
+	i = 0;
+	dif = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '|')
+			dif = 1;
+		if (str[i] == '|')
+		{
+			if (dif == 0)
+				return (1);
+			dif = 0;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char			*str;
@@ -220,6 +248,10 @@ int	main(int ac, char **av, char **envp)
 			return (free_all(&cmd_line));
 
 		}
+		if (check_str(str) != 0)
+			write(2, "minishell: syntax error near unexpected token '|' \n", ft_strlen("minishell: syntax error near unexpected token '|' \n"));
+		else
+		{
 //		printf("on rentre dans pars\n");
 		res = pars(str, &cmd_line);
 //		printf("on sort de pars");
@@ -233,7 +265,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		if (res == 0)
 		{
-			//print_cmdl(&cmd_line);
+		//	print_cmdl(&cmd_line); 
 		if (str != NULL && cmd_line != NULL)
 		{
 			res = ft_exec(&cmd_line);
@@ -248,6 +280,7 @@ int	main(int ac, char **av, char **envp)
 				free_all(&cmd_line);
 				return (1);
 			}
+		}
 		}
 	}
 	
