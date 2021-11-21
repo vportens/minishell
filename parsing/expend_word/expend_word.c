@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 18:40:38 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:08:44 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
+int	word_modif_two(t_token **stc, char *duplica, t_quote quote, t_quote prec)
 {
 	char	*s1;
 	int		cur;
@@ -42,8 +42,8 @@ int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 
 int	word_modif(t_token **stc, char *str, e_token token)
 {
-	e_quote	quote;
-	e_quote	prec;
+	t_quote	quote;
+	t_quote	prec;
 
 	quote = NONE;
 	prec = NONE;

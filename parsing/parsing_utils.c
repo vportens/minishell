@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:04:51 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/15 20:10:23 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 22:10:09 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_redirection(char c)
 	return (0);
 }
 
-e_quote	update_quote_status(char c, e_quote quote)
+t_quote	update_quote_status(char c, t_quote quote)
 {
 	if (c == '"')
 	{
@@ -45,7 +45,7 @@ e_quote	update_quote_status(char c, e_quote quote)
 	return (quote);
 }
 
-e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote, char **s1)
+t_quote	update_quote_succes(t_token *stc, int *i, t_quote quote, char **s1)
 {
 	(*i)++;
 	stc->expanded = true;
@@ -61,7 +61,7 @@ e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote, char **s1)
 int	unclose_quote(char	*str)
 {
 	int		i;
-	e_quote	quote;
+	t_quote	quote;
 
 	i = 0;
 	quote = NONE;

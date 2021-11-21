@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 21:39:13 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:09:27 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	token_add_back(t_token **first, t_token *add_back);
 int		len_cmd(t_commande_line *cmd);
 
 int		unclose_quote(char	*str);
-e_quote	update_quote_status(char c, e_quote quote);
-e_quote	update_quote_succes(t_token *stc, int *i, e_quote quote, char **s1);
+t_quote	update_quote_status(char c, t_quote quote);
+t_quote	update_quote_succes(t_token *stc, int *i, t_quote quote, char **s1);
 int		pars_cmd_line(t_commande_line **cmd_lst, char *str);
 
 int		is_separator(char c);

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:58:48 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 16:49:04 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:08:04 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_cmdl(t_commande_line *new)
 
 static void	go_to_the_pipe(int *i, char *str)
 {
-	e_quote	quote;
+	t_quote	quote;
 
 	quote = NONE;
 	while (str[*i])

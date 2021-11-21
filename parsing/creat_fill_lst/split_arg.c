@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 23:22:21 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/16 14:16:31 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 22:08:07 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	iter_to_end_or_redirection(char	*str, int *cur)
 
 int	iter_to_end_arg(int *cur, char *str)
 {
-	e_quote	quote;
+	t_quote	quote;
 
 	quote = NONE;
 	while (str[(*cur)])
