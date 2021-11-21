@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:37:57 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 12:14:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:41:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ char	*word_will_single(char *str, int *i, char *s1)
 	s2 = ft_strncpy(s2, str + j, (*i) - j);
 	s3 = ft_strjoin(s1, s2);
 	free_both(s1, s2);
-//	printf("passage de free)both dans word till single\n");
 	return (s3);
 }

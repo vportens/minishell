@@ -6,13 +6,33 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 14:08:07 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:33:30 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
+
+char	*write_bad_cmd_free_split(char *str, char **split_path)
+{
+	free_split(split_path);
+	write(2, "minishell: ", 11);
+	write(2, str, ft_strlen(str));
+	write(2, " : commande introuvable\n",
+		ft_strlen(" : commande introuvable\n"));
+	return (NULL);
+}
+
+char	*write_bad_cmd_free(char *str)
+{
+	write(2, "minishell: ", 11);
+	write(2, str, ft_strlen(str));
+	write(2, " : commande introuvable\n",
+		ft_strlen(" : commande introuvable\n"));
+	free(str);
+	return (NULL);
+}
 
 char	*get_acces(char *str, char *path)
 {
@@ -45,25 +65,17 @@ int	try_acces(char *str, char *path)
 	return (0);
 }
 
-char	*get_bin_argv_zero(char *str, char *path)
+char	*get_bin_argv_zero(char *str, char *path, int i)
 {
-	int		i;
 	int		ret;
 	char	**split_path;
 	char	*try;
 
-	i = 0;
 	if (str && (str[0] == '.' || str[0] == '/'))
 		return (str);
 	split_path = ft_strsplit(path, ':');
 	if (split_path == NULL)
-	{
-		write(2, "minishell: ", 11);
-		write(2, str, ft_strlen(str));
-		write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
-		free(str);
-		return (NULL);
-	}
+		return (write_bad_cmd_free(str));
 	while (split_path[i] && str[0] != '\0')
 	{
 		ret = try_acces(str, split_path[i]);
@@ -74,16 +86,10 @@ char	*get_bin_argv_zero(char *str, char *path)
 			return (try);
 		}
 		if (ret == 50)
-		{
-			free_split(split_path);
-			return (NULL);
-		}
+			return (free_split_ret_null(split_path));
 		i++;
 	}
-	free_split(split_path);
-	write(2, "minishell: ", 11);
-	write(2, str, ft_strlen(str));
-	write(2, " : commande introuvable\n", ft_strlen(" : commande introuvable\n"));
+	write_bad_cmd_free_split(str, split_path);
 	exit_status = 127;
 	return (str);
 }

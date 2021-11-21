@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 12:14:32 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:40:38 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	expend_words(t_commande_line **block)
 
 	cur_b = *block;
 	if (edit_type(block, 0) != 0 || check_open_fil(block) != 0)
-		return (12);	
+		return (12);
 	res = 0;
 	while (cur_b)
 	{
@@ -127,7 +127,6 @@ int	expend_words(t_commande_line **block)
 		{
 			if (cur_t->str && cur_t->str[0] != '\0')
 			{
-		//		printf("enter in word_modif avec str to modif :%s\\n\n", cur_t->str);
 				res = word_modif(&cur_t, cur_t->str, cur_t->type);
 				if (res != 0)
 					return (50);

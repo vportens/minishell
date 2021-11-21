@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 18:18:29 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:32:17 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 		if ((*cmdl)->argv[0] == NULL)
 			free_str_fd_all_env_pid_exit(first, pid, str);
 		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0],
-				ft_get_env("PATH"));
+				ft_get_env("PATH"), 0);
 	}
 	if ((*cmdl)->argv[0] == NULL)
 		free_str_fd_exit_malloc_error(str, first);

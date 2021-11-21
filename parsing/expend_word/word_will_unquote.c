@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 01:27:37 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 12:13:53 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:40:58 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*word_will_unquote(t_token **stc, char *str, int *cur, char *s1)
 			s1 = if_env(stc, str, s1, cur);
 			if (s1 == NULL)
 			{
-					return (NULL);
+				return (NULL);
 			}
 		}
 	}

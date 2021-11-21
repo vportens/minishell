@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/21 18:16:44 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:31:50 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /* -------------------------------------------------------------------------- */
 char	*get_acces(char *str, char *path);
 int	try_acces(char *str, char *path);
-char	*get_bin_argv_zero(char *str, char *path);
+char	*get_bin_argv_zero(char *str, char *path, int i);
 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = exec/ft_lst_to_str.c                         */
@@ -58,5 +58,6 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid);
 int	exec_builtin(char **str, t_commande_line **cmdl,
 	t_commande_line **first, pid_t *pid);
 void	signal_cmd_2(int sig);
+char	*free_split_ret_null(char **split_path);
 
 #endif

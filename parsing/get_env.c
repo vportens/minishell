@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:08:09 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 14:11:08 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:58:23 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
 
 int	get_len_env_var(char *str)
 {
@@ -46,10 +46,11 @@ int	is_env(char *str, char *env, int len)
 	return (-1);
 }
 
-char	*alloc_dollar(void)
+char	*alloc_dollar(int *cur)
 {
 	char	*new;
 
+	*cur = *cur + 1;
 	new = malloc(sizeof(char) * 2);
 	if (new)
 	{
@@ -58,11 +59,6 @@ char	*alloc_dollar(void)
 		return (new);
 	}
 	return (NULL);
-}
-
-char	*alloc_exit_status(void)
-{
-	return (ft_itoa(exit_status));
 }
 
 char	*get_envp(char *str, int *cur)
@@ -74,14 +70,11 @@ char	*get_envp(char *str, int *cur)
 	cpy = NULL;
 	len_str = get_len_env_var(str);
 	if (len_str == 0)
-	{
-		*cur = *cur + 1;
-		return (alloc_dollar());
-	}
+		return (alloc_dollar(cur));
 	if (len_str == 1 && str[1] == '?')
 	{
 		*cur = *cur + 2;
-		return (alloc_exit_status());
+		return (ft_itoa(exit_status));
 	}
 	cpy = malloc(sizeof(char) * (len_str + 1));
 	if (cpy == NULL)

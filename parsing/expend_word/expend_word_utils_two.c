@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expend_word_utils_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:56:16 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 19:41:58 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 18:39:55 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	ret_error_file_without_file(t_commande_line *cur_b)
 {
-	write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*         erreur de syntaxe"));
+	write(2, "minishell: erreur de syntaxe",
+		ft_strlen("minishell: erreur de syntaxe"));
 	if (cur_b)
-		write(1, " |\n", 3);
+		write(2, " |\n", 3);
 	else
-		write(1, " newline\n", 9);
+		write(2, " newline\n", 9);
 	return (12);
 }
 

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 22:26:17 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/19 12:15:16 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:01:06 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*expanded_str(char *str)
 	return (new);
 }
 
-int	write_in_fd(int	fd, char *limitor, bool expanded)
+int	write_in_fd(int fd, char *limitor, bool expanded)
 {
 	char	*str;
 
@@ -82,20 +82,18 @@ int	write_in_fd(int	fd, char *limitor, bool expanded)
 			break ;
 		if (str[0] != '\0')
 		{
-		if (expanded == 0)
-		{
-			str = expanded_str(str);
-			if (str == NULL)
-				return (50);
+			if (expanded == 0)
+			{
+				str = expanded_str(str);
+				if (str == NULL)
+					return (50);
+			}
 		}
-		}
-	//	printf("str : %s\n", str);
 		write(fd, str, ft_strlen(str));
 		write(fd, "\n", 1);
 		free(str);
 	}
 	free(str);
-//	close(fd);
 	return (0);
 }
 

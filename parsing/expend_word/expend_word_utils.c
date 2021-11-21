@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expend_word_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:49:27 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/09 19:39:01 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 18:39:01 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,26 @@ int	end_modif_two(char *str, t_token **stc, char *s1)
 
 int	is_type_file(e_token type)
 {
-	if (type == CREAT_FILE || type == WRITE_FILE || type == OPEN_FILE || type == HERE_DOC)
+	if (type == CREAT_FILE || type == WRITE_FILE
+		|| type == OPEN_FILE || type == HERE_DOC)
 		return (1);
 	return (0);
 }
 
 int	ret_file_without_obj(e_token type)
 {
-	write(1, "*************************************\n*         erreur de syntaxe", ft_strlen("*************************************\n*        erreur de syntaxe"));
+	write(2, "minishell: erreur de syntaxe",
+		ft_strlen("minishell: erreur de syntaxe"));
 	if (type == NON)
-		write(1, " newline\n", 9);
+		write(2, " newline\n", 9);
 	if (type == CREAT_FILE)
-		write(1, " >\n", 3);
+		write(2, " >\n", 3);
 	else if (type == WRITE_FILE)
-		write(1, " >>\n", 4);
+		write(2, " >>\n", 4);
 	else if (type == OPEN_FILE)
-		write(1, " <\n", 3);
+		write(2, " <\n", 3);
 	else if (type == HERE_DOC)
-		write(1, " <<\n", 4);
+		write(2, " <<\n", 4);
 	return (12);
 }
 
