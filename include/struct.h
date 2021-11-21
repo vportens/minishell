@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 22:11:49 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:19:59 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_token			t_token;
 typedef struct s_commande_line	t_commande_line;
 typedef struct s_env			t_env;
 
-
 struct		s_exec
 {
 	char	**argv;
@@ -28,12 +27,12 @@ struct		s_exec
 	t_exec	*next;	
 };
 
-struct		s_token
+struct			s_token
 {
-	char	*str;
+	char		*str;
 	t_e_token	type;
-	bool	expanded;
-	t_token	*next;
+	bool		expanded;
+	t_token		*next;
 };
 
 struct				s_commande_line
