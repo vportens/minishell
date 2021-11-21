@@ -6,37 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 23:38:51 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:43:27 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
 int	g_exit_status;
-
-int	free_all(t_commande_line **cmd_line)
-{
-	t_commande_line *tmp;
-
-	if (cmd_line)
-	{
-		while (*cmd_line)
-		{
-			tmp = (*cmd_line)->next;
-			if ((*cmd_line)->string)
-				free((*cmd_line)->string);
-			if ((*cmd_line)->argv)
-				free((*cmd_line)->argv);
-			if ((*cmd_line)->first_token)
-				free_token(cmd_line);
-			if ((*cmd_line)->name_file)
-				free((*cmd_line)->name_file);
-			free((*cmd_line));
-			*cmd_line = tmp;
-		}
-	}
-	return (1);
-}
 
 int	pars(char *str, t_commande_line **cmd_line)
 {
@@ -70,14 +46,14 @@ void	signal_cmd(int sig)
 	if (sig == 2)
 	{
 		g_exit_status = 130;
-        printf("\n");
-        rl_on_new_line();
-        rl_replace_line("", 0);
-        rl_redisplay();
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	if (sig == SIGQUIT)
 	{
-		write(2 ,"Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
+		write(2, "Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
 		exit (1);
 	}
 }
@@ -128,17 +104,11 @@ void	go_to_exec(t_commande_line **cmd_line, char *str)
 	}
 }
 
-void	error_str(void)
-{
-	write(2, "minishell: syntax error near unexpected token '|' \n", ft_strlen("minishell: syntax error near unexpected token '|' \n"));
-	g_exit_status = 2;
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	char			*str;
 	t_commande_line	*cmd_line;
-	
+
 	cmd_line = NULL;
 	g_exit_status = 0;
 	ft_init_t_env(envp);

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/21 23:38:22 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:43:51 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,6 @@ void	free_end(t_commande_line **cmd, char *str);
 
 void	free_token(t_commande_line **cmd_line);
 int	free_str_all_ret_malloc_error(t_commande_line **cmd, char *str);
+void	error_str(void);
+int	free_all(t_commande_line **cmd_line);
 #endif
