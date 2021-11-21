@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/20 17:03:22 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:00:02 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
 
 int	ft_sup_int(char *str)
 {
@@ -52,12 +52,12 @@ int	ft_non_int(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			write(2, "minishell: exit: ", ft_strlen("minishell: exit: "));
+			write(2, "minishell: exit: ", 17);
 			write(2, str, ft_strlen(str));
-			write(2, ": numeric argument required\n", ft_strlen(": numeric argument required\n"));
+			write(2, ": numeric argument required\n", 27);
 			return (1);
 		}
-		i++;		
+		i++;
 	}
 	return (ft_sup_int(str));
 }
@@ -80,7 +80,7 @@ int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 		ret = ft_atoi(args[1]);
 		if (args[2] != NULL)
 		{
-			write(2, "minishell: exit: too many arguments\n", ft_strlen("minishell: exit: too many arguments\n"));
+			write(2, "minishell: exit: too many arguments\n", 36);
 			exit_status = 1;
 			return (2);
 		}
@@ -98,38 +98,39 @@ int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 
 int	ft_exec_builtin(char *str, char **args, t_commande_line **first, pid_t *pid)
 {
-	int (*tb_tk[7])(char **) = {&ft_built_in_cd, &ft_built_in_echo, &ft_built_in_env, &ft_built_in_pwd, &ft_built_in_export, &ft_built_in_unset};
-	char *built[7] = {"cd", "echo", "env", "pwd", "export", "unset", "exit"};
-	int i;
-
-	i = 0;
 	if (str == NULL)
-			return (0);
+		return (0);
 	if (ft_strcmp("exit", str))
 	{
 		exit_bltin(args, first, pid);
 		free(pid);
 		free_all(first);
 		ft_clean_env();
-		exit (1); // just not if not forking
+		exit (1);
 		return (1);
 	}
-	while (i < 7 && !ft_strcmp(built[i], str))
-		i++;
-	if (i < 7)
-		tb_tk[i](args);
+	if (ft_strcmp("cd", str))
+		ft_built_in_cd(args);
+	else if (ft_strcmp("echo", str))
+		ft_built_in_echo(args, (*first)->fd_out);
+	else if (ft_strcmp("env", str))
+		ft_built_in_env(args, (*first)->fd_out);
+	else if (ft_strcmp("pwd", str))
+		ft_built_in_pwd(args, (*first)->fd_out);
+	else if (ft_strcmp("export", str))
+		ft_built_in_export(args, (*first)->fd_out);
+	else if (ft_strcmp("unset", str))
+		ft_built_in_unset(args);
 	free(pid);
 	ft_clean_env();
-	free_all(first); // free env;
-	if (i < 7)
-		return (0);
+	free_all(first);
 	return (0);
 }
 
-int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *pid)
+int	ft_exec_bd_fd(char *str, char **args, t_commande_line **first, pid_t *pid)
 {
 	if (str == NULL)
-			return (0);
+		return (0);
 	if (ft_strcmp("exit", str))
 	{
 		exit_bltin(args, first, pid);
@@ -142,7 +143,7 @@ int	ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *p
 	else if (ft_strcmp("env", str))
 		ft_built_in_env_fd(args, (*first)->fd_out);
 	else if (ft_strcmp("pwd", str))
-		ft_built_in_pwd_fd(args,(*first)->fd_out);
+		ft_built_in_pwd_fd(args, (*first)->fd_out);
 	else if (ft_strcmp("export", str))
 		ft_built_in_export_fd(args, (*first)->fd_out);
 	else if (ft_strcmp("unset", str))

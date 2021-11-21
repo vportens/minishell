@@ -6,15 +6,15 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 18:22:01 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 16:05:44 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:31:43 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int ft_init_env(t_env **env_list)
+static int	ft_init_env(t_env **env_list)
 {
-	char *s;
+	char	*s;
 
 	s = ft_strjoin("PWD=", getcwd(NULL, 0));
 	if (s == NULL)
@@ -41,14 +41,15 @@ static int ft_init_env(t_env **env_list)
 
 t_env	**get_adress_env(void)
 {
-	static t_env *new = NULL;
-    return (&new);
+	static t_env	*new = NULL;
+
+	return (&new);
 }
 
-int		ft_init_t_env(char **env)
+int	ft_init_t_env(char **env)
 {
 	t_env	**env_list;
-	int	i;
+	int		i;
 
 	env_list = get_adress_env();
 	i = 0;

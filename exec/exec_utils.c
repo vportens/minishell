@@ -44,7 +44,7 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid)
 	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
 	if ((*cmdl)->argv == NULL)
 		return (0);
-	else if (ft_exec_builtin_fd((*cmdl)->argv[0],
+	else if (ft_exec_bd_fd((*cmdl)->argv[0],
 			(*cmdl)->argv, cmdl, pid) != 0)
 	{
 		return (0);

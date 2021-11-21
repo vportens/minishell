@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_built_in_export.c                               :+:      :+:    :+:   */
+/*   ft_built_in_export_fd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 14:02:20 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:08:48 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
 
-
-int		ft_built_in_export_fd(char **str, int fd)
+int	ft_built_in_export_fd(char **str, int fd)
 {
-	int i;
+	int	i;
 
-	printf("fd = %d\n", fd);
 	i = 1;
 	exit_status = 0;
 	if (*(str + 1) == NULL)
 	{
 		ft_built_in_show_export_fd(fd);
-		return 0;
+		return (0);
 	}
 	while (str[i] != NULL)
 	{
@@ -43,11 +41,11 @@ int		ft_built_in_export_fd(char **str, int fd)
 
 void	ft_show_export_fd(t_env **env, int fd)
 {
-	t_env			*cur;
-	int				len;
-	
+	t_env	*cur;
+	int		len;
+
 	cur = *env;
-	while(cur)
+	while (cur)
 	{
 		len = ft_get_lenkey(cur->str);
 		if (cur->declare == 1)
@@ -67,10 +65,10 @@ void	ft_show_export_fd(t_env **env, int fd)
 	}
 }
 
-void    ft_built_in_show_export_fd(int fd)
+void	ft_built_in_show_export_fd(int fd)
 {
-    t_env **env;
+	t_env	**env;
 
-    env = get_adress_env();
-    ft_show_export_fd(env, fd);
+	env = get_adress_env();
+	ft_show_export_fd(env, fd);
 }

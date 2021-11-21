@@ -6,19 +6,19 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:18:40 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 19:08:08 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:45:06 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
 
 int	ft_check_n(char **str)
 {
-	int i;
-	int y;
-	int cpt;
+	int	i;
+	int	y;
+	int	cpt;
 
 	cpt = 0;
 	y = 0;
@@ -43,8 +43,8 @@ int	ft_check_n(char **str)
 
 int	ft_built_in_echo(char **str)
 {
-	int i;
-	int y;
+	int	i;
+	int	y;
 
 	str++;
 	y = 0;
@@ -59,7 +59,7 @@ int	ft_built_in_echo(char **str)
 		i++;
 	}
 	if (y == 0)
-	printf("\n");
-	exit_status = 0; 
+		printf("\n");
+	exit_status = 0;
 	return (0);
 }

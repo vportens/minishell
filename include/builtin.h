@@ -74,7 +74,7 @@ int    ft_built_in_cd_fd(char **str, int fd);
 /*                      FILE = built_in/ft_push_front.c                       */
 /* -------------------------------------------------------------------------- */
 int		ft_push_front(char *env, t_env **begin_lst, int declare);
-int     ft_exec_builtin_fd(char *str, char **args, t_commande_line **first, pid_t *pid);
+int     ft_exec_bd_fd(char *str, char **args, t_commande_line **first, pid_t *pid);
 
 
 /* -------------------------------------------------------------------------- */

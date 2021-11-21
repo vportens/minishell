@@ -6,15 +6,15 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:59:11 by victor            #+#    #+#             */
-/*   Updated: 2021/11/02 14:16:11 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:21:24 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_get_lenkey(char *env)
+int	ft_get_lenkey(char *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i] != '\0' && env[i] != '=')
@@ -22,7 +22,7 @@ int		ft_get_lenkey(char *env)
 	return (i);
 }
 
-int		ft_singletone(char *str, int mode)
+int	ft_singletone(char *str, int mode)
 {
 	t_env	**env_list;
 
@@ -30,15 +30,17 @@ int		ft_singletone(char *str, int mode)
 	if (mode == DELETE)
 	{
 		ft_delete_env_call(env_list, str);
-		return (0);	
+		return (0);
 	}
 	if (mode == FREE)
 		ft_clean_envlist(env_list);
 	if (mode == ADD)
+	{
 		if (ft_add_value_to_env(env_list, str) == 50)
 		{
 			ft_clean_envlist(env_list);
 			return (50);
 		}
+	}
 	return (0);
 }

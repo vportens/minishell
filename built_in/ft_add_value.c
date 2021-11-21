@@ -6,23 +6,23 @@
 /*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 21:18:11 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/16 15:30:52 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:13:19 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_add_env(char *str)
+int	ft_add_env(char *str)
 {
-	return (ft_singletone(str, ADD));	
+	return (ft_singletone(str, ADD));
 }
 
 char	*ft_final_add(char *env)
 {
-	int len;
-	char *s;
-	int i;
-	int y;
+	int		len;
+	char	*s;
+	int		i;
+	int		y;
 
 	i = 0;
 	y = 0;
@@ -44,9 +44,9 @@ char	*ft_final_add(char *env)
 	return (s);
 }
 
-int		ft_special_lenkey(char *str)
+int	ft_special_lenkey(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0' && str[i] != '=' && str[i] != '+')
@@ -54,11 +54,11 @@ int		ft_special_lenkey(char *str)
 	return (i);
 }
 
-int		ft_add_value_to_env(t_env **env_list, char *env)
+int	ft_add_value_to_env(t_env **env_list, char *env)
 {
-	int len;
-	int declare;
-	t_env *cpy;
+	int		len;
+	int		declare;
+	t_env	*cpy;
 
 	declare = 0;
 	cpy = *env_list;
@@ -66,7 +66,7 @@ int		ft_add_value_to_env(t_env **env_list, char *env)
 	while (cpy)
 	{
 		declare = cpy->declare;
-		if (len == ft_get_lenkey(cpy->str) && !ft_truestrncmp(env, cpy->str, len))
+		if (len == ft_get_lenkey(cpy->str) && !ft_strncmp(env, cpy->str, len))
 		{
 			if (ft_equal(cpy->str) && !ft_equal(env))
 				return (0);

@@ -74,7 +74,7 @@ int		split_all_cmdl_string_to_token(t_commande_line **first);
 
 int		organise_arg(t_commande_line **cmd);
 
-int		ft_truestrncmp(char *str, char *to, int n);
+int		ft_strncmp(char *str, char *to, int n);
 void	get_environment(char **env);
 
 #endif

@@ -6,25 +6,25 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/19 14:02:20 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:40:16 by lchristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
+extern int	exit_status;
 
-void    ft_built_in_show_export(void)
+void	ft_built_in_show_export(void)
 {
-    t_env **env;
+	t_env	**env;
 
-    env = get_adress_env();
-    ft_show_export(env);
+	env = get_adress_env();
+	ft_show_export(env);
 }
 
-int		ft_export_is_incorrect(char *s)
+int	ft_export_is_incorrect(char *s)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if ((ft_is_alpha(s[0]) && s[0] != '_'))
@@ -41,16 +41,16 @@ int		ft_export_is_incorrect(char *s)
 	return (0);
 }
 
-int		ft_built_in_export(char **str)
+int	ft_built_in_export(char **str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	exit_status = 0;
 	if (*(str + 1) == NULL)
 	{
 		ft_built_in_show_export();
-		return 0;
+		return (0);
 	}
 	while (str[i] != NULL)
 	{
@@ -68,11 +68,11 @@ int		ft_built_in_export(char **str)
 
 void	ft_show_export(t_env **env)
 {
-	t_env			*cur;
-	int				len;
-	
+	t_env	*cur;
+	int		len;
+
 	cur = *env;
-	while(cur)
+	while (cur)
 	{
 		len = ft_get_lenkey(cur->str);
 		if (cur->declare == 1)
