@@ -6,21 +6,20 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 23:24:45 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/21 23:44:18 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:47:20 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 void	free_token(t_commande_line **cmd_line)
 {
-
-	t_token			*tok;
+	t_token	*tok;
 
 	while ((*cmd_line)->first_token)
-	{ 
+	{
 		tok = (*cmd_line)->first_token->next;
 		if ((*cmd_line)->first_token->str)
 			free((*cmd_line)->first_token->str);
