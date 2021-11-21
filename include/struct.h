@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:59 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 21:05:53 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:33:08 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_token			t_token;
 typedef struct s_commande_line	t_commande_line;
 typedef struct s_env			t_env;
 
+
 struct		s_exec
 {
 	char	**argv;
@@ -30,7 +31,7 @@ struct		s_exec
 struct		s_token
 {
 	char	*str;
-	t_token	type;
+	e_token	type;
 	bool	expanded;
 	t_token	*next;
 };

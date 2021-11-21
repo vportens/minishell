@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:26:24 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 20:57:46 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:40:38 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	word_modif_two(t_token **stc, char *duplica, t_quote quote, t_quote prec)
+int	word_modif_two(t_token **stc, char *duplica, e_quote quote, e_quote prec)
 {
 	char	*s1;
 	int		cur;
@@ -22,9 +22,9 @@ int	word_modif_two(t_token **stc, char *duplica, t_quote quote, t_quote prec)
 		return (50);
 	while (str[cur])
 	{
-		quote = updatt_quote_status(str[cur], quote);
+		quote = update_quote_status(str[cur], quote);
 		if (prec != quote)
-			prec = updatt_quote_succes(*stc, &cur, quote, &s1);
+			prec = update_quote_succes(*stc, &cur, quote, &s1);
 		else
 		{
 			if (quote == SINGLE)
@@ -40,10 +40,10 @@ int	word_modif_two(t_token **stc, char *duplica, t_quote quote, t_quote prec)
 	return (end_modif_two(str, stc, s1));
 }
 
-int	word_modif(t_token **stc, char *str, t_token token)
+int	word_modif(t_token **stc, char *str, e_token token)
 {
-	t_quote	quote;
-	t_quote	prec;
+	e_quote	quote;
+	e_quote	prec;
 
 	quote = NONE;
 	prec = NONE;
@@ -86,7 +86,7 @@ int	check_open_fil(t_commande_line **block)
 	t_commande_line	*cur_b;
 	t_token			*cur_t;
 	int				file;
-	t_token			type;
+	e_token			type;
 
 	cur_b = *block;
 	file = 0;

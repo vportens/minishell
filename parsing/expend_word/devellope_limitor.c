@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   devellope_limitor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laclide <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:25:25 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 20:57:27 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/16 11:54:09 by laclide          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	move_to(char *str, int *i, t_quote quote)
+int	move_to(char *str, int *i, e_quote quote)
 {
 	if (quote == NONE)
 	{
@@ -32,7 +32,7 @@ int	move_to(char *str, int *i, t_quote quote)
 	return (0);
 }
 
-char	*limitor_unquote(char *str, int *i, char *s1, t_quote quote)
+char	*limitor_unquote(char *str, int *i, char *s1, e_quote quote)
 {
 	int		j;
 	char	*s2;
@@ -68,17 +68,17 @@ char	*expand_full_quote_str(void)
 char	*devellope_limitor(t_token *stc, char *str, int i)
 {
 	char	*expand_str;
-	t_quote	quote;
-	t_quote	prec;
+	e_quote	quote;
+	e_quote	prec;
 
 	quote = NONE;
 	prec = NONE;
 	expand_str = NULL;
 	while (str && str[i])
 	{
-		quote = updatt_quote_status(str[i], quote);
+		quote = update_quote_status(str[i], quote);
 		if (prec != quote)
-			prec = updatt_quote_succes(stc, &i, quote, &expand_str);
+			prec = update_quote_succes(stc, &i, quote, &expand_str);
 		else
 		{
 			expand_str = limitor_unquote(str, &i, expand_str, quote);

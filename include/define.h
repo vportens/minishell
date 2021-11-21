@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:07:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 21:09:41 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:55:18 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef enum quote
 	DOUBLE,
 	BACKSLASH,
 	END
-}	t_quote;
+}	e_quote;
 
 typedef enum mod
 {
@@ -28,7 +28,7 @@ typedef enum mod
 	DELETE,
 	FREE,
 	ADD
-}			t_mod;
+}			e_mod;
 
 typedef enum token
 {
@@ -44,6 +44,6 @@ typedef enum token
 	FILE_OUT,
 	FILE_OUT_OVER,
 	ENDS
-}				t_e_token;
+}				e_token;
 
 #endif
