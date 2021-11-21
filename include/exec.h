@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/11/09 22:29:17 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 17:40:36 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ char	**env_to_tabtab(t_env **envp);
 
 int		create_heredoc_fd(t_commande_line **cmdl, t_token **cur);
 char	*creat_aleatori_name(void);
+
+void	free_fd_all_exit_malloc_error(t_commande_line **first);
+void	free_str_fd_exit_malloc_error(char **str, t_commande_line **first);
+void	free_str_exit_fd_error(char **str);
+void    free_str_fd_all_env_pid_exit(t_commande_line **cmd, pid_t *pid, char **str);
+void    free_file_name(char *file_name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/20 18:37:21 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:41:23 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,8 @@ int	ft_sup_int(char *str);
 
 extern int	exit_status;
 
-void	free_fd_all_exit_malloc_error(t_commande_line **first)
-{
-	close_fd_all(first);
-	exit (50);
-}
-
-void	free_str_fd_exit_malloc_error(char **str, t_commande_line **first)
-{
-	free(str);
-	close_fd_all(first);
-	exit (50);
-}
-
-void	free_str_exit_fd_error(char **str)
-{
-	free(str);
-	exit(1);
-}
-
-int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first, char **str, pid_t *pid)
+int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first,
+	char **str, pid_t *pid)
 {
 	struct stat	buff;
 
@@ -55,7 +37,8 @@ int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first, char **str, pid
 	}
 	write(2, "minishell: ", ft_strlen("minishell: "));
 	write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
-	write(2, ": No such file or directory\n", ft_strlen(": No such file or directory\n"));
+	write(2, ": No such file or directory\n",
+		ft_strlen(": No such file or directory\n"));
 	free_all(first);
 	free(str);
 	free(pid);
@@ -65,7 +48,8 @@ int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first, char **str, pid
 	return (0);
 }
 
-int	exec_builtin(char **str, t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
+int	exec_builtin(char **str, t_commande_line **cmdl,
+	t_commande_line **first, pid_t *pid)
 {
 	free(str);
 	if (ft_exec_builtin((*cmdl)->argv[0], (*cmdl)->argv, first, pid) == 2)
@@ -83,37 +67,19 @@ int	ft_execve_fct(t_commande_line **cmdl, t_commande_line **first, pid_t *pid)
 	close_fd_all(first);
 	str = env_to_tabtab(get_adress_env());
 	if (str == NULL)
-	{
 		free_fd_all_exit_malloc_error(first);
-	}
 	if (ft_is_builtin((*cmdl)->argv[0]) == 0)
 	{
 		if ((*cmdl)->argv[0] == NULL)
-		{
-		free_all(first);
-		ft_clean_env();
-		free(pid);
-		free(str);
-		exit(1);
-		}
+			free_str_fd_all_env_pid_exit(first, pid, str);
 		(*cmdl)->argv[0] = get_bin_argv_zero((*cmdl)->argv[0],
 				ft_get_env("PATH"));
 	}
 	if ((*cmdl)->argv[0] == NULL)
 		free_str_fd_exit_malloc_error(str, first);
-
-	if ((*cmdl)->name_file != NULL)
-	{
-		unlink((*cmdl)->name_file);
-		free((*cmdl)->name_file);
-	}
+	free_file_name((*cmdl)->name_file);
 	if ((*cmdl)->fd_in < 0 || (*cmdl)->fd_out < 0)
-	{
-		free_all(first);
-		ft_clean_env();
-		free(pid);
-		free_str_exit_fd_error(str);
-	}
+		free_str_fd_all_env_pid_exit(first, pid, str);
 	if (ft_is_builtin((*cmdl)->argv[0]))
 		exec_builtin(str, cmdl, first, pid);
 	else
@@ -126,7 +92,8 @@ int	no_forking(t_commande_line **cmdl, pid_t *pid)
 	printf("stdin : %d\nstdout : %d\n", (*cmdl)->fd_in, (*cmdl)->fd_out);
 	if ((*cmdl)->argv == NULL)
 		return (0);
-	else if (ft_exec_builtin_fd((*cmdl)->argv[0], (*cmdl)->argv, cmdl, pid) != 0)
+	else if (ft_exec_builtin_fd((*cmdl)->argv[0],
+			(*cmdl)->argv, cmdl, pid) != 0)
 	{
 		return (0);
 	}
@@ -139,9 +106,9 @@ void	signal_cmd_2(int sig)
 	if (sig == 2)
 	{
 		exit_status = 130;
-        printf("\n");
-        rl_replace_line("", 0);
-        rl_redisplay();
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -154,7 +121,6 @@ int	multi_fork(pid_t *pid, int i, t_commande_line **cmdl, t_commande_line **cur)
 		exit(1);
 	if (pid[i] == 0)
 	{
-		
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		ft_execve_fct(cur, cmdl, pid);
@@ -183,7 +149,6 @@ int	forking(t_commande_line **cmdl, pid_t *pid)
 	cur = *cmdl;
 	if (len == 1 && ft_is_builtin(cur->argv[0]))
 	{
-		//free(pid);
 		return (no_forking(cmdl, pid));
 	}
 	while (i < len)

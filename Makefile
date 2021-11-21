@@ -40,6 +40,7 @@ SRCS =  	main.c											\
 			exec/pipe.c										\
 			exec/open_fd.c									\
 			exec/utils.c									\
+			exec/exec_free_utils.c							\
 			built_in/ft_add_value.c							\
 			built_in/ft_built_in_export_fd.c				\
 			built_in/ft_get_value.c							\
