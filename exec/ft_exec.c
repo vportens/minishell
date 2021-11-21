@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:51:33 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first,
 		write(2, ": Permission denied\n", ft_strlen(": Permission denied\n"));
 		exit(126);
 	}
-	write(2, "minishell: ", ft_strlen("minishell: "));
-	write(2, (*cmdl)->argv[0], ft_strlen((*cmdl)->argv[0]));
-	write(2, ": No such file or directory\n",
-		ft_strlen(": No such file or directory\n"));
 	free_all(first);
 	free(str);
 	free(pid);
