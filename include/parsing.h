@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchristo <lchristo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:06:42 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/15 20:11:30 by laclide          ###   ########.fr       */
+/*   Updated: 2021/11/21 21:39:13 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		get_next_quote(char	*str, int i);
 
 void	init_type(t_token *new);
 void	init_token(t_token *new);
-int     ft_is_builtin(char *str);
+int		ft_is_builtin(char *str);
 
 void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back);
 void	token_add_back(t_token **first, t_token *add_back);
@@ -57,7 +57,7 @@ char	*copy_fake_env(char *str);
 char	*fake_env(int *j, int len_str);
 int		len_fake_env(char *str);
 
-int     free_all(t_commande_line **cmd_line);
+int		free_all(t_commande_line **cmd_line);
 void	free_both(char *s1, char *s2);
 int		free_cmdl_ret_malloc_error(t_commande_line *str);
 int		free_token_ret_malloc_error(t_token *tok);
