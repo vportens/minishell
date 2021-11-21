@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:22:14 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,28 @@ int	free_all(t_commande_line **cmd_line)
 
 	if (cmd_line)
 	{
-//	printf("cmdl exist\n");
 	while (*cmd_line)
 	{
-//		printf("je rentre dans cmdl\n");
 		tmp = (*cmd_line)->next;
 		if ((*cmd_line)->string)
 			free((*cmd_line)->string);
-		
-//		printf("je free string\n");
 		if ((*cmd_line)->argv)
 			free((*cmd_line)->argv);
-//		printf("je free argvl\n");
 		if ((*cmd_line)->first_token)
 		{
-			
-//			printf("je rentre dans token\n");
-			i = 0;	
+			i = 0;
 			while ((*cmd_line)->first_token)
 			{ 
-//				printf("token %d\n", i);
-//				printf("token str %s\n",(*cmd_line)->first_token->str);
-
 				tok = (*cmd_line)->first_token->next;
 				if ((*cmd_line)->first_token->str)
 					free((*cmd_line)->first_token->str);
-//				printf("str de tok free\n");
-
 				free((*cmd_line)->first_token);
-//				printf("tok free\n");
 				(*cmd_line)->first_token = tok;
 				i++;
 			}
-//			printf("je sort dans token\n");
 		}
 		if ((*cmd_line)->name_file)
 			free((*cmd_line)->name_file);
-//		printf("je free cmdl\n");
 		free((*cmd_line));
 		*cmd_line = tmp;
 	}
@@ -71,7 +56,6 @@ int	pars(char *str, t_commande_line **cmd_line)
 	int	res;
 
 	res = unclose_quote(str);
-//	printf("sort de unclose_quote\n");
 	if (res > 0)
 	{
 		free_all(cmd_line);
@@ -84,16 +68,12 @@ int	pars(char *str, t_commande_line **cmd_line)
 			free(str);
 			return (50); // clean all arg;
 		}
-//		printf("sort de get_cmd_line\n");
-		
 		if (split_all_cmdl_string_to_token(cmd_line) > 0) /* ici on malloc les token et on remplit token->str et init token->type*/
 		{
 			free_all(cmd_line);
 			free(str);
 			return (50); // clean all arg
 		}
-//		printf("sort de splitall\n");
-		
 		res = expend_words(cmd_line);
 		if (res != 0)
 		{
@@ -104,16 +84,12 @@ int	pars(char *str, t_commande_line **cmd_line)
 				return (50);
 			}
 		}
-//		printf("sort de expend_word\n");
-		
 		if (organise_arg(cmd_line) != 0)
 		{
 			free_all(cmd_line);
 			free(str);
 			return (50);
 		}
-//		printf("sort de orga\n");
-		
 	}
 	return (res);
 }
@@ -216,10 +192,39 @@ int	check_str(char *str)
 	return (0);
 }
 
+void	go_to_exec(t_commande_line **cmd_line, char *str)
+{
+	int	res;
+
+	res = pars(str, cmd_line);
+	if (res == 50)
+	{
+		free_all_env_str_ret_malloc_error(cmd_line, str);
+		exit (1);
+	}
+	if (res == 0)
+	{
+		if (str != NULL && *cmd_line != NULL)
+		{
+			res = ft_exec(cmd_line);
+			if (res != 0)
+			{
+				free_all_error(cmd_line, str, res);
+				exit (1);
+			}
+		}
+	}
+}
+
+void	error_str(void)
+{
+	write(2, "minishell: syntax error near unexpected token '|' \n", ft_strlen("minishell: syntax error near unexpected token '|' \n"));
+	g_exit_status = 2;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char			*str;
-	int				res;
 	t_commande_line	*cmd_line;
 	
 	cmd_line = NULL;
@@ -227,8 +232,8 @@ int	main(int ac, char **av, char **envp)
 	ft_init_t_env(envp);
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
-	if (ac && av)
-	{
+	if (!ac && !av)
+		return (0);
 	while (1)
 	{
 		str = readline("minishell$> ");
@@ -236,56 +241,11 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGINT, signal_cmd);
 		signal(SIGQUIT, SIG_IGN);
 		if (str == NULL)
-		{
-			printf("exit\n");
-			ft_clean_env();
-			return (free_all(&cmd_line));
-
-		}
+			return (print_exit_free_env_all(&cmd_line));
 		if (check_str(str) != 0)
-			write(2, "minishell: syntax error near unexpected token '|' \n", ft_strlen("minishell: syntax error near unexpected token '|' \n"));
+			error_str();
 		else
-		{
-//		printf("on rentre dans pars\n");
-		res = pars(str, &cmd_line);
-//		printf("on sort de pars");
-		if (res == 50)
-		{
-			free(str);
-			free_all(&cmd_line);
-			ft_clean_env();
-			write(1, "malloc error\n", 13);
-			return (50);
-		}
-		if (res == 0)
-		{
-		//	print_cmdl(&cmd_line); 
-		if (str != NULL && cmd_line != NULL)
-		{
-			res = ft_exec(&cmd_line);
-			if (res != 0)
-			{
-				if (res == 40)
-					write(1, "pipe fails\n", 11);
-				if (res == 50)
-					write(1, "malloc error\n", 13);
-				free(str);
-				ft_clean_env();
-				free_all(&cmd_line);
-				return (1);
-			}
-		}
-		}
-	}
-	
-	//	print_cmdl(&cmd_line);
-		if (str)
-			free(str);
-//		printf("free all entre\n");
-		free_all(&cmd_line);
-//		printf("free all sorti\n");
-	//		cmd_line = cmd_line->next;
-
-	}
+			go_to_exec(&cmd_line, str);
+		free_end(&cmd_line, str);
 	}
 }

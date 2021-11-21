@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:50:47 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/17 20:21:06 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:15:41 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@
 # include <errno.h>
 
 void	signal_cmd(int sig);
+int	print_exit_free_env_all(t_commande_line **cmd);
+
+int	free_all_env_str_ret_malloc_error(t_commande_line **cmd, char *str);
+
+int	free_all_error(t_commande_line **cmd, char *str, int error);
+
+void	free_end(t_commande_line **cmd, char *str);
 
 #endif
