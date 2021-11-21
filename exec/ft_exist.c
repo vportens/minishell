@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:41:26 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 18:33:30 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 char	*write_bad_cmd_free_split(char *str, char **split_path)
 {
@@ -90,6 +90,6 @@ char	*get_bin_argv_zero(char *str, char *path, int i)
 		i++;
 	}
 	write_bad_cmd_free_split(str, split_path);
-	exit_status = 127;
+	g_exit_status = 127;
 	return (str);
 }

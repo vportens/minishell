@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 19:53:48 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-int	exit_status;
+int	g_exit_status;
 
 int	free_all(t_commande_line **cmd_line)
 {
@@ -178,10 +178,10 @@ void	print_cmdl(t_commande_line **cmdl)
 
 void	signal_cmd(int sig)
 {
-	exit_status += sig;
+	g_exit_status += sig;
 	if (sig == 2)
 	{
-		exit_status = 130;
+		g_exit_status = 130;
         printf("\n");
         rl_on_new_line();
         rl_replace_line("", 0);
@@ -223,7 +223,7 @@ int	main(int ac, char **av, char **envp)
 	t_commande_line	*cmd_line;
 	
 	cmd_line = NULL;
-	exit_status = 0;
+	g_exit_status = 0;
 	ft_init_t_env(envp);
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);

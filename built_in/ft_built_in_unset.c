@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:11:00 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 19:41:15 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 int	ft_built_in_unset(char **str)
 {
@@ -25,6 +25,6 @@ int	ft_built_in_unset(char **str)
 			return (50);
 		i++;
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 	return (0);
 }

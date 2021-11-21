@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 20:45:22 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 int	ft_sup_int(char *str)
 {
@@ -81,7 +81,7 @@ int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 		if (args[2] != NULL)
 		{
 			write(2, "minishell: exit: too many arguments\n", 36);
-			exit_status = 1;
+			g_exit_status = 1;
 			return (2);
 		}
 		free_in_builin(first, pid, ret);

@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 18:13:55 by viporten          #+#    #+#             */
-/*   Updated: 2021/11/21 18:19:01 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 {
@@ -29,11 +29,11 @@ int	wait_pid(t_commande_line **cmdl, pid_t *pid)
 	}
 	while (i < len)
 	{
-		waitpid(pid[i], &exit_status, 0);
-		if (WIFEXITED(exit_status))
-			exit_status = WEXITSTATUS(exit_status);
-		else if (WIFSIGNALED(exit_status))
-			exit_status = 128 + WTERMSIG(exit_status);
+		waitpid(pid[i], &g_exit_status, 0);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
+		else if (WIFSIGNALED(g_exit_status))
+			g_exit_status = 128 + WTERMSIG(g_exit_status);
 		i++;
 	}
 	return (0);
@@ -64,10 +64,10 @@ int	exec_builtin(char **str, t_commande_line **cmdl,
 
 void	signal_cmd_2(int sig)
 {
-	exit_status += sig;
+	g_exit_status += sig;
 	if (sig == 2)
 	{
-		exit_status = 130;
+		g_exit_status = 130;
 		printf("\n");
 		rl_replace_line("", 0);
 		rl_redisplay();

@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:15 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 19:40:16 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 void	ft_built_in_show_export(void)
 {
@@ -46,7 +46,7 @@ int	ft_built_in_export(char **str)
 	int	i;
 
 	i = 1;
-	exit_status = 0;
+	g_exit_status = 0;
 	if (*(str + 1) == NULL)
 	{
 		ft_built_in_show_export();
@@ -56,7 +56,7 @@ int	ft_built_in_export(char **str)
 	{
 		if (ft_export_is_incorrect(str[i]))
 		{
-			exit_status = 1;
+			g_exit_status = 1;
 			printf("minishell: export: '%s': not a valid identifier\n", str[i]);
 		}
 		else if (ft_singletone(str[i], ADD) == 50)

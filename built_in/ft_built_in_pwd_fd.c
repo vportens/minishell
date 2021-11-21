@@ -6,13 +6,13 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:57:54 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 19:22:54 by lchristo         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 int	ft_built_in_pwd_fd(char **str, int fd)
 {
@@ -23,7 +23,7 @@ int	ft_built_in_pwd_fd(char **str, int fd)
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (50);
-	exit_status = 0;
+	g_exit_status = 0;
 	ft_putstr_fd(pwd, fd);
 	ft_putchar_fd('\n', fd);
 	free(pwd);

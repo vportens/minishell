@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:24:44 by lchristo          #+#    #+#             */
-/*   Updated: 2021/11/21 18:32:17 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_non_int(char *str);
 
 int	ft_sup_int(char *str);
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first,
 	char **str, pid_t *pid)
@@ -43,8 +43,8 @@ int	ft_exec_cmd(t_commande_line **cmdl, t_commande_line **first,
 	free(str);
 	free(pid);
 	ft_clean_env();
-	exit_status = 127;
-	exit(exit_status);
+	g_exit_status = 127;
+	exit(g_exit_status);
 	return (0);
 }
 
