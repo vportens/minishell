@@ -14,6 +14,7 @@ LIB =  -L/usr/include -lreadline
 
 SRCS =  	main.c											\
 			free_main.c										\
+			free_end_stc.c									\
 			parsing/ft_is_builtin.c							\
 			parsing/creat_fill_lst/get_cmd_line.c			\
 			parsing/lst_fonction/cmdl_add_back.c			\
