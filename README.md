@@ -66,10 +66,14 @@ In bash there are a lot of caractere with meanings ass ```$``` for env variable,
 
 **' rules**
 ```'``` make thing easer and cancel all meaning of caractere, inside ```'``` ```"```, ```$env``` ``` ``` ```|``` ```< << > >>```are juste caracter inside a single word
+ 
 Try ```echo '$USER | cat ls blablabla'```
+ 
 **" rules**
 ```"``` as ```'``` cancel second meaning of caractere exepte for env variable that make you able to use ```'```, and like ```'``` all caraceter inside double quote are a single word
+ 
 Try ``` echo "$USER | 'ici c'est Paris;"```
+ 
 **no quote rules**
 Here all caractere got there seconde meaning, and each ``` ``` are separator of word
 Try ```echo $USER hello there | ls | cat > file_out```
