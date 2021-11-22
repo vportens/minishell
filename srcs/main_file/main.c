@@ -6,11 +6,11 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/22 00:33:15 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:12:35 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../../include/minishell.h"
 
 int	g_exit_status;
 
