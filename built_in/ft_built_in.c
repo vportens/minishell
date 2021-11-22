@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:20 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 22:21:19 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/22 00:26:29 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	ft_sup_int(char *str)
 		res = res * 10 + str[i] - '0';
 		i++;
 		if (res > 2147483648)
-			return (1);
+			return (2);
 	}
 	res = res * sig;
 	if (res > 2147483647)
-		return (1);
+		return (2);
 	return (0);
 }
 
@@ -54,8 +54,8 @@ int	ft_non_int(char *str)
 		{
 			write(2, "minishell: exit: ", 17);
 			write(2, str, ft_strlen(str));
-			write(2, ": numeric argument required\n", 27);
-			return (1);
+			write(2, ": numeric argument required\n", 28);
+			return (2);
 		}
 		i++;
 	}
@@ -75,7 +75,7 @@ int	exit_bltin(char **args, t_commande_line **first, pid_t *pid)
 			ft_clean_env();
 			free_all(first);
 			free(pid);
-			exit (1);
+			exit (2);
 		}
 		ret = ft_atoi(args[1]);
 		if (args[2] != NULL)

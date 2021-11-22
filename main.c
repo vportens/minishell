@@ -6,7 +6,7 @@
 /*   By: viporten <viporten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 08:58:02 by laclide           #+#    #+#             */
-/*   Updated: 2021/11/21 23:43:27 by viporten         ###   ########.fr       */
+/*   Updated: 2021/11/22 00:33:15 by viporten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	pars(char *str, t_commande_line **cmd_line)
 
 	res = unclose_quote(str);
 	if (res > 0)
+	{
+		write(2, "minishell: miss quote\n", 22);
 		free_all(cmd_line);
+	}
 	else
 	{
 		if (get_cmd_line(str, cmd_line) > 0)
