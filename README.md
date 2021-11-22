@@ -83,5 +83,7 @@ Try ```echo $USER hello there | ls | cat > file_out```
 
 
 **Found '|'**
-Your commande_line run from start to ```|```
-But you should Kn
+Your commande_line run from start to ```|```, You should know the quoting rules to not interpret a ```|``` as a caractere in double or single quote.
+Then copi the string you get (without '|') into your structure commande line. 
+Repeat the operation until the end of file
+
