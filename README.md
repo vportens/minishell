@@ -20,12 +20,13 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 ### What you should know
 #### I- Parsing
 - .1. Separation commande_line
+- .1,1. Quote close and quoting rules
 - .2. Separation of word in commande_line
 - .2,1. Type of word
 - .2,2. Expende word
 - .3. Prepare execution
 - .4. Error parsing
-- 
+
 #### II- Builtin
 - .1. Env
 - .2. Export
@@ -47,3 +48,28 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
  
 #### V- Test
 
+# I- Parsing
+## 1. Separation commande_line
+**Here only '|' commande from each other, ';' is considere as a caracter :(**
+## 1.1 Quote close, Quoting rules
+At first, you should check if quote are properly close, following quoting rules :
+The first quote you see cancel other type of quote untill you see it again 
+Exemple :
+```" ' "``` quote are close because ```'``` is not considere as quote inside double quote
+**Quoting rules**
+In bash there are a lot of caractere with meanings ass ```$``` for env variable, single quote and double quote are use to playe with or whitout those seconde meaning, these rules will be useful to you to catch each commande line.
+**' rules**
+```'``` make thing easer and cancel all meaning of caractere, inside ```'``` ```"```, ```$env``` ``` ``` ```|``` ```< << > >>```are juste caracter inside a single word
+Try ```echo '$USER | cat ls blablabla'```
+**" rules**
+```"``` as ```'``` cancel second meaning of caractere exepte for env variable that make you able to use ```'```, and like ```'``` all caraceter inside double quote are a single word
+Try ``` echo "$USER | 'ici c'est Paris;"```
+**no quote rules**
+Here all caractere got there seconde meaning, and each ``` ``` are separator of word
+Try ```echo $USER hello there | ls | cat > file_out```
+
+
+
+**Found '|'**
+Your commande_line run from start to ```|```
+But you should Kn
