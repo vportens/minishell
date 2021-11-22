@@ -25,6 +25,25 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 - .2,2. Expende word
 - .3. Prepare execution
 - .4. Error parsing
-#### II- Execution
-#### III- Test
+- 
+#### II- Builtin
+- .1. Env
+- .2. Export
+- .3. Unset
+- .4. Pwd
+- .5. Cd
+- .6. Exit
+
+#### III- Redirection
+- .1. Pipe
+- .2. Open Close file
+- .3. Here_doc /// this part is not posix prouf see end of point
+ 
+#### IV- Execution
+- .1. When fork
+- .2. Commande exist or right to execute?
+- .3. Execution
+- .4. Close fd
+ 
+#### V- Test
 
