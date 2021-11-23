@@ -144,6 +144,17 @@ $LS // this should do a ls -la
 For type limitor expension you have to not expende env var  
 Exemple try :  
 ```cat << $HOME```
+**!!! special case 3**
+For type IN_FILE and EXIT_FILE you do not have to split env on space,  
+Exemple in bash :  
+```
+$> Export t="ha  ha"
+$> echo baguette > $t
+$> ls
+'ha ha'
+$> cat < $t
+baguette
+```  
 
 ## 3. Prepare execution  
 Here you are, you should have all your commande_line struct with all your token word expend and the type of each word.  
