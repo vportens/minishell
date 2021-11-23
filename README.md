@@ -143,7 +143,7 @@ $LS // this should do a ls -la
 **!!! special case 2**  
 For type limitor expension you have to not expende env var  
 Exemple try :  
-```cat << $HOME```
+```cat << $HOME```  
 **!!! special case 3**
 For type IN_FILE and EXIT_FILE you do not have to split env on space,  
 Exemple in bash :  
