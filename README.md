@@ -25,6 +25,7 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 - .2. Separation of word in commande_line
 - .2,1. Type of word
 - .2,2. Expende word
+- .2,3. Expende env
 - .3. Prepare execution
 - .4. Error parsing
 
@@ -39,13 +40,14 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 #### III- Redirection
 - .1. Pipe
 - .2. Open Close file
-- .3. Here_doc /// this part is not posix prouf see end of point
+- .3. Here_doc /// this part is not posix prouf, see end of point
  
 #### IV- Execution
 - .1. When fork
 - .2. Commande exist or right to execute?
 - .3. Execution
 - .4. Close fd
+- .5. Exit_status
  
 #### V- Test
 
@@ -156,6 +158,14 @@ $> cat < $t
 baguette
 ```  
 
+## 2.3 Expend env
+Has you see higher,  
+According to the type of the word, you have to expend the env with different rule,  
+In all case, a env variable start by '$' and can only be compose by alphanum caractere + ```_```   
+```$?``` is not considere as a env variable but as the **exit_status** and ```?``` is not a alphanum caractere  
+And in case of ```$$``` I considere it as ```$``` 
+
+
 ## 3. Prepare execution  
 Here you are, you should have all your commande_line struct with all your token word expend and the type of each word.  
 Now to prepare execution we will set an list of type Arg to path to execve as a char **args in each our struct cmd_line;  
@@ -177,9 +187,14 @@ struct cmd_line{
 ```
 
 ## Error parsing  
-During all these step you have to becarfull of deferent type of error, as commande line empty following by a pipe, or thing like ><, << < <, >|, |<, | |,  
+During all these step you have to becarfull of deferent type of error, as commande line empty following by a pipe,  
+Thing like ><, << < <, >|, |<, | |,  
+See the testing file  
 
 # II- Builtin  
+
+
+
 
 ## 6. Exit  
 There is four type of exit, each of use write exit in terminal :   
@@ -191,8 +206,8 @@ exit (num) (num) (num) : doesn't exit and set exit status to 1 + a error message
 # III- Redirection  
 
 ## 1. Pipe  
-Pipe will allow you to communicate throught your list of commande via file_directory (fd)  
-In each cmd_line you will need a fd_in an a fd_out (int)  
+Pipe will allow you to communicate throught your list of commande via file_directory (fd)   
+In each cmd_line you will need a fd_in an a fd_out (int) **(man open)**   
 Your first cmd_line fd_int will be set at STDIN, and the last cmd_line fd_out on STDOUT  
 Connect your pipe[0] to the fd_out and pipe[1] to fd_in of the next cmd_line.  
 
@@ -204,7 +219,7 @@ And don't forget to close the fd that become ussless :)
 
 ## 3. Here_doc  
 For Here_doc, there a special case,   
-I personnaly chose the easy solution to creat a file with a aleatorie name and file it with the imformation till i got my limitor word.  
+I personnaly chose the easy solution to creat a file with a random name and fill it with the imformation till i got my limitor word.  
 **Becarefull**  
 Here_doc is special, as for the expension, the contente is expend with is own rule  
 If the limitor is expend (had quote on it) the word in the file will not be expend, and if it's not, the word will be expend  
@@ -220,18 +235,25 @@ bash : cat << hello
 bash : Vporten
 ```
 
+For a more precise execution of minishell, before open file you should start by checking if you have here_doc througt all your commande_line,  
+Then write until you got a limitor directely in the fd give by pipe.  Then check if there are open file after  
+
 # IV- Execution
 
 ## 1. When fork  
 The real question is when not fork,  
 And only when you have one commande line and it's a builtin, that allowe you to move through your directory and move env  
+When you have finish the parsing, there you start fork, one fork for each commande_line  
+**man 2 fork**  
+**man 2 waitpid**  
 
 ## 2. Commande exist or right to exectute?  
 To execute a commande no builtin, you have two choice;  
 if it's start by . or / it's a absolute path and then just pass it through execve,  
-else you will have to foud the real path of the commande by split $PATH on ':' try with access if it's exist  
-if you reatch the and of your split path without found a access, the commande doesn't exist.  
-The commande can exist but withou the right to open it becarfull to the return of access.  
+else you will have to found the real path of the commande by spliting $PATH on ':',  
+join each split with the commande, and try with access **(man 2 access)** if it's exist    
+if you reatch the end of your split path without found a valide access, the commande doesn't exist.  
+The commande can exist but without the right to open it, becarfull to the return of access.  
 
 ## 3. Execution
 
@@ -239,19 +261,37 @@ You have to start all your fork and exec all the commande in the same time and a
 ```time sleep 2 | sleep 2```
 
 In fork,   
-use dup2 with the your fd_in and fd_out (read man dup2)  
+use dup2 with the your fd_in and fd_out **(man dup2)**  
 close all your fd (all, not just the one in the commande line present here, you can close multiple time a same fd without have probleme)  
 exec with execve,  
-becarfull if execve fail to free all your memorie of the fork and exit with the good exit status (commande not found or permition denied)  
+**(man 2 execve)**  
+becarfull if execve fail, free all your memorie in the fork and exit with the good exit status (commande not found or permition denied)  
   
-Outside, then use waitpid (man 2 waitpid) to wait for all the execution done  
-Then close your local fd_in fd_out (cmd_line->fd_in and cmd_line->fd_out)  
+Outside, then use waitpid (man 2 waitpid) to wait for all the execution done   
+Then close your local fd_in fd_out (cmd_line->fd_in and cmd_line->fd_out)   
+  
+## 4. Close fd   
+Close all your fd is importante, you can check different way, look for    
+```cat | ls``` and ```cat | cat |ls ```   
 
-## 4. Close fd  
-Close all your fd is importante, you can check different way, look for   
-```cat | ls``` and ```cat | cat |ls ```  
+ ## 5. Exit_status  
+ Exit_status depend of multiple thing,    
+ If the commande work,  **0**  
+ If a commande exist and fail cause of the arg, **1**  
+ If a commande exist and you dont have the permission **126**  
+ If a commande doesn't exist **127**  
+ If a signal Kill or interrupte the commande **127 + signal**   
+ If error parsing **2**  
+ Exit status come with Error message in your terminal, **don't forget that the error fd is 2**  
+ (putstr_fd)   
 
 
-**vportens**
-**readme for minishell**
+ Here is some wait to try it on bash  
+ ```
+ bash> touch new && chmod 000 new && ./new
+ bash> echo $?
+ ```
+   
+**vportens**  
+**readme for minishell**  
 
