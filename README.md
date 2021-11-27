@@ -1,24 +1,23 @@
 
 ### minishell : petitcoquillage 
 
-This program try to recreate bash --posix comportement in certain limite
+This program tries to recreate bash --posix behaviour in some ways.  
 
 ### Execution :
-To execute this Program you have to be on linux 
+To execute this Program you have use linux.    
 ```
 make && ./minishell
 ```
-To check your leaks and ignore readline leaks, copy ```valgrind_readline_leaks_ignore.txt``` then execute the programme as it is right on ```cmd_valgrind_see_all_leaks.txt``` 
+To check your leaks and ignore readline leaks, copy ```valgrind_readline_leaks_ignore.txt``` then execute the programme like it is written in this file :  ```cmd_valgrind_see_all_leaks.txt``` .  
 
 ### Informations Briefly
-This programme follow some rule and try answer the projet's suject that you can see in : ```minishell.pdf```.
-There only one global variable for the exit_status and one singletone for the env.
+This programme follows some rules and try answer the projet's subject that you can see in : ```minishell.pdf```.
+There is only one global variable for the exit_status and one singletone for the env.
 Briefly, we have to recreate bash --posix comportement for ```|``` ```<``` ```<<``` ```>``` ```>>``` builtin ```cd ``` ```pwd``` ```exit with arg``` ```env``` ```unset``` ```export``` ```echo with option -n``` ```$?``` and of course ```$```
 
-all source need here :
-https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
+[(Click here for the source)](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html) 
 
-### What you should know
+### What you should know (Summary)
 #### I- Parsing
 - .1. Separation commande_line
 - .1,1. Quote close and quoting rules
@@ -44,7 +43,7 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
  
 #### IV- Execution
 - .1. When fork
-- .2. Commande exist or right to execute?
+- .2. Command exist or right to execute?
 - .3. Execution
 - .4. Close fd
 - .5. Exit_status
@@ -55,28 +54,28 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 ## 1. Separation commande_line
 **Here only '|' commande from each other, ';' is considere as a caracter :(**
 ## 1.1 Quote close, Quoting rules
-At first, you should check if quote are properly close, following quoting rules :
+At first, you should check if quotes are properly closed, following quoting rules: The first quote you see cancel the other type of quote until you see it again.    
 
-The first quote you see cancel other type of quote untill you see it again  
+For example:  
+```" ' "``` quotes are closed because ```'``` is not considered as quote inside double quotes.  
+  
+**Quoting Rules**  
+In bash there are a lot of characters with meanings such as ```$``` for env variables, single quotes and double quotes are used to play with or without those second meanings, these rules will be useful for you to catch each command line.  
 
-Exemple :
+**' Rules**  
+```'``` make things easier and cancel all second meanings of characters, inside ```'``` ,```"```, ```$env```,``` ```, ```|```, ```< << > >>``` are just characters inside a single word  
+Try ```echo '$USER | cat ls blablabla'```.    
 
-```" ' "``` quote are close because ```'``` is not considere as quote inside double quote  
-**Quoting rules**  
-In bash there are a lot of caractere with meanings ass ```$``` for env variable, single quote and double quote are use to playe with or whitout those seconde   meaning, these rules will be useful to you to catch each commande line.  
-**' rules**  
-```'``` make thing easer and cancel all meaning of caractere, inside ```'``` ```"```, ```$env``` ``` ``` ```|``` ```< << > >>```are juste caracter inside a single word  
-Try ```echo '$USER | cat ls blablabla'```  
-**" rules**  
-```"``` as ```'``` cancel second meaning of caractere exepte for env variable that make you able to use ```'```, and like ```'``` all caraceter inside double quote are a single word  
-Try ``` echo "$USER | 'ici c'est Paris;"```  
-**no quote rules**  
-Here all caractere got there seconde meaning, and each ``` ``` are separator of word  
-Try ```echo $USER hello there | ls | cat > file_out```  
+**" Rules**  
+```"``` like ```'``` cancel the second meanings of characters except for env variables that make you able to use ```'```, and like ```'``` all characters inside double quotes are a single word.    
+Try ``` echo "$USER | 'ici c'est Paris;"``` . 
+**No quote rules**  
+Here all characters got there second meanings, and each  ``` ``` are separators of words.    
+Try ```echo $USER hello there | ls | cat > file_out``` .   
 
 **Found '|'**  
-Your commande_line run from start to ```|```, You should know the quoting rules to not interpret a ```|``` as a caractere in double or single quote.  
-Then copi the string you get (without '|') into your structure commande line (link list).   
+Your commande_line run from start to ```|```. You should know the quoting rules to not interpret a ```|``` as a character in double or single quotes.  
+Then copy the string you get (without ```|```) into your structure commande_line (link list).   
 Repeat the operation until the end of file.  
 
 ```
@@ -85,9 +84,9 @@ struct cmd_line{
     stuct cmd_line   *next;
 }
 ```
-## 2. Separation of word in commande_line  
-Now you go your list of commande_line with, you will have to got your list of word  
-For that, use the quoting rule and separete your commande_line in a link list of word  
+## 2. Separation of words in commande_line  
+Now you have got your list of commande_line, you need your list of words.    
+For that, use the quoting rules and separate your commande_line in a link list of words.    
 ```
 struct token{
     char            *word;
@@ -102,9 +101,9 @@ struct cmd_line{
 }
 ```
 
-## 2.1 Type of word  
-To to differentiate if a word is a arg a file a heredoc I set a type in my struct token following different rule  
-My type is set as a enum as :  
+## 2.1 Type of words  
+To differentiate if a word is an arg, a file or a heredoc. I set a type in my struct token following several rules.    
+My type is set as an enum:  
 ```
 enum type{
     NONE, //defaut set
@@ -119,56 +118,59 @@ enum type{
     EXIT_FILE_RET; // word following '>>'
 }
 ```
-Becarefull, of ```syntaxe error near unexpeted token 'x'```  
-Exemple :  
+Be careful, of ```syntaxe error near unexpeted token 'x'```.    
+Example :  
 ``` cat > > file_out```
 
 ## 2.2 Expend word
-To expend each word, there are differente rule following and some specifique to type limitor,  
-For each word, you have to cut space at start and at the end of it,  
-Then expend each quote following the quoting rule and skip the quote  
-For env var, you have to check if it's exist in env, if it's doesn't exit, then skip it.  
-Exemple :  
+To expand each word, there are different rules depending on the Type.     
+For each word, you have to cut space at start and at the end of it.  
+Then expand each quotes following the quoting rules and skip the quotes.    
+For env var, you have to check if it exist in env, if it's doesn't exit just skip it.  
+Example :  
 ```word :                 "cou'cou"$lol'$USER   'a became word : cou'cou$USER   a (here $lol don't exist)```
 
-**!!! special case 1**  
-If a env is set like ``` export LS="ls -la"```  
-There are to type of extend  
-First, in double quote it is considere as a single word : ls -la  
-Second, is it's not quote, you have to split it an the space considering it ass 2 word, word1 : ls word2 : -la  
-Exemple in bash :  
+**!!! Special Case 1**  
+If a env is set like ``` export LS="ls -la"```.
+First, in double quotes it is considered as a single word : ls -la  .    
+Second, if it's not quotes, you have to split it on the space considering it as 2 words:  
+ - word1 : ls   
+ - word2 : -la  
+  
+Example in bash :  
 ``` 
 Export LS="ls -la"
 $LS // this should do a ls -la
-"$LS" // this should print an error commande ls -la not found
+"$LS" // this should print an error command "ls -la" not found
 ```
-**!!! special case 2**  
-For type limitor expension you have to not expende env var  
-Exemple try :  
+**!!! Special Case 2**  
+For type limitors expand you have to not expand env var.  
+For example try :  
 ```cat << $HOME```  
-**!!! special case 3**  
+  
+**!!! Special Case 3**  
 For type IN_FILE and EXIT_FILE you do not have to split env on space,  
 Exemple in bash :  
 ```
 $> Export t="ha  ha"
 $> echo baguette > $t
 $> ls
-'ha ha'
+'ha  ha'
 $> cat < $t
 baguette
 ```  
 
-## 2.3 Expend env
+## 2.3 Expand env
 Has you see higher,  
-According to the type of the word, you have to expend the env with different rule,  
-In all case, a env variable start by '$' and can only be compose by alphanum caractere + ```_```   
-```$?``` is not considere as a env variable but as the **exit_status** and ```?``` is not a alphanum caractere  
-And in case of ```$$``` I considere it as ```$``` 
+According to the type of the word, you have to expand the env with differents rules,  
+In all case, a env variable start by '$' and can only be compose by alphanum characters + ```_```   
+```$?``` is not consider as a env variable but as the **exit_status** and ```?``` is not a alphanum character.   
+And in case of ```$$``` I consider it as ```$``` 
 
 
 ## 3. Prepare execution  
-Here you are, you should have all your commande_line struct with all your token word expend and the type of each word.  
-Now to prepare execution we will set an list of type Arg to path to execve as a char **args in each our struct cmd_line;  
+Here you are, you should have all your commande_line struct with all your token word expand and the type of each word.  
+Now to prepare execution we will set a list of type Arg to path to execve as a char **args in each our struct cmd_line;  
 Not a big deal, look trought the truct token, compte the number of type ARG and do a tab with all of them.  
 
 ```
@@ -187,7 +189,7 @@ struct cmd_line{
 ```
 
 ## Error parsing  
-During all these step you have to becarfull of deferent type of error, as commande line empty following by a pipe,  
+During all these steps you have to be carful of different types of error, as command line empty followed by a pipe.  
 Thing like ><, << < <, >|, |<, | |,  
 See the testing file  
 
@@ -197,7 +199,7 @@ See the testing file
 
 
 ## 6. Exit  
-There is four type of exit, each of use write exit in terminal :   
+There are four types of exit, each write exit in terminal:     
 exit : exit and set exit status to 0;  
 exit (num) : exit and set exit status to num  
 exit (num alpha) : exit and set exit status to 2 + a error message  
@@ -206,15 +208,15 @@ exit (num) (num) (num) : doesn't exit and set exit status to 1 + a error message
 # III- Redirection  
 
 ## 1. Pipe  
-Pipe will allow you to communicate throught your list of commande via file_directory (fd)   
+Pipe will allow you to communicate through your list of command via file_directory (fd)   
 In each cmd_line you will need a fd_in an a fd_out (int) **(man open)**   
 Your first cmd_line fd_int will be set at STDIN, and the last cmd_line fd_out on STDOUT  
 Connect your pipe[0] to the fd_out and pipe[1] to fd_in of the next cmd_line.  
 
 ## 2. Open Close file  
 
-Now your commande line are connected via fd, but maybe you have to redirect information via file set by the commande line right on bash,  
-Go throug your token lst, and if you got a Type file/heredoc/exitfile/exitfileout then, open it with open, and change your fd_in or fd_out  
+Now your command line are connected via fd, but maybe you have to redirect information via file set by the commande line right on bash,  
+Go through your token lst, and if you got a Type file/heredoc/exitfile/exitfileout then, open it with open, and change your fd_in or fd_out  
 And don't forget to close the fd that become ussless :)  
 
 ## 3. Here_doc  
