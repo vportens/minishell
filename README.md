@@ -85,7 +85,7 @@ struct cmd_line{
 }
 ```
 ## 2. Separation of words in commande_line  
-Now you have got your list of commande_line, you need your list of words.    
+Now you got your list of commande_line, you need your list of words.    
 For that, use the quoting rules and separate your commande_line in a link list of words.    
 ```
 struct token{
@@ -122,7 +122,7 @@ Be careful, of ```syntaxe error near unexpeted token 'x'```.
 Example :  
 ``` cat > > file_out```
 
-## 2.2 Expend word
+## 2.2 Expand word
 To expand each word, there are different rules depending on the Type.     
 For each word, you have to cut space at start and at the end of it.  
 Then expand each quotes following the quoting rules and skip the quotes.    
@@ -163,15 +163,15 @@ baguette
 ## 2.3 Expand env
 Has you see higher,  
 According to the type of the word, you have to expand the env with differents rules,  
-In all case, a env variable start by '$' and can only be compose by alphanum characters + ```_```   
+In all cases, a env variable start by '$' and can only be compose by alphanum characters + ```_```   
 ```$?``` is not consider as a env variable but as the **exit_status** and ```?``` is not a alphanum character.   
 And in case of ```$$``` I consider it as ```$``` 
 
 
 ## 3. Prepare execution  
 Here you are, you should have all your commande_line struct with all your token word expand and the type of each word.  
-Now to prepare execution we will set a list of type Arg to path to execve as a char **args in each our struct cmd_line;  
-Not a big deal, look trought the truct token, compte the number of type ARG and do a tab with all of them.  
+Now to prepare execution we will set a list of type Arg to give to execve as a char **args in each our struct cmd_line;  
+Not a big deal, look trought the struct token, count the number of type ARG and do a tab with all of them.  
 
 ```
 struct token{
@@ -210,21 +210,21 @@ exit (num) (num) (num) : doesn't exit and set exit status to 1 + a error message
 ## 1. Pipe  
 Pipe will allow you to communicate through your list of command via file_directory (fd)   
 In each cmd_line you will need a fd_in an a fd_out (int) **(man open)**   
-Your first cmd_line fd_int will be set at STDIN, and the last cmd_line fd_out on STDOUT  
+Your first cmd_line fd_in will be set at STDIN, and the last cmd_line fd_out on STDOUT  
 Connect your pipe[0] to the fd_out and pipe[1] to fd_in of the next cmd_line.  
 
 ## 2. Open Close file  
 
 Now your command line are connected via fd, but maybe you have to redirect information via file set by the commande line right on bash,  
 Go through your token lst, and if you got a Type file/heredoc/exitfile/exitfileout then, open it with open, and change your fd_in or fd_out  
-And don't forget to close the fd that become ussless :)  
+And don't forget to close the fd that becomes ussless :)  
 
 ## 3. Here_doc  
-For Here_doc, there a special case,   
+For Here_doc, it is a special case,   
 I personnaly chose the easy solution to creat a file with a random name and fill it with the imformation till i got my limitor word.  
 **Becarefull**  
-Here_doc is special, as for the expension, the contente is expend with is own rule  
-If the limitor is expend (had quote on it) the word in the file will not be expend, and if it's not, the word will be expend  
+Here_doc is special, as for the expension, the content is expand with is own rules  
+If the limitor is expand (had quote on it) the word in the file will not be expand, and if it's not, the word will be expand  
 Exemple :  
 ```
 bash : cat << hello""
@@ -237,29 +237,29 @@ bash : cat << hello
 bash : Vporten
 ```
 
-For a more precise execution of minishell, before open file you should start by checking if you have here_doc througt all your commande_line,  
+For a more precise execution of minishell, before open file you should start by checking if you have here_doc through all your commande_line,  
 Then write until you got a limitor directely in the fd give by pipe.  Then check if there are open file after  
 
 # IV- Execution
 
 ## 1. When fork  
 The real question is when not fork,  
-And only when you have one commande line and it's a builtin, that allowe you to move through your directory and move env  
+And only when you have one commande line and it's a builtin, that allows you to move through your directory and move env  
 When you have finish the parsing, there you start fork, one fork for each commande_line  
 **man 2 fork**  
 **man 2 waitpid**  
 
 ## 2. Commande exist or right to exectute?  
 To execute a commande no builtin, you have two choice;  
-if it's start by . or / it's a absolute path and then just pass it through execve,  
+if it's start by . or / it's an absolute path and then just pass it through execve,  
 else you will have to found the real path of the commande by spliting $PATH on ':',  
-join each split with the commande, and try with access **(man 2 access)** if it's exist    
-if you reatch the end of your split path without found a valide access, the commande doesn't exist.  
-The commande can exist but without the right to open it, becarfull to the return of access.  
+join each split with the command, and try with access **(man 2 access)** if it exist    
+if you reach the end of your split path without finding  a valide access, the command doesn't exist.  
+The command can exist but without the right to open it, becarefull to the return of access.  
 
 ## 3. Execution
 
-You have to start all your fork and exec all the commande in the same time and after wait for it   
+You have to start all your fork and exec all the command in the same time and after wait for it   
 ```time sleep 2 | sleep 2```
 
 In fork,   
@@ -267,17 +267,17 @@ use dup2 with the your fd_in and fd_out **(man dup2)**
 close all your fd (all, not just the one in the commande line present here, you can close multiple time a same fd without have probleme)  
 exec with execve,  
 **(man 2 execve)**  
-becarfull if execve fail, free all your memorie in the fork and exit with the good exit status (commande not found or permition denied)  
+becarefull if execve fail, free all your memory in the fork and exit with the good exit status (commande not found or permission denied)  
   
-Outside, then use waitpid (man 2 waitpid) to wait for all the execution done   
+Outside, use waitpid (man 2 waitpid) to wait for all the execution done   
 Then close your local fd_in fd_out (cmd_line->fd_in and cmd_line->fd_out)   
   
 ## 4. Close fd   
-Close all your fd is importante, you can check different way, look for    
+Closng all your fd is important, you can check different ways, look for    
 ```cat | ls``` and ```cat | cat |ls ```   
 
  ## 5. Exit_status  
- Exit_status depend of multiple thing,    
+ Exit_status depands of multiple things,    
  If the commande work,  **0**  
  If a commande exist and fail cause of the arg, **1**  
  If a commande exist and you dont have the permission **126**  
