@@ -293,6 +293,8 @@ Closng all your fd is important, you can check different ways, look for
  bash> touch new && chmod 000 new && ./new
  bash> echo $?
  ```
+   
+ ## END  
  Thanks for reading, if this tuto help you don't forgot to stars and follow, and maybe minishell destructor will be on the way :)   
    
 **vportens**  
