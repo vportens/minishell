@@ -118,7 +118,7 @@ enum type{
     EXIT_FILE_RET; // word following '>>'
 }
 ```
-Be careful, of ```syntaxe error near unexpeted token 'x'```.    
+Be careful, of ```syntax error near unexpected token 'x'```.    
 Example :  
 ``` cat > > file_out```
 
